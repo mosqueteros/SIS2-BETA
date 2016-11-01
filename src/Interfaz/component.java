@@ -1,5 +1,6 @@
 
 package Interfaz;
+import Administrador.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,20 +8,20 @@ import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.util.Date;
 public class component {
     private JFrame fram;
     private JTextField TidVenta, TidEmpleado, Tci, Tmarca, TidAuto,Tapellidos,Tnombre,Tfecha;
-    private JButton confirmar,impresion;
+    private JButton confirmar;
     private JLabel idEmpleado, Bnombre, idAuto, idVenta,Bapellidos,Bci,BCliente,Bfecha;
     
 
-    public component(JFrame frame) {
+    public component(JFrame frame,String dato) {
         fram = frame;
         editor();
         Tfecha.setText(getFechaActual()+"            "+getHoraActual()+" horas");
+        TidAuto.setText(dato);
     }
     public String getFechaActual() {
         Date ahora = new Date();
@@ -44,24 +45,15 @@ public class component {
         Tfecha=new JTextField();
         
         
-        //textfields
-        impresion=new JButton();
-        impresion.setFont(new Font("Arial", 4,15));
-        impresion.setText("imprimir");
-        impresion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                BimpresionActionPerformed(evt);}
-
-        });
-        fram.getContentPane().add(impresion);
-        impresion.setBounds(600, 500, 120,50);
-        
         confirmar = new JButton();
         confirmar.setFont(new Font("Arial", 4,15));
         confirmar.setText("registrar");
         confirmar.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
-                BconfirmaActionPerformed(evt);}
+                BconfirmaActionPerformed(evt);
+            }
+
         });
         fram.getContentPane().add(confirmar);
         confirmar.setBounds(400, 500, 120,50);
@@ -141,13 +133,30 @@ public class component {
         fram.pack();
     }
     private void BconfirmaActionPerformed(ActionEvent evt) {
-      //en esta parte se conecta la base de datos
-      //
+        if(!Tnombre.getText().isEmpty()){
+            if(!Tapellidos.getText().isEmpty()){
+                if(!Tci.getText().isEmpty()){
+                    //comprobarDatos con davor
+                    Administrador admin=Administrador.crearAdministrador("");
+                    // admin.registrarVentaContado(8);
+                   transitarImpresion(); 
+                }
+            }
+        }
+     transitarImpresion();
+        
     }
-    
-     private void BimpresionActionPerformed(ActionEvent evt) {
-     //en esta parte manda a la impresion obteniendo los datos 
-     //es otra tarea por asignar
-     }
+
+    private void transitarImpresion() {
+        String dat[] = new String[6];
+        dat[0]=TidVenta.getText();
+        dat[1]=TidEmpleado.getText();
+        dat[2]=TidEmpleado.getText();
+        dat[3]=Tnombre.getText()+""+Tapellidos.getText();
+        dat[4]=Tci.getText();
+        dat[5]=TidAuto.getText();
+        impresora imp= new impresora(dat);
+        fram.dispose();
+    }
 }
 

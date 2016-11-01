@@ -38,17 +38,6 @@ public class impresora {
     }
     //enviar un cadena de String; poner dispose ala anterrior pantalla
     //eliminar este main
-    public static void main(String[] args) {
-    String dat[] = new String[6];
-    dat[0] = "klg12221";
-    dat[1] = "1232111";
-    dat[2] = "fernado catorseno vargas";
-    dat[3] = "jose maria martines";
-    dat[4] = "76211233";
-    dat[5] = "tyu1233";
-    impresora pantalla = new impresora(dat);
-    
-    }
     private void componentes() {
         panelScrol = new JScrollPane();
         textoPa = new JTextArea();
@@ -58,7 +47,7 @@ public class impresora {
         frame.getContentPane().add(panelScrol);
         panelScrol.setBounds(200, 70, 600, 400);
         textoPa.setFont(new Font("Arial", 3, 18));
-
+        textoPa.setEnabled(false);
         imprimiConf = new JButton();
         imprimiConf.setFont(new Font("Arial", 3, 15));
         imprimiConf.setText("confirmar");
