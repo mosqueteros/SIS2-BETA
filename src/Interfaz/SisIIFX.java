@@ -13,13 +13,19 @@ import java.util.regex.Pattern;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -34,39 +40,67 @@ public class SisIIFX extends Application {
             
     TextField nombre;
     TextField NIT;
-    TextField marca;
-    TextField modelo;
+    TextField IDEauto;
     TextField costoUnitario;
     TextField fecha;
     TextField precioDeVenta;
+    TextField porcentajeGanancias;
     
     Label nombreLabel;
     Label NITLabel;
-    Label marcaLabel;
-    Label modeloLabel;
+    Label IDEautoLabel;
     Label costoUnitarioLabel;
     Label fechaLabel;
     Label precioDeVentaLabel;
+    Label porcentajeGananciasLabel;
     
     Button boton;
     
+    int segundaCol;
+    int primeraCol;
     
+    String fuenteTitulo;
+    String fuenteLabel;
+    String fuente;
+    String fuenteTextField;
+    String colorLabel;
+    int tamanoLabel;
+    int tamanoTextField;
+    int tamanoTitulo;
     
+    Group raiz;
     Scene scene;
     
     @Override
     public void start(Stage primaryStage) {
-        
-        root = new Pane();
+        fuenteLabel = "Britannic Bold";
+        tamanoLabel = 25;
+        fuenteTextField = "Cambria";
+        tamanoTextField = 15;
+        primeraCol=40;
+        segundaCol=340;
+        fuenteTitulo = "Cambria";
+        tamanoTitulo = 40;
+        colorLabel = "#f7f7f9";
+      // root = new Pane();
+       
+        raiz = new Group();
+        Scene escena = new Scene(raiz);
+        Image image = new Image("file:///C:/Users/USUARIO/Desktop/FondoInterfaz.png");
+        ImageView iv1 = new ImageView();
+         iv1.setImage(image);
+       //  escena.setFill(Color.BLACK);
+         HBox box = new HBox();
+         box.getChildren().add(iv1);
+         raiz.getChildren().add(box);
+         primaryStage.setScene(escena); 
+         primaryStage.sizeToScene(); 
         inicializarBotones();
         inicializarTextFields();
         inicializarLabels();
-        primaryStage.setResizable(false);
         
-        
-        scene = new Scene(root, 1000,600);
-        primaryStage.setScene(scene);
         primaryStage.show();
+        
     }
     public void inicializarBotones(){
         boton = new Button("Registrar");
@@ -84,47 +118,51 @@ public class SisIIFX extends Application {
         add(boton);
     }
     public void inicializarLabels(){
+      
        Text texto = new Text("COMPRA DE VEHÍCULOS: ");
-       texto.setFont(Font.font("Britannic Bold",40));
-       texto.setLayoutX(10);texto.setLayoutY(50);
+       texto.setFont(Font.font(fuenteTitulo,tamanoTitulo));
+       texto.setLayoutX(primeraCol);texto.setLayoutY(110);
+       texto.setFill(Color.WHITE);
        add(texto);
-        nombreLabel         = new Label("Nombre: ");
-        nombreLabel.setFont(Font.font("Britannic Bold",20));
-        nombreLabel.setLayoutX(10);nombreLabel.setLayoutY(150);
-           
-        NITLabel            = new Label("NIT: ");
-        NITLabel.setFont(Font.font("Britannic Bold",20));
-        NITLabel.setLayoutX(10);NITLabel.setLayoutY(200);
-        
-        marcaLabel          = new Label("Marca: ");
-        marcaLabel.setFont(Font.font("Britannic Bold",20));
-        marcaLabel.setLayoutX(10);marcaLabel.setLayoutY(250);
-        
-        modeloLabel          = new Label("Modelo: ");
-        modeloLabel.setFont(Font.font("Britannic Bold",20));
-        modeloLabel.setLayoutX(10);modeloLabel.setLayoutY(300);
-
+        int i = 60;
+        int inicio = 160;
+        nombreLabel         = new Label("Nombre del proveedor: ");
+        nombreLabel.setFont(Font.font(fuenteLabel,tamanoLabel));
+        nombreLabel.setLayoutX(primeraCol);nombreLabel.setLayoutY(inicio);
+        nombreLabel.setTextFill(Color.web(colorLabel));
+       inicio+=i;    
+        NITLabel            = new Label("NIT del proveedor: ");
+        NITLabel.setFont(Font.font(fuenteLabel,tamanoLabel));
+        NITLabel.setLayoutX(primeraCol);NITLabel.setLayoutY(inicio);
+        NITLabel.setTextFill(Color.web(colorLabel));
+        inicio+=i;
+        IDEautoLabel = new Label("IDE del auto: ");
+        IDEautoLabel.setFont(Font.font(fuenteLabel, tamanoLabel));
+        IDEautoLabel.setLayoutX(primeraCol);IDEautoLabel.setLayoutY(inicio);
+        IDEautoLabel.setTextFill(Color.web(colorLabel)); 
+        inicio+=i;
         costoUnitarioLabel  = new Label("Costo unitario: ");
-        costoUnitarioLabel.setFont(Font.font("Britannic Bold",20));
-        costoUnitarioLabel.setLayoutX(10);costoUnitarioLabel.setLayoutY(350);
-        
+        costoUnitarioLabel.setFont(Font.font(fuenteLabel,tamanoLabel));
+        costoUnitarioLabel.setLayoutX(primeraCol);costoUnitarioLabel.setLayoutY(inicio);
+        costoUnitarioLabel.setTextFill(Color.web(colorLabel));
+        inicio+=i;
         fechaLabel          = new Label("Fecha: ");
-        fechaLabel.setFont(Font.font("Britannic Bold",20));
-        fechaLabel.setLayoutX(10);fechaLabel.setLayoutY(400);
-        
-        
+        fechaLabel.setFont(Font.font(fuenteLabel,tamanoLabel));
+        fechaLabel.setLayoutX(primeraCol);fechaLabel.setLayoutY(inicio);
+        fechaLabel.setTextFill(Color.web(colorLabel));
+        inicio+=i;
         precioDeVentaLabel  = new Label("Precio de Venta: ");
-        precioDeVentaLabel.setFont(Font.font("Britannic Bold",20));
-        precioDeVentaLabel.setLayoutX(10);precioDeVentaLabel.setLayoutY(450);
-        
+        precioDeVentaLabel.setFont(Font.font(fuenteLabel,tamanoLabel));
+        precioDeVentaLabel.setLayoutX(primeraCol);precioDeVentaLabel.setLayoutY(inicio);
+        precioDeVentaLabel.setTextFill(Color.web(colorLabel));
+        inicio+=i;
         anadirLabels();
     }
     public void anadirLabels(){
         
         add(nombreLabel);
         add(NITLabel);
-        add(marcaLabel);
-        add(modeloLabel);
+        add(IDEautoLabel);
         add(costoUnitarioLabel);
         add(fechaLabel);
         add(precioDeVentaLabel);
@@ -132,53 +170,84 @@ public class SisIIFX extends Application {
     
     }
     public void inicializarTextFields(){
-        
-        nombre =        new TextField("Nombre");
-        nombre.setLayoutX(190);nombre.setLayoutY(150);
+        int i = 60;
+        int inicio = 150;
+        nombre =        new TextField();
+        nombre.setFont(Font.font(fuenteTextField, FontWeight.BOLD,tamanoTextField));
+        nombre.setLayoutX(segundaCol);nombre.setLayoutY(inicio);
         nombre.setPrefWidth(300);
-        
-        NIT =           new TextField("NIT");
-        NIT.setLayoutX(190);NIT.setLayoutY(200);
+        nombre.setPrefHeight(40);
+        //nombre.setFont(Font.font(fuenteTextField, FontWeight.BOLD,tamanoTextField));
+        inicio+=i;
+        NIT =           new TextField();
+        NIT.setLayoutX(segundaCol);NIT.setLayoutY(inicio);
         NIT.setPrefWidth(300);      
-        
-        marca =         new TextField("Marca");
-        marca.setLayoutX(190);marca.setLayoutY(250);
-        marca.setPrefWidth(300);
-        
-        modelo =        new TextField("Modelo");
-        modelo.setLayoutX(190);modelo.setLayoutY(300);
-        modelo.setPrefWidth(300);
-        
-        costoUnitario = new TextField("Costo");
-        costoUnitario.setLayoutX(190);costoUnitario.setLayoutY(350);
+        NIT.setFont(Font.font(fuenteTextField, FontWeight.BOLD,tamanoTextField));
+        NIT.setPrefHeight(40);
+        inicio+=i;
+        IDEauto =       new TextField();
+        IDEauto.setLayoutX(segundaCol);IDEauto.setLayoutY(inicio);
+        IDEauto.setPrefWidth(300);
+        IDEauto.setFont(Font.font(fuenteTextField, FontWeight.BOLD,tamanoTextField));
+        IDEauto.setPrefHeight(40);       
+        IDEauto.setEditable(false);
+        inicio+=i;
+        costoUnitario = new TextField();
+        costoUnitario.setLayoutX(segundaCol);costoUnitario.setLayoutY(inicio);
         costoUnitario.setPrefWidth(300);
-        
-        fecha =         new TextField("Fecha");
-        fecha.setLayoutX(190);fecha.setLayoutY(400);
+        costoUnitario.setFont(Font.font(fuenteTextField, FontWeight.BOLD,tamanoTextField));
+        costoUnitario.setPrefHeight(40);
+        inicio+=i;
+        fecha =         new TextField();
+        fecha.setLayoutX(segundaCol);fecha.setLayoutY(inicio);
         fecha.setPrefWidth(300);
         fecha.setEditable(false);
+        fecha.setFont(Font.font(fuenteTextField, FontWeight.BOLD,tamanoTextField));
+        fecha.setPrefHeight(40);
         asignarFecha();
-        
-        precioDeVenta = new TextField("Precio");
+        inicio+=i;
+        precioDeVenta = new TextField();  
         precioDeVenta.setPrefWidth(300);
-        precioDeVenta.setLayoutX(190);precioDeVenta.setLayoutY(450);
+        precioDeVenta.setPrefHeight(40);
+        precioDeVenta.setLayoutX(segundaCol);precioDeVenta.setLayoutY(inicio);
+        precioDeVenta.setFont(Font.font(fuenteTextField, FontWeight.BOLD,tamanoTextField));
+        precioDeVenta.setEditable(false);
         
+        porcentajeGanancias = new TextField();
+        porcentajeGanancias.setPrefColumnCount(2);
+        porcentajeGanancias.setPrefHeight(40);
+        porcentajeGanancias.setFont(Font.font(fuenteTextField, FontWeight.BOLD,tamanoTextField));
+        porcentajeGanancias.setLayoutX(segundaCol+350);porcentajeGanancias.setLayoutY(inicio);
         
+        porcentajeGanancias.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent ke) {
+               int a  = Integer.parseInt(costoUnitario.getText());
+               double b = Integer.parseInt(porcentajeGanancias.getText())/100.0;
+               double mul = 1+b;
+               double res = mul*a;
+                precioDeVenta.setText(a+res+"");
+              
+            }
+});
         anadirTextFields();
     }
+    public void establecerPrecioDeVenta(){
+    
+    }
+    
     public void anadirTextFields(){
     
         add(nombre);
         add(NIT);
-        add(marca);
-        add(modelo);
+        add(IDEauto);
         add(costoUnitario);
         add(fecha);
         add(precioDeVenta);
+        add(porcentajeGanancias);
  
     }
     public void add(Node n){
-        root.getChildren().add(n);
+        raiz.getChildren().add(n);
     
     }
 
@@ -192,7 +261,7 @@ public class SisIIFX extends Application {
     public void comprobarCamposVacios(){
         if(nombre.getText().equals("")||
            NIT.getText().equals("") ||
-           marca.getText().equals("") ||
+           IDEauto.getText().equals("") ||
            costoUnitario.getText().equals("") ||     
            fecha.getText().equals("") ||
            precioDeVenta.getText().equals("")){
@@ -209,8 +278,7 @@ public class SisIIFX extends Application {
     public void asignarFecha(){
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
-    fecha.setText("                                                                     "+
-            dateFormat.format(date));
+    fecha.setText(dateFormat.format(date));
     }
     
     
