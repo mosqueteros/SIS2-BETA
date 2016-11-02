@@ -79,4 +79,53 @@ public class Administrador {
             System.out.println(e.toString());
         }
     }
+    public void ingresarCliente(int ci,String nombre, String apellidos, int cuenta, String banco, int telefono, String direccion){
+        //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
+        ConexionMySQL base = new ConexionMySQL();
+        Connection cn = base.Conectar();
+        String ingreso1 = "INSERT INTO cliente"+"(ciclie, nombreclie, apellidosclie, cuentaclie, bancoclie, telefonoclie, direcionclie)"+
+                "VALUES(?,?,?,?,?,?)";
+        try{
+            int n;
+            PreparedStatement ps=cn.prepareStatement(ingreso1);
+            ps.setInt(1, ci);
+            ps.setString(2, nombre);
+            ps.setString(3, apellidos);
+            ps.setInt(4, cuenta);
+            ps.setString(5, banco);
+            ps.setInt(6, telefono);
+            ps.setString(5, direccion);
+            n=ps.executeUpdate();
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        
+    }
+    public void ingresarVentaCredito(String plazo, String estado, float deuda, int idcliente){
+        //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
+        ConexionMySQL base = new ConexionMySQL();
+        Connection cn = base.Conectar();
+        String ingreso1 = "INSERT INTO ventacredito"+"(plazoventcred, estadoventcred, deudaventcred, idclie)"+
+                "VALUES(?,?,?,?,?,?)";
+        try{
+            int n;
+            PreparedStatement ps=cn.prepareStatement(ingreso1);
+            ps.setString(1, plazo);
+            ps.setString(2, estado);
+            ps.setFloat(3, deuda);
+            ps.setInt(4, idcliente);
+            n=ps.executeUpdate();
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        
+    }
+}
+
 }
