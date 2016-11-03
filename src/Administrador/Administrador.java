@@ -126,6 +126,32 @@ public class Administrador {
         }
         
     }
+    public void registrar_compra(String nombre, int nit, int id_auto, int costo_unitario, int cantidad_auto, int precio_venta){
+    
+        ConexionMySQL base = new ConexionMySQL();
+        Connection cn = base.Conectar();
+        String tabla = "compra_vehiculos";
+        String consulta = "INSERT INTO "+tabla+"(Nombre, NIT, ID_Auto, Costo_Unitario, Cantidad, Precio_de_venta)"+
+                "VALUES(?,?,?,?,?,?)";
+        try{
+            int n;
+            PreparedStatement ps=cn.prepareStatement(consulta);
+            ps.setString(1, nombre);
+            ps.setInt(2, nit);
+            ps.setInt(3, id_auto);
+            ps.setInt(4, costo_unitario);
+            ps.setInt(5, cantidad_auto);
+            ps.setInt(6, precio_venta);
+            n=ps.executeUpdate();
+            if(n>0) System.out.println("Funciona");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        
+    }
+    
     
 }
 
