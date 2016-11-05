@@ -64,8 +64,12 @@ public class Administrador {
         }
     }
     public void registrarAutomovil(Float f, int cant, String nombre){
+        ConexionMySQL base = new ConexionMySQL();
+        Connection cn = base.Conectar();
+       
         String ingreso1 = "INSERT INTO automovil"+"(precioauto, cantidad, nombreAuto)"+
                 "VALUES(?,?,?)";
+        
         try{
             PreparedStatement ps=cn.prepareStatement(ingreso1);
             ps.setFloat(1, f);
@@ -127,7 +131,7 @@ public class Administrador {
         
     }
     public void registrar_compra(String nombre, int nit, int id_auto, int costo_unitario, int cantidad_auto, int precio_venta){
-    
+        // registra la compra de un conjunto de vehiculos y lo actualiza al numero de vehiculos que ya existen
         ConexionMySQL base = new ConexionMySQL();
         Connection cn = base.Conectar();
         String tabla = "compra_vehiculos";
@@ -143,7 +147,7 @@ public class Administrador {
             ps.setInt(5, cantidad_auto);
             ps.setInt(6, precio_venta);
             n=ps.executeUpdate();
-            if(n>0) System.out.println("Funciona");
+            if(n>0) actualizar_automovil(id_auto, cantidad_auto);
             else System.out.println("NOOOOO");
         }
         catch(Exception e){
@@ -152,6 +156,21 @@ public class Administrador {
         
     }
     
-    
+    private void actualizar_automovil(int id_auto, int cantidad_auto){
+        String idd=""+id_auto;
+        String ingreso = "update automovil set cantidadauto = cantidadauto+"+cantidad_auto+" where idauto="+idd;
+        
+        int n;
+        try{
+            PreparedStatement ps=cn.prepareStatement(ingreso);
+            n=ps.executeUpdate();
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        
+    }
 }
 
