@@ -115,7 +115,7 @@ public class buscador {
 
     private void aceptarActionPerformed(ActionEvent evt) {
         if(!texto.getText().isEmpty()){
-             vendedorVehiculo venta=new vendedorVehiculo(texto.getText());
+             vendedorVehiculo v=new vendedorVehiculo(texto.getText());
              frame.dispose(); 
         }
         
