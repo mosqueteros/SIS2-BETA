@@ -1,5 +1,6 @@
 package Interfaz;
 
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -47,10 +48,11 @@ public class impresora {
         frame.getContentPane().add(panelScrol);
         panelScrol.setBounds(200, 70, 600, 400);
         textoPa.setFont(new Font("Arial", 3, 18));
-        textoPa.setEnabled(false);
+        textoPa.setEditable(false);
+        textoPa.setBackground(Color.lightGray);
         imprimiConf = new JButton();
         imprimiConf.setFont(new Font("Arial", 3, 15));
-        imprimiConf.setText("confirmar");
+        imprimiConf.setText("aceptar");
         imprimiConf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

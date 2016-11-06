@@ -32,10 +32,14 @@ public class buscador {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         componentes();
+        modificador(lista);
         frame.setSize(500, 400);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
+        
+        
+        
     }
 
     private void componentes() {

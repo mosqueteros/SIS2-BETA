@@ -168,10 +168,10 @@ public class component {
     private void transitarImpresion() {
         String dat[] = new String[5];
         dat[0] = TidEmpleado.getText();
-        dat[1] = TidEmpleado.getText();
-        dat[2] = Tnombre.getText() + "" + Tapellidos.getText();
-        dat[3] = Tci.getText();
-        dat[4] = TidAuto.getText();
+        dat[1] = Tname.getText() + "" + Tapellidos.getText();
+        dat[2] = Tci.getText();
+        dat[3] = TidAuto.getText();
+        dat[4]=Tfecha.getText();
         impresora imp = new impresora(dat);
     }
 
@@ -191,9 +191,7 @@ public class component {
             Class[] tipo = new Class[]{
                 String.class, String.class, String.class, String.class, String.class, String.class
             };
-            boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false
-            };
+            
 
             @Override
             public Class getColumnClass(int columnIndex) {
@@ -271,7 +269,7 @@ public class component {
         panel2.setLayout(null);
     }
 
-    private void anadir(JTable tablero) {
+    private void anadir(JTable tablero) {//prueba para ver si funciona
         tablero.setValueAt("edv", 0, 0);
         tablero.setValueAt("edasd", 0, 1);
         tablero.setValueAt("asdsa", 0, 2);
@@ -297,6 +295,7 @@ public class component {
                 !Tapellidos.getText().isEmpty() && valida.ApellidosValido(Tapellidos.getText())&&
                         !Tci.getText().isEmpty() && valida.CIValido(Tci.getText())){
                         System.out.println("listo");
+                        transitarImpresion();
         }
     }
 
