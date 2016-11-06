@@ -17,28 +17,28 @@ public class Validacion {
    
      public boolean nombreProveedorValido(String nombre){
         
-        Pattern p = Pattern.compile("[a-zA-Z_]{0,20}");
+        Pattern p = Pattern.compile("[a-zA-Z_]{1,20}");
         if(!p.matcher(nombre).matches()){
             return false;
         }
         return true;
     }
     public boolean NITValido(String NITT){
-        Pattern p = Pattern.compile("[0-9]{0,20}");
+        Pattern p = Pattern.compile("[0-9]{1,20}");
         if(!p.matcher(NITT).matches()){
             return false;
         }
         return true;
     } 
     public boolean ApellidosValido(String apellidos){
-        Pattern p = Pattern.compile("[a-zA-z_]");
+        Pattern p = Pattern.compile("[a-zA-z_ ]{1,25}");
         if(!p.matcher(apellidos).matches()){
             return false;
         }
         return true;
     }
     public boolean CIValido(String CI){
-        Pattern p = Pattern.compile("[0-9]{1,8}");
+        Pattern p = Pattern.compile("[0-9]{7,8}");
         if(!p.matcher(CI).matches()){
             return false;
         
@@ -63,7 +63,3 @@ public class Validacion {
     }
 
 }
-
-     
-    
-
