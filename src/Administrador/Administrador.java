@@ -21,6 +21,10 @@ public class Administrador {
         cn = base.Conectar();
         
     }
+    
+    
+    
+    
     public void ingresarEmpleado(String nombre, String apellidos, float sueldo, int ci, String correo, String tipo){
         //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
         String ingreso1 = "INSERT INTO empleado"+"(Nombre, Apellidos, sueldo, ci, correo, tipo)"+
@@ -41,7 +45,57 @@ public class Administrador {
         catch(Exception e){
             System.out.println(e.toString());
         }
+    }    
+    public void modificacionEmpleado(int ci, String correo, float sueldo){
+        // modifica sueldo, correo y buscar segun su ci si el sueldo no requiere ser modificado se le envia 0
+        
+        String idd=""+ci;
+        int n;
+        PreparedStatement ps;
+        String modificacion_sueldo, modificacion_correo;
+        
+        modificacion_sueldo = "update empleado set sueldo = sueldo+"+sueldo+" where ci="+idd;        
+        modificacion_correo = "update empleado set correo = '"+correo+"' where ci="+idd;        
+        
+        try{
+                ps = cn.prepareStatement(modificacion_sueldo);
+                n = ps.executeUpdate();
+            
+            if(!correo.equals("")){
+                ps = cn.prepareStatement(modificacion_correo);
+                n = ps.executeUpdate();
+            }
+            
+            
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
+    public void eliminacionEmpleado(int ci){
+        // eliminar un empleado segun su ci
+        String idd=""+ci;
+        int n;
+        PreparedStatement ps;
+        String eliminarEmpleado;
+        
+        eliminarEmpleado = "DELETE FROM empleado where ci="+idd;        
+        
+        try{
+                ps = cn.prepareStatement(eliminarEmpleado);
+                n = ps.executeUpdate();
+        
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
+    
+    
     public void registrarVentaContado(int id){
         //actualizar el stock
         
@@ -63,6 +117,10 @@ public class Administrador {
             System.out.println(e.toString());
         }
     }
+    
+    
+    
+    
     public void registrarAutomovil(Float f, int cant, String nombre){
         ConexionMySQL base = new ConexionMySQL();
         Connection cn = base.Conectar();
@@ -83,10 +141,14 @@ public class Administrador {
             System.out.println(e.toString());
         }
     }
+    
+    
+    
+    
+    
+    
     public void ingresarCliente(int ci,String nombre, String apellidos, int cuenta, String banco, int telefono, String direccion){
         //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
-        ConexionMySQL base = new ConexionMySQL();
-        Connection cn = base.Conectar();
         String ingreso1 = "INSERT INTO cliente"+"(ciclie, nombreclie, apellidosclie, cuentaclie, bancoclie, telefonoclie, direcionclie)"+
                 "VALUES(?,?,?,?,?,?)";
         try{
@@ -108,10 +170,13 @@ public class Administrador {
         }
         
     }
+    
+    
+    
+    
+    
     public void ingresarVentaCredito(String plazo, String estado, float deuda, int idcliente){
         //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
-        ConexionMySQL base = new ConexionMySQL();
-        Connection cn = base.Conectar();
         String ingreso1 = "INSERT INTO ventacredito"+"(plazoventcred, estadoventcred, deudaventcred, idclie)"+
                 "VALUES(?,?,?,?,?,?)";
         try{
@@ -130,10 +195,13 @@ public class Administrador {
         }
         
     }
+
+
+
+
+
     public void registrar_compra(String nombre, int nit, int id_auto, int costo_unitario, int cantidad_auto, int precio_venta){
         // registra la compra de un conjunto de vehiculos y lo actualiza al numero de vehiculos que ya existen
-        ConexionMySQL base = new ConexionMySQL();
-        Connection cn = base.Conectar();
         String tabla = "compra_vehiculos";
         String consulta = "INSERT INTO "+tabla+"(Nombre, NIT, ID_Auto, Costo_Unitario, Cantidad, Precio_de_venta)"+
                 "VALUES(?,?,?,?,?,?)";
@@ -154,8 +222,7 @@ public class Administrador {
             System.out.println(e.toString());
         }
         
-    }
-    
+    }    
     private void actualizar_automovil(int id_auto, int cantidad_auto){
         String idd=""+id_auto;
         String ingreso = "update automovil set cantidadauto = cantidadauto+"+cantidad_auto+" where idauto="+idd;
@@ -172,5 +239,8 @@ public class Administrador {
         }
         
     }
+    
+    
+    
 }
 
