@@ -16,5 +16,7 @@ public class Prueba {
         //admin.ingresarEmpleado("Davor", "Heredia", 100, 342, "jaredAchi@gmail.com", "Vendedor");
         //admin.modificacionEmpleado(200, "luluchan@gmail.com", 100);
         //admin.eliminacionEmpleado(200);
+        admin.reporteVendedoresVentas("20071016");
+        
     }
 }

@@ -249,11 +249,19 @@ public class Administrador {
         
     }
     
-    public ArrayList<ArrayList<String>> reporteVendedoresVentas(){
-        String consulta = "SELECT empleado.Nombre AS name, count(*) AS cantidad AS Numero_Ventas FROM ventacontado JOIN empleado ON ventacontado.idEmp = empleado.idEmp GROUP BY ventacontado.idEmp";
+    // el ingreso de la fecha debe ser como un numero entero con el año primero
+    // luego el mes seguido del dia
+    public ArrayList<ArrayList<String>> reporteVendedoresVentas(String date){
         
         ArrayList<ArrayList<String>> vendedores = new ArrayList();
         ArrayList<String> aux;
+        
+        int mesini = (((Integer.parseInt(date)%10000)/100)*100);
+        int mesfin = mesini+50;
+        String fechaini = date.substring(0,4)+mesini;
+        String fechafin = date.substring(0,4)+mesfin;
+        
+        String consulta = "SELECT empleado.Nombre AS name, count(*) AS Numero_Ventas FROM ventacontado JOIN empleado ON ventacontado.idEmp = empleado.idEmp WHERE ventacontado.fecha >= '"+ fechaini +"' and ventacontado.fecha <= '"+fechafin +"' GROUP BY ventacontado.idEmp";
         
         String var;
         Statement stmt;
@@ -270,7 +278,7 @@ public class Administrador {
                 aux = new ArrayList<String>();
                 
                 aux.add(rs.getString("name"));
-                aux.add(rs.getString("cantidad"));
+                aux.add(rs.getString("Numero_Ventas"));
                 
                 vendedores.add(aux);
                 pos++;
@@ -278,6 +286,10 @@ public class Administrador {
             
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i < vendedores.size(); i++){
+            System.out.println(vendedores.get(i).get(0)+" - "+vendedores.get(i).get(1));
         }
        
         return vendedores;
