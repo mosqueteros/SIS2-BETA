@@ -1,7 +1,10 @@
 package Administrador;
 
+import java.util.ArrayList;
 import BaseDatos.ConexionMySQL;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Administrador {
     private static Administrador admin;
@@ -239,7 +242,66 @@ public class Administrador {
         
     }
     
+    public ArrayList<ArrayList<String>> reporteVendedoresVentas(){
+        String consulta = "SELECT empleado.Nombre AS name, count(*) AS cantidad AS Numero_Ventas FROM ventacontado JOIN empleado ON ventacontado.idEmp = empleado.idEmp GROUP BY ventacontado.idEmp";
+        
+        ArrayList<ArrayList<String>> vendedores = new ArrayList();
+        ArrayList<String> aux;
+        
+        String var;
+        Statement stmt;
+        int pos = 1;
+        try {
+            
+            stmt = cn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery(consulta);
+            
+            while(rs.absolute(pos)){
+                
+                aux = new ArrayList<String>();
+                
+                aux.add(rs.getString("name"));
+                aux.add(rs.getString("cantidad"));
+                
+                vendedores.add(aux);
+                pos++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return vendedores;
+    }
     
+    
+    public ArrayList<String> prueba1(){
+        
+        ArrayList<String> lista  = new ArrayList();
+        String var;
+        Statement stmt;
+        int pos = 1;
+        try {
+            stmt = cn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM empleado");
+            
+            while(rs.absolute(pos)){
+                var = rs.getString("Apellidos");
+                System.out.println("-> "+var);
+                pos++;
+            }
+            
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return lista;
+    }
     
 }
 
