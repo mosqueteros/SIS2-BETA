@@ -66,7 +66,6 @@ public class Administrador {
                 n = ps.executeUpdate();
             }
             
-            
             if(n>0) System.out.println("Funciono");
             else System.out.println("NOOOOO");
         }
