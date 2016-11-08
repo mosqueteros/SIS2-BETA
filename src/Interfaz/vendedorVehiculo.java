@@ -1,20 +1,20 @@
 
 package Interfaz;
+import java.awt.Color;
 import javax.swing.JFrame;
 public class vendedorVehiculo {
     private JFrame frame;
     private component componentes;
-    public vendedorVehiculo(String dato) {
-        frame = new JFrame();
+    public vendedorVehiculo(String da) {
+        frame=new JFrame("registro de compra de vehiculo");
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(null);
-        frame.setTitle("registro de venta de vehiculos al contado ");
-        component p=new component(frame, dato);
+        frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+        frame.setLayout(null);
         frame.setSize(1000, 600);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
-    public static void main(String []a){
-        vendedorVehiculo n=new vendedorVehiculo(" ");
+        component p=new component(frame,da);
+        System.out.println("entro");
     }
 }

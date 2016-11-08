@@ -25,12 +25,13 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import Administrador.*;
-
+//no sirve
 public class component {
+
     private Administrador admin;
     private JFrame frame;
     private JPanel panel2;
-    private JTextField TidEmpleado, Tci, Tnombres, TidAuto, Tapellidos, Tnombre, Tfecha,Tname;
+    private JTextField TidEmpleado, Tci, Tnombres, TidAuto, Tapellidos, Tnombre, Tfecha, Tname;
     private JButton nuevo, guardar;
     private JLabel idEmpleado, Bnombre, idAuto, Bapellidos, Bci, BCliente, Bfecha;
     private Validacion valida;
@@ -38,12 +39,13 @@ public class component {
     private JScrollPane nombreColumnas;
 
     public component(JFrame frame, String dato) {
-        admin=Administrador.crearAdministrador("");
+        admin = Administrador.crearAdministrador("");
         this.frame = frame;
+        frame.setVisible(true);
         panel();
         tablavehiculos();
         editor();
-        valida=new Validacion();
+        valida = new Validacion();
         Tfecha.setText(getFechaActual() + "            " + getHoraActual() + " horas");
         TidAuto.setText(dato);
         frame.add(panel2);
@@ -69,7 +71,7 @@ public class component {
         Tnombre = new JTextField();
         Tci = new JTextField();
         Tfecha = new JTextField();
-        Tname=new JTextField();
+        Tname = new JTextField();
         nuevo = new JButton();
         nuevo.setFont(new Font("Arial", 4, 15));
         nuevo.setText("nuevo");
@@ -122,7 +124,7 @@ public class component {
         Bapellidos.setText("Apellidos:");
         panel2.add(Bapellidos);
         Bapellidos.setBounds(5, 300, 100, 20);
-        
+
         Bci = new JLabel();
         Bci.setFont(new Font("Arial", 4, 15));
         Bci.setText("CI:");
@@ -156,10 +158,6 @@ public class component {
         Tfecha.setBounds(100, 400, 300, 30);
         panel2.add(Tfecha);
 
-
-
-       
-
     }
 
     private void BconfirmaActionPerformed(ActionEvent evt) {
@@ -173,14 +171,14 @@ public class component {
         dat[1] = Tname.getText() + "" + Tapellidos.getText();
         dat[2] = Tci.getText();
         dat[3] = TidAuto.getText();
-        dat[4]=Tfecha.getText();
+        dat[4] = Tfecha.getText();
         impresora imp = new impresora(dat);
     }
 
     private void tablavehiculos() {
         tablero = new JTable();
         nombreColumnas = new JScrollPane();
-        nombreColumnas.setFont(new Font("OCR A Extended", 3, 14));
+        nombreColumnas.setFont(new Font("OCR A Extended", 3, 15));
         tablero.setModel(new DefaultTableModel(
                 new Object[][]{//matriz
                     {null, null, null, null, null, null},
@@ -193,7 +191,6 @@ public class component {
             Class[] tipo = new Class[]{
                 String.class, String.class, String.class, String.class, String.class, String.class
             };
-            
 
             @Override
             public Class getColumnClass(int columnIndex) {
@@ -266,8 +263,8 @@ public class component {
         panel2 = new JPanel();
         grupo2 = new GroupLayout(panel2);
         panel2.setLayout(grupo2);
-        panel2.setBackground(Color.LIGHT_GRAY);
-        panel2.setBounds(0, 0, 1000, 600);
+        panel2.setBackground(Color.BLUE);
+        panel2.setBounds(0, 0, 1100, 600);
         panel2.setLayout(null);
     }
 
@@ -293,23 +290,23 @@ public class component {
     }
 
     private void BgusradrActionPerformed(ActionEvent evt) {
-        String nombre=Tnombres.getText();
-        String apellido=Tapellidos.getText();
-        int ci=Integer.parseInt(Tci.getText());
-        String nombreAuto=TidAuto.getText();
-        String fecha=Tfecha.getText();
+        String nombre = Tnombres.getText();
+        String apellido = Tapellidos.getText();
+        int ci = Integer.parseInt(Tci.getText());
+        String nombreAuto = TidAuto.getText();
+        String fecha = Tfecha.getText();
         float precio;
         int id;
         //int idEmp, int idAuto, Float precio, String nombre, String apellidos, int ci, String fecha
-        if(!nombre.isEmpty() && valida.nombreProveedorValido(nombre)&&
-                !apellido.isEmpty() && valida.ApellidosValido(apellido)&&
-                        !(""+ci).isEmpty() && valida.CIValido(""+ci)){
-                        System.out.println("listo");
-                        precio=admin.getPrecioAuto(nombreAuto);
-                        id=admin.getIdAuto(nombreAuto);
-                        admin.registrarVentaAutomovil(nombreAuto);
-                        //admin.registrarVentaContado(1, id, precio, nombre, apellido, ci, fecha);
-                        transitarImpresion();
+        if (!nombre.isEmpty() && valida.nombreProveedorValido(nombre)
+                && !apellido.isEmpty() && valida.ApellidosValido(apellido)
+                && !("" + ci).isEmpty() && valida.CIValido("" + ci)) {
+            System.out.println("listo");
+            precio = admin.getPrecioAuto(nombreAuto);
+            id = admin.getIdAuto(nombreAuto);
+            admin.registrarVentaAutomovil(nombreAuto);
+            //admin.registrarVentaContado(1, id, precio, nombre, apellido, ci, fecha);
+            transitarImpresion();
         }
     }
 

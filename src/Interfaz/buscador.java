@@ -1,5 +1,6 @@
 package Interfaz;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -8,36 +9,33 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class buscador {
 
-    private JFrame frame = new JFrame("buscador de ID vehiculo");
-
+    private JFrame frame;
+    private JPanel panel;
     private JLabel textBuscador;
     private JTextField texto;
     private JComboBox combo;
     private ArrayList<String> lista;
     private String directeada;
     private JButton aceptar;
-
-    public buscador(ArrayList<String> lista) {
+    
+    public buscador(JFrame frame,ArrayList<String> lista) {
+        this.frame=frame;
+        
         this.lista = lista;
-        frame = new JFrame();
-        frame.setTitle("buscador de ID vehiculo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(null);
+        panel();
         componentes();
         modificador(lista);
-        frame.setSize(500, 400);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
-        
+        frame.add(panel);
         
         
     }
@@ -61,7 +59,7 @@ public class buscador {
         });
         combo = new JComboBox<>();
         combo.setModel(new DefaultComboBoxModel<>(new String[]{""}));
-        frame.getContentPane().add(combo);
+        panel.add(combo);
         combo.setBounds(290, 10, 200, 30);
         combo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -74,14 +72,14 @@ public class buscador {
         aceptar.setFont(new Font("Arial", 4, 15));
         aceptar.setText("aceptar");
         aceptar.setBounds(390, 340, 100, 30);
-        frame.getContentPane().add(aceptar);
+        panel.add(aceptar);
         aceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 aceptarActionPerformed(evt);
             }
 
         });
-        frame.pack();
+        //panel.pack();
     }
 
     private void textokeyReleased(KeyEvent evt) {
@@ -123,6 +121,14 @@ public class buscador {
              frame.dispose(); 
         }
         
+    }
+
+    private void panel() {
+        panel=new JPanel();
+        GroupLayout grupo=new GroupLayout(panel);
+        panel.setLayout(grupo);
+        panel.setBackground(Color.RED);
+        panel.setBounds(0, 0,500, 400);
     }
   
     
