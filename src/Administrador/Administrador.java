@@ -163,14 +163,14 @@ public class Administrador {
     
     
     
-    public void ingresarCliente(int ci,String nombre, String apellidos, int cuenta, String banco, int telefono, String direccion){
+    public void RegistrarCliente(String ci,String nombre, String apellidos, int cuenta, String banco, int telefono, String direccion){
         //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
         String ingreso1 = "INSERT INTO cliente"+"(ciclie, nombreclie, apellidosclie, cuentaclie, bancoclie, telefonoclie, direcionclie)"+
                 "VALUES(?,?,?,?,?,?)";
         try{
             int n;
             PreparedStatement ps=cn.prepareStatement(ingreso1);
-            ps.setInt(1, ci);
+            ps.setString(1, ci);
             ps.setString(2, nombre);
             ps.setString(3, apellidos);
             ps.setInt(4, cuenta);

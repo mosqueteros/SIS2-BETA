@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interfaz_A_Credito;
+package Interfaz;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,19 +13,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import Administrador.Administrador;
 
 /**
  *
  * @author MAYKOL
  */
-public class Interface_Venta extends javax.swing.JFrame {
+public class Interface_Cliente extends javax.swing.JFrame {
 
     /**
      * Creates new form Interface_Venta
      */
     int con=0;
+    String ci, nombre, apellido, banco, direccion;
+    int cuenta, telefono;
+    Administrador admin = Administrador.crearAdministrador("");
     //private DefaultTableModel tabla1;
-    public Interface_Venta() {
+    public Interface_Cliente() {
         initComponents();
         textFecha.setText(getFechaActual()+"            "+getHoraActual()+" horas");
        SLetras(textNombre);
@@ -72,7 +76,7 @@ public class Interface_Venta extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         textDireccion = new javax.swing.JTextField();
         botonSalir = new javax.swing.JButton();
-        comboBanco = new javax.swing.JComboBox<>();
+        comboBanco = new javax.swing.JComboBox<String>();
         labelFecha = new javax.swing.JLabel();
         textFecha = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -121,7 +125,7 @@ public class Interface_Venta extends javax.swing.JFrame {
         });
 
         comboBanco.setFont(new java.awt.Font("Rod", 1, 14)); // NOI18N
-        comboBanco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BANCO UNION", "BANCO MERCANTIL", "BANCO NACIONAL DE BOLIVIA", "BANCOSOL", "BANCO FIE", "BANCO GANADERO" }));
+        comboBanco.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BANCO UNION", "BANCO MERCANTIL", "BANCO NACIONAL DE BOLIVIA", "BANCOSOL", "BANCO FIE", "BANCO GANADERO" }));
         comboBanco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBancoActionPerformed(evt);
@@ -311,7 +315,12 @@ public class Interface_Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_textFechaActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-            /*long ced = Long.parseLong(textCI.getText().trim());
+        if (VerificarDatos()){
+            ObtenerDatos();
+            GuardarDatos();
+            limpiarDatos();
+        }
+        /*long ced = Long.parseLong(textCI.getText().trim());
             String nom = .getText().trim();
             String tel = cj_telefono.getText().trim();
             String tipo = item_tipo.getSelectedItem().toString();  
@@ -373,6 +382,40 @@ public class Interface_Venta extends javax.swing.JFrame {
             }
         });
     }
+       private boolean VerificarDatos(){
+        boolean resp=false;
+        if(textCI.getText()!="" && textNombre.getText()!=""
+                && textApellido.getText()!="" &&textCuenta.getText()!=""
+                && textTelefono.getText()!="" && textDireccion.getText()!=""){
+            resp=true;
+        }else
+            resp=false;
+        
+        return resp;
+    }
+    private void ObtenerDatos(){
+        ci = textCI.getText();
+        nombre = textNombre.getText();
+        apellido = textApellido.getText();
+        cuenta = Integer.parseInt(textCuenta.getText());
+        banco = (String)comboBanco.getSelectedItem();
+        telefono = Integer.parseInt(textTelefono.getText());
+        direccion = textDireccion.getText();
+    }
+    
+    private void GuardarDatos(){
+        admin.RegistrarCliente(ci, nombre, apellido, cuenta, banco, telefono, direccion);
+    }
+    
+    private void limpiarDatos(){
+        textCI.setText("");
+        textNombre.setText("");
+        textApellido.setText("");
+        textCuenta.setText("");
+        comboBanco.setSelectedIndex(0);
+        textTelefono.setText("");
+        textDireccion.setText("");
+    }
   
     /**
      * @param args the command line arguments
@@ -391,14 +434,18 @@ public class Interface_Venta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interface_Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interface_Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interface_Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interface_Venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -407,7 +454,7 @@ public class Interface_Venta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Interface_Venta().setVisible(true);
+                new Interface_Cliente().setVisible(true);
             }
         });
     }
