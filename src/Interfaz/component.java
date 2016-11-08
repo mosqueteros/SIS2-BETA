@@ -24,9 +24,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import Administrador.*;
 
 public class component {
-
+    private Administrador admin;
     private JFrame frame;
     private JPanel panel2;
     private JTextField TidEmpleado, Tci, Tnombres, TidAuto, Tapellidos, Tnombre, Tfecha,Tname;
@@ -37,6 +38,7 @@ public class component {
     private JScrollPane nombreColumnas;
 
     public component(JFrame frame, String dato) {
+        admin=Administrador.crearAdministrador("");
         this.frame = frame;
         panel();
         tablavehiculos();
@@ -291,10 +293,22 @@ public class component {
     }
 
     private void BgusradrActionPerformed(ActionEvent evt) {
-        if(!Tnombres.getText().isEmpty() && valida.nombreProveedorValido(Tnombres.getText())&&
-                !Tapellidos.getText().isEmpty() && valida.ApellidosValido(Tapellidos.getText())&&
-                        !Tci.getText().isEmpty() && valida.CIValido(Tci.getText())){
+        String nombre=Tnombres.getText();
+        String apellido=Tapellidos.getText();
+        int ci=Integer.parseInt(Tci.getText());
+        String nombreAuto=TidAuto.getText();
+        String fecha=Tfecha.getText();
+        float precio;
+        int id;
+        //int idEmp, int idAuto, Float precio, String nombre, String apellidos, int ci, String fecha
+        if(!nombre.isEmpty() && valida.nombreProveedorValido(nombre)&&
+                !apellido.isEmpty() && valida.ApellidosValido(apellido)&&
+                        !(""+ci).isEmpty() && valida.CIValido(""+ci)){
                         System.out.println("listo");
+                        precio=admin.getPrecioAuto(nombreAuto);
+                        id=admin.getIdAuto(nombreAuto);
+                        admin.registrarVentaAutomovil(nombreAuto);
+                        //admin.registrarVentaContado(1, id, precio, nombre, apellido, ci, fecha);
                         transitarImpresion();
         }
     }

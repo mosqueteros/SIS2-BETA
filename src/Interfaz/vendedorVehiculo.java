@@ -15,6 +15,6 @@ public class vendedorVehiculo {
         frame.setVisible(true);
     }
     public static void main(String []a){
-        vendedorVehiculo n=new vendedorVehiculo("ssd");
+        vendedorVehiculo n=new vendedorVehiculo(" ");
     }
 }

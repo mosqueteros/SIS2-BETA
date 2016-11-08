@@ -98,16 +98,11 @@ public class Administrador {
     }
     
     
-    public void registrarVentaContado(int id){
+    
+    public void registrarVentaAutomovil(String nombre){
         //actualizar el stock
         
-        /*PreparedStatement pstmt = con.prepareStatement("UPDATE EMPLOYEES
-                                     SET SALARY = ? WHERE ID = ?");
-        pstmt.setBigDecimal(1, 153833.00)
-        pstmt.setInt(2, 110592)*/
-        String idd=""+id;
-        String ingreso = "update automovil set cantidad = cantidad - 1 where idauto="+idd;
-        //String
+        String ingreso = "update automovil set cantidad = cantidad - 1 where nombreAuto='"+nombre+"'";
         int n;
         try{
             PreparedStatement ps=cn.prepareStatement(ingreso);
@@ -120,13 +115,32 @@ public class Administrador {
         }
     }
     
-    
+    //para generar el registro de la venta al contado
+    public void registrarVentaContado(int idEmp, int idAuto, Float precio, String nombre, String apellidos, int ci, String fecha){
+        String ingreso1 = "INSERT INTO ventacontado"+"(idEmp, idAuto, precio, nombre, apellidos, ci, fecha)"+
+                "VALUES(?,?,?,?,?,?)";
+        try{
+            int n;
+            PreparedStatement ps=cn.prepareStatement(ingreso1);
+            ps.setInt(1, idEmp);
+            ps.setInt(2, idAuto);
+            ps.setFloat(3, precio);
+            ps.setString(4, nombre);
+            ps.setString(5, apellidos);
+            ps.setInt(6, ci);
+            ps.setString(7, fecha);
+            n=ps.executeUpdate();
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
     
     
     public void registrarAutomovil(Float f, int cant, String nombre){
-        ConexionMySQL base = new ConexionMySQL();
-        Connection cn = base.Conectar();
-       
+        
         String ingreso1 = "INSERT INTO automovil"+"(precioauto, cantidad, nombreAuto)"+
                 "VALUES(?,?,?)";
         
@@ -174,9 +188,6 @@ public class Administrador {
     }
     
     
-    
-    
-    
     public void ingresarVentaCredito(String plazo, String estado, float deuda, int idcliente){
         //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
         String ingreso1 = "INSERT INTO ventacredito"+"(plazoventcred, estadoventcred, deudaventcred, idclie)"+
@@ -197,10 +208,6 @@ public class Administrador {
         }
         
     }
-
-
-
-
 
     public void registrar_compra(String nombre, int nit, int id_auto, int costo_unitario, int cantidad_auto, int precio_venta){
         // registra la compra de un conjunto de vehiculos y lo actualiza al numero de vehiculos que ya existen
@@ -223,7 +230,7 @@ public class Administrador {
         catch(Exception e){
             System.out.println(e.toString());
         }
-        
+       
     }    
     private void actualizar_automovil(int id_auto, int cantidad_auto){
         String idd=""+id_auto;
@@ -301,6 +308,75 @@ public class Administrador {
         }
        
         return lista;
+    }
+
+    public ArrayList<String> getListaAutos(){
+        ArrayList<String> lista=new ArrayList<String>();
+        try{
+            Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String consulta="SELECT nombreAuto FROM automovil";
+            ResultSet rs = stmt.executeQuery(consulta);
+            //int[] lista=rs.getArray("nombreAuto");
+            System.out.println("Hello");
+            int p=1;
+            String nombre;
+            while(rs.absolute(p)){
+                nombre=rs.getString("nombreAuto");
+                lista.add(nombre);
+                p++;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return lista;
+    }
+    
+    public int getStock(String nombre){
+        int stock=0;
+        try{
+            Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String consulta="SELECT cantidad FROM automovil where nombreAuto='"+nombre+"'";
+            ResultSet rs = stmt.executeQuery(consulta);
+            rs.absolute(1);
+            String res=rs.getString("cantidad");
+            stock=Integer.parseInt(res);
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return stock;
+    }
+    public float getPrecioAuto(String nombre){
+        float precio=0;
+        try{
+            Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String consulta="SELECT precioauto FROM automovil where nombreAuto='"+nombre+"'";
+            ResultSet rs = stmt.executeQuery(consulta);
+            rs.absolute(1);
+            String res=rs.getString("precioauto");
+            precio=Float.parseFloat(res);
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return precio;
+    }
+    
+    public int getIdAuto(String nombre){
+        int id=0;
+        try{
+            Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String consulta="SELECT idauto FROM automovil where nombreAuto='"+nombre+"'";
+            ResultSet rs = stmt.executeQuery(consulta);
+            rs.absolute(1);
+            String res=rs.getString("idauto");
+            id=Integer.parseInt(res);
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return id;
     }
     
 }
