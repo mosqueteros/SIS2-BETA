@@ -25,9 +25,6 @@ public class Administrador {
         
     }
     
-    
-    
-    
     public void ingresarEmpleado(String nombre, String apellidos, float sueldo, int ci, String correo, String tipo){
         //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
         String ingreso1 = "INSERT INTO empleado"+"(Nombre, Apellidos, sueldo, ci, correo, tipo)"+
@@ -158,12 +155,7 @@ public class Administrador {
         }
     }
     
-    
-    
-    
-    
-    
-    public void RegistrarCliente(String ci,String nombre, String apellidos, int cuenta, String banco, int telefono, String direccion){
+    public void registrarCliente(String ci,String nombre, String apellidos, int cuenta, String banco, int telefono, String direccion){
         //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
         String ingreso1 = "INSERT INTO cliente"+"(ciclie, nombreclie, apellidosclie, cuentaclie, bancoclie, telefonoclie, direcionclie)"+
                 "VALUES(?,?,?,?,?,?)";
@@ -187,6 +179,28 @@ public class Administrador {
         
     }
     
+    public void modificarCliente(int id,String ci,String nombre, String apellidos, int cuenta, String banco, int telefono, String direccion){
+        //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
+        String ingreso = "UPDATE cliente SET "+
+                "ciclie="+ci+
+                ", nombreclie='"+nombre+
+                "', apellidosclie='"+apellidos+
+                "', cuentaclie="+cuenta+
+                ", bancoclie='"+banco+
+                "', telefonoclie="+telefono+
+                ", direccionclie='"+direccion+
+                "' WHERE idclie="+id;
+        int n;
+        try{
+            PreparedStatement ps=cn.prepareStatement(ingreso);
+            n=ps.executeUpdate();
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
     
     public void ingresarVentaCredito(String plazo, String estado, float deuda, int idcliente){
         //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
@@ -322,6 +336,48 @@ public class Administrador {
         return lista;
     }
 
+    public ArrayList<ArrayList<String>> getClientes(){
+        ArrayList<ArrayList<String>> lista=new ArrayList<ArrayList<String>>();
+        try{
+            Statement stmt = cn.createStatement();
+            String consulta="SELECT * FROM cliente ORDER BY nombreclie";
+            ResultSet rs = stmt.executeQuery(consulta);
+            
+            String id;
+            String ci;
+            String nombre;
+            String apellidos;
+            String cuenta;
+            String banco;
+            String telefono;
+            String direccion;
+            while(rs.next()){
+                ArrayList<String> fila= new ArrayList<String>();
+                id=Integer.toString(rs.getInt("idclie"));
+                ci=rs.getString("ciclie");
+                nombre=rs.getString("nombreclie");
+                apellidos=rs.getString("apellidosclie");
+                cuenta=Integer.toString(rs.getInt("cuentaclie"));
+                banco=rs.getString("bancoclie");
+                telefono=Integer.toString(rs.getInt("telefonoclie"));
+                direccion=rs.getString("direccionclie");
+                fila.add(id);
+                fila.add(ci);
+                fila.add(nombre);
+                fila.add(apellidos);
+                fila.add(cuenta);
+                fila.add(banco);
+                fila.add(telefono);
+                fila.add(direccion);
+                lista.add(fila);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return lista;
+    }
+    
     public ArrayList<String> getListaAutos(){
         ArrayList<String> lista=new ArrayList<String>();
         try{
