@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interfaz;
+package InterfacesFX;
 
 
 import java.text.DateFormat;
@@ -86,7 +86,7 @@ public class SisIIFX extends Application {
        
         raiz = new Group();
         Scene escena = new Scene(raiz);
-        Image image = new Image("file:///C:/Users/USUARIO/Desktop/FondoInterfaz.png");
+        Image image = new Image("file:///C:/Users/USUARIO/Desktop/InterfazMejor.jpg");
         ImageView iv1 = new ImageView();
          iv1.setImage(image);
        //  escena.setFill(Color.BLACK);

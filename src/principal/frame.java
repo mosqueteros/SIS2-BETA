@@ -245,7 +245,7 @@ public class frame {
                         
                         
                     }
-                    if (carg == "gerente") {
+                    if (carg.equals( "gerente")) {
                         ventaCredit.setEnabled(true);
                         ventaCont.setEnabled(true);
                         reporteVent.setEnabled(true);
@@ -253,7 +253,7 @@ public class frame {
                         registroEmple.setEnabled(true);
                         despidoEmpl.setEnabled(true);
                     }
-                    if(carg=="recursos humanos"){
+                    if(carg.equals("recursos humanos")){
                         registroEmple.setEnabled(true);
                         despidoEmpl.setEnabled(true);
                     }
