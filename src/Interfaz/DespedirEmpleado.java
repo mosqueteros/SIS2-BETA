@@ -73,24 +73,26 @@ public class DespedirEmpleado{
      
      JButton confirmarBoton;
      JButton botonEliminar;
+     
     public static void main(String [] args)throws Exception{
         DespedirEmpleado despido = new DespedirEmpleado("");
     }
     public DespedirEmpleado(String cargo){
         Frame = new JFrame();
-        
-       Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Frame.setSize(400,450);
+        Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Frame.setSize(450,500);
         this.cargo = cargo;
         inicializarEstandares();
         inicializarPanel();
         inicializarEstandares();
+        inicializarBotones();
         inicializarLabels();
         inicializarTextFields();
-        inicializarBotones();
+        
         //Frame.pack();
         Frame.setResizable(false);
         Frame.add(panel);
+        Frame.setLocationRelativeTo(null);
         Frame.setVisible(true);
         //inicializarBotones();
     }
@@ -107,21 +109,27 @@ public class DespedirEmpleado{
     
     }
      public void inicializarLabels(){
-        tituloLabel = new JLabel("DESPEDIDO ");
+        tituloLabel = new JLabel("DESPEDIR");
         CILabel =       new JLabel("CI: ");
         labels =        new ArrayList<>();
         labels.add(CILabel);
         anadirLabels();
+         JLabel label = new JLabel(); 
+        label.setIcon(new ImageIcon(getClass().getResource("/Imagen/InterfazMejor.jpg")));
+         Frame.getContentPane().add(label);
+        label.setBounds(0,0,500,500);
     }
     private void anadirLabels(){
-        tituloLabel.setBounds(columnaUno,40,9000,40);
-        tituloLabel.setFont(new Font(fuenteLabel, 4, 30));
+        tituloLabel.setBounds(columnaUno+70,30,900,40);
+        tituloLabel.setFont(new Font(fuenteLabel, 4, 40));
+        tituloLabel.setForeground(Color.LIGHT_GRAY);
         Frame.getContentPane().add(tituloLabel);
         int y = 150;
         for(int j = 0; j< labels.size(); j++){
             JLabel actual = labels.get(j);
+            actual.setForeground(Color.LIGHT_GRAY);
             actual.setFont(new Font(fuenteLabel, 4, tamanoLabel));
-            actual.setBounds(columnaUno, y, 200, 40);
+            actual.setBounds(columnaUno, y-5, 200, 40);
             y+=saltoLinea;
             Frame.getContentPane().add(actual);
         }
@@ -136,7 +144,7 @@ public class DespedirEmpleado{
         int y = 150;
         for(int j = 0; j< textFields.size(); j++){
             JTextField actual = textFields.get(j);
-            actual.setFont(new Font(fuenteTextField, 4, tamanoLabel));
+            actual.setFont(new Font(fuenteTextField, 4 , tamanoLabel));
             actual.setBounds(columnaDos, y, 200, 30);
             actual.setBorder(new LineBorder(Color.GRAY));
             y+=saltoLinea;
@@ -149,7 +157,7 @@ public class DespedirEmpleado{
         panel = new JPanel();
         
         panel.setBackground(Color.LIGHT_GRAY);
-        panel.setBounds(0, 0,500, 500);
+        panel.setBounds(0, 0,450, 500);
        
     
     }
@@ -158,7 +166,7 @@ public class DespedirEmpleado{
            confirmarBoton.setFont(new Font(fuenteLabel, 4, tamanoLabel));
            confirmarBoton.setBounds(columnaUno+5, 320, 150, 40);
            
-           botonEliminar = new JButton("cancelar");
+           botonEliminar = new JButton("Cancelar");
            botonEliminar.setBounds(columnaDos+60, 320, 150, 40);
            botonEliminar.setFont(new Font(fuenteLabel, 4, tamanoLabel));
     
