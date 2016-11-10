@@ -5,6 +5,7 @@
  */
 package principal;
 
+import Administrador.Administrador;
 import Interfaz.Validacion;
 import java.awt.Color;
 import java.awt.Font;
@@ -19,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -63,7 +65,7 @@ public class princi {
         nombre.setFont(new Font("Arial", 3, 15));
         nombre.setBounds(10, 10, 90, 20);
         pasword.getContentPane().add(nombre);
-        paswor = new JPasswordField("ksjdhdhdhxvgv");
+        paswor = new JPasswordField("1234567");
         paswor.setFont(new Font("Arial", 3, 15));
         paswor.setBounds(100, 90, 120, 20);
         pasword.getContentPane().add(paswor);
@@ -72,17 +74,17 @@ public class princi {
         paswordt.setBounds(10, 90, 90, 20);
         pasword.getContentPane().add(paswordt);
 
-        id = new JTextField();
+        id = new JTextField("1");
         id.setFont(new Font("Arial", 3, 15));
         id.setBounds(100, 50, 120, 20);
         pasword.getContentPane().add(id);
-        ide = new JLabel("ide:");
+        ide = new JLabel("Ide:");
         ide.setFont(new Font("Arial", 3, 15));
         ide.setBounds(10, 50, 90, 20);
         pasword.getContentPane().add(ide);
 
         combo = new JComboBox<>();
-        combo.setModel(new DefaultComboBoxModel<>(new String[]{"DPTO DE VENTAS", "R HUMANOS", "ADMISNISTRACION", "CAJERO"}));
+        combo.setModel(new DefaultComboBoxModel<>(new String[]{"VENDEDOR", "R HUMANOS", "ADMISNISTRACION", "CAJERO"}));
         pasword.getContentPane().add(combo);
         combo.setBounds(100, 10, 120, 20);
         combo.addActionListener(new ActionListener() {
@@ -130,25 +132,43 @@ public class princi {
 
     private void aceptarActionPerformed(ActionEvent evt) {
         Validacion valida = new Validacion();
-
         int iden = Integer.parseInt("" + id.getText());
         String carg = valor;
         String contrasena = paswor.getText();
-        System.out.println("-> " + valor);
+        String cargoEmpleado;
+        Administrador admin=Administrador.crearAdministrador("");
+        int ci;
         if (iden != 0) {
             System.out.println("sss "+carg);
-            if (valida.nombreProveedorValido(carg)) {
+            if (valida.nombreProveedorValido(carg) ) {
                 System.out.println("aaa");
                 if (contrasena != null && valida.CIValido(contrasena)) {
-                    System.out.println("mmmmmm");
-                    try {
-                        PrincipalNuevo p = new PrincipalNuevo(iden, valor);
-                    } catch (Exception ex) {
-                        Logger.getLogger(princi.class.getName()).log(Level.SEVERE, null, ex);
+                        ci=admin.getCIEmpleado(iden);
+                        cargoEmpleado=admin.getTipoEmpleado(iden);
+                        if(ci==Integer.parseInt(contrasena) && cargoEmpleado.equals(carg)){
+                        try {
+                           admin.setUsuarioConectado(iden);
+                           PrincipalNuevo p = new PrincipalNuevo(valor);
+                           
+                        } catch (Exception ex) {
+                            System.out.println(ex.toString());
+                        }
+                        pasword.dispose();
                     }
-                    pasword.dispose();
+                        else {
+                            
+                        JOptionPane.showMessageDialog(null,"DATOS INCORRECTOS");
+        
+                        }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"DATOS INCORRECTOS");
+        
                 }
             }
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"DATOS INCORRECTOS");
         }
     }
 }

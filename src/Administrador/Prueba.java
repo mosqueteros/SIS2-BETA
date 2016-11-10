@@ -13,12 +13,12 @@ public class Prueba {
         //admin.RegistrarCliente("7387477575gh", "Alberto", "Cortes Mamani"
         //        , "643783783873", "Banco Union", "72546738", "av. Siempre viva 336");
         //admin.registrarVentaContado(1);
-        //admin.ingresarEmpleado("Davor", "Heredia", 100, 342, "jaredAchi@gmail.com", "Vendedor");
+        admin.ingresarEmpleado("Eduardo", "Perez", 10045, 1112223, "eduardo@gmail.com", "R HUMANOS");
         //admin.modificacionEmpleado(200, "luluchan@gmail.com", 100);
         //admin.eliminacionEmpleado(200);
         //admin.reporteVendedoresVentas("20071016");
-        Transaccion transaccion = new Transaccion();
-        transaccion.ejecutarPagoCliente(1, 100, "1212", 1);
+        //Transaccion transaccion = new Transaccion();
+        //transaccion.ejecutarPagoCliente(1, 100, "1212", 1);
         
     }
     private static void llenarTablero() {

@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 public class vendedorVehiculo {
     private JFrame frame;
     private component componentes;
-    public vendedorVehiculo(String da) {
+    public vendedorVehiculo(String da,String cargo) {
         frame=new JFrame("registro de compra de vehiculo");
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -14,7 +14,7 @@ public class vendedorVehiculo {
         frame.setSize(1000, 600);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        component p=new component(frame,da);
+        component p=new component(frame,da,cargo);
         System.out.println("entro");
     }
 }

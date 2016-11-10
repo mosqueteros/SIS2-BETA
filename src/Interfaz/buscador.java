@@ -31,8 +31,9 @@ public class buscador {
     String fuente;
     int tamanoTitulo;
     int tamanoLabels;
-    
-    public buscador(JFrame frame,ArrayList<String> lista) {
+    String cargo;
+    public buscador(JFrame frame,ArrayList<String> lista,String cargo) {
+        this.cargo=cargo;
         this.frame=frame;  
         this.lista = lista;
         panel();
@@ -125,7 +126,7 @@ public class buscador {
 
     private void aceptarActionPerformed(ActionEvent evt) {
         if(!texto.getText().isEmpty()){
-             vendedorVehiculo v=new vendedorVehiculo(texto.getText());
+             vendedorVehiculo v=new vendedorVehiculo(texto.getText(),cargo);
              frame.dispose(); 
         }
         

@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import Administrador.Administrador;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -15,20 +16,24 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import principal.PrincipalNuevo;
 
 /**
  *
  * @author USUARIO
  */
-public class minePane extends JPanel{
+public class registroEmplead extends JPanel{
     JLabel tituloLabel;
     JLabel nombreLabel;
+    JLabel apellidosLabel;
     JLabel ciLabel;
     JLabel correoElectronicoLabel;
     JLabel tipoEmpleadoLabel;
@@ -36,6 +41,7 @@ public class minePane extends JPanel{
     Validacion v;
     JTextField titulo;
     JTextField nombre;
+    JTextField apellidos;
     JTextField ci;
     JTextField correoElectronico;
     JTextField tipoEmpleado;
@@ -52,8 +58,11 @@ public class minePane extends JPanel{
     String fuente;
     int grosor;
     int tamano;
-    
-    public minePane(){
+    String padre;
+    JFrame actual;
+    public registroEmplead(String p,JFrame aux){
+        padre=p;
+        actual=aux;
        // this.setLayout(null);
         v = new Validacion();
          grosor = 4;
@@ -67,6 +76,7 @@ public class minePane extends JPanel{
         inicializarComponentes();
        
         //anadirComponentes();
+
     }
     public void inicializarComponentes(){
         inicializarLabels();
@@ -78,33 +88,72 @@ public class minePane extends JPanel{
     public void inicializarBotones(){
         registrarBoton = new JButton("Registrar");
         registrarBoton.setFont(new Font((fuente),grosor,tamano));
-        registrarBoton.setBounds(240,330,300,50);
+        registrarBoton.setBounds(240,360,300,50);
         registrarBoton.addActionListener(new ActionListener(){
            @Override
             public void actionPerformed(ActionEvent e) {
+                
                 if (enviar()){
-                    System.out.println("Enviado");
+                    JOptionPane.showMessageDialog(null,"EL NUEVO EMPLEADO FUE REGITRADO CON EXITO");
+                     actual.dispose();
+                     principal.PrincipalNuevo p=new PrincipalNuevo(padre);
+                   
                 }else{
-                    System.out.println("Error");
+                    JOptionPane.showMessageDialog(null,"ALGUNOS DE LOS DATOS NO ES VALIDO");
+                  
                 }
+                
             }
         } );
         //anadirAPanel((JButton)registrarBoton,this);
         add(registrarBoton);
         cancelarBoton = new JButton("Cancelar");
         cancelarBoton.setFont(new Font((fuente),grosor,tamano));
-        cancelarBoton.setBounds(600,330,300,50);
+        cancelarBoton.setBounds(600,360,300,50);
+        cancelarBoton.addActionListener(new ActionListener(){
+           @Override
+            public void actionPerformed(ActionEvent e) {
+                
+               JOptionPane.showMessageDialog(null,"LA TRANSACCION NO SE REALIZO");
+               actual.dispose();
+               principal.PrincipalNuevo p=new PrincipalNuevo(padre);
+                
+            }
+        } );
         //anadirAPanel((JButton)registrarBoton,this);
         add(cancelarBoton);
     
     }
+    private float calcularSueldo(){
+        float sueldo=0;
+        switch ((String)comboBox.getSelectedItem()) {
+        
+            case "VENDEDOR":
+                sueldo = 4000;
+                break;
+            case "R HUMANOS":
+                sueldo = 3000;
+                break;
+            case "GERENTE":
+                sueldo = 12000;
+                break;
+            case "CAJERO":
+                sueldo = 3500;
+                break;
+        }
+        return sueldo;
+    
+    }
     public boolean enviar(){
-       
-        if(v.CIValido(ci.getText()) &&
-          v.nombreProveedorValido(nombre.getText()) &&
-          v.correoValido(correoElectronico.getText()) ){
-            return true;
-        }else{
+        Administrador admin;
+        if(v.CIValido(ci.getText()) && v.ApellidosValido(apellidos.getText()) && v.nombreProveedorValido(nombre.getText()) &&
+        v.correoValido(correoElectronico.getText()) ){
+            admin=Administrador.crearAdministrador("");
+            
+        admin.ingresarEmpleado(nombre.getText(), apellidos.getText() ,calcularSueldo(), Integer.parseInt(ci.getText()), correoElectronico.getText(), (String)comboBox.getSelectedItem());
+         return true;
+        } 
+        else{
             return false;
         }
     }
@@ -123,16 +172,18 @@ public class minePane extends JPanel{
     }
     
     public void inicializarTextFields(){
-       nombre   =     new JTextField();    
-       ci       =     new JTextField();     
+       nombre           =     new JTextField();  
+       apellidos        =     new JTextField();     
+       ci               =     new JTextField();     
        correoElectronico = new JTextField();
        textFields = new ArrayList<>();
-       textFields.add(nombre);textFields.add(ci);textFields.add(correoElectronico);
+       textFields.add(nombre);textFields.add(apellidos);textFields.add(ci);textFields.add(correoElectronico);
        comboBox = new JComboBox();
        comboBox.setFont(new Font((fuente),grosor,tamano));
-       comboBox.addItem("Recursos Humanos");
-       comboBox.addItem("Vendedor");
-       comboBox.addItem("Mecanico");
+       comboBox.addItem("R HUMANOS");
+       comboBox.addItem("VENDEDOR");
+       comboBox.addItem("CAJERO");
+       comboBox.addItem("GERENTE");
        anadirTextFields();
     }
     public void anadirTextFields(){
@@ -176,12 +227,13 @@ public class minePane extends JPanel{
         tituloLabel.setFont(new Font((fuente),grosor,35));
         tituloLabel.setBounds(300,30,600,30);
         add(tituloLabel);
-        nombreLabel = new JLabel("Nombre: ");
-        ciLabel = new JLabel("CI: ");
-        correoElectronicoLabel = new JLabel("Correo Electrónico: ");
-        tipoEmpleadoLabel = new JLabel("Tipo de Empleado: ");
+        nombreLabel           = new JLabel("Nombre: ");
+        apellidosLabel          = new JLabel("Apellidos: ");
+        ciLabel                 = new JLabel("CI: ");
+        correoElectronicoLabel  = new JLabel("Correo Electrónico: ");
+        tipoEmpleadoLabel       = new JLabel("Tipo de Empleado: ");
         labels = new ArrayList<>();
-        labels.add(nombreLabel);labels.add(ciLabel);
+        labels.add(nombreLabel);labels.add(apellidosLabel);labels.add(ciLabel);
         labels.add(correoElectronicoLabel); labels.add(tipoEmpleadoLabel); 
         anadirLabels();
     }

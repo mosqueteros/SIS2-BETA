@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 public class buscadorIDvehiculo {
     private JFrame frame;
-    public buscadorIDvehiculo(){
+    public buscadorIDvehiculo(String cargo){
         frame=new JFrame("registro de compra de vehiculo");
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +27,7 @@ public class buscadorIDvehiculo {
                 vehiculosDisponibles.add(nombre);
             }
         }
-        buscador busca=new buscador(frame,vehiculosDisponibles);
+        buscador busca=new buscador(frame,vehiculosDisponibles,cargo);
         frame.setVisible(true);
     }
     /*    public static void main(String[] args) {

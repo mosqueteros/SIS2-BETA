@@ -59,6 +59,8 @@ public class CajeroSwing{
     }
     public CajeroSwing()throws Exception{
         Frame = new JFrame();
+        
+       Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.setSize(400,450);
         inicializarEstandares();
         inicializarPanel();

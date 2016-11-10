@@ -45,6 +45,7 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import principal.PrincipalNuevo;
 
 public class DespedirEmpleado{
     private static Administrador admin = Administrador.crearAdministrador("concesionario");
@@ -66,16 +67,21 @@ public class DespedirEmpleado{
      int columnaDos;
      int tamanoLabel;
      
+     String cargo;
      String fuenteLabel;
      String fuenteTextField;
+     
      JButton confirmarBoton;
      JButton botonEliminar;
     public static void main(String [] args)throws Exception{
-        DespedirEmpleado despido = new DespedirEmpleado();
+        DespedirEmpleado despido = new DespedirEmpleado("");
     }
-    public DespedirEmpleado()throws Exception{
+    public DespedirEmpleado(String cargo){
         Frame = new JFrame();
+        
+       Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.setSize(400,450);
+        this.cargo = cargo;
         inicializarEstandares();
         inicializarPanel();
         inicializarEstandares();
@@ -88,6 +94,7 @@ public class DespedirEmpleado{
         Frame.setVisible(true);
         //inicializarBotones();
     }
+    
     //kktsv81102
    
     public void inicializarEstandares(){
@@ -137,7 +144,7 @@ public class DespedirEmpleado{
         }
     
     }
-    private void inicializarPanel()throws Exception {
+    private void inicializarPanel() {
 
         panel = new JPanel();
         
@@ -150,7 +157,8 @@ public class DespedirEmpleado{
            confirmarBoton = new JButton("Confirmar");
            confirmarBoton.setFont(new Font(fuenteLabel, 4, tamanoLabel));
            confirmarBoton.setBounds(columnaUno+5, 320, 150, 40);
-           botonEliminar = new JButton("Eliminar");
+           
+           botonEliminar = new JButton("cancelar");
            botonEliminar.setBounds(columnaDos+60, 320, 150, 40);
            botonEliminar.setFont(new Font(fuenteLabel, 4, tamanoLabel));
     
@@ -160,14 +168,29 @@ public class DespedirEmpleado{
            confirmarBoton.addActionListener(new ActionListener() {
                @Override
                public void actionPerformed(ActionEvent e) {
-                    admin.eliminacionEmpleado(Integer.parseInt(CI.getText()));
-               }
+                   if(!CI.getText().isEmpty()){
+                      if(admin.existeEmpleado(Integer.parseInt(CI.getText()))){
+                        admin.eliminacionEmpleado(Integer.parseInt(CI.getText()));
+                        Frame.dispose();
+                        JOptionPane.showMessageDialog(null,"EL EMPLEADO CON EL CI "+CI.getText()+" FUE ELIMINADO.");
+                        PrincipalNuevo v = new PrincipalNuevo(cargo);
+                   }
+                      else
+                   JOptionPane.showMessageDialog(null,"NO EXISTE EL EMPLEADO CON CI :"+CI.getText());
+                
+                   }
+                }
+               
            }
            );
            botonEliminar.addActionListener(new ActionListener() {
                @Override
                public void actionPerformed(ActionEvent e) {
                    CI.setText("");
+                   
+                        JOptionPane.showMessageDialog(null,"LA TRANSACCION SE CANCELO");
+                   Frame.dispose();
+                        PrincipalNuevo v = new PrincipalNuevo(cargo);
                }
            }
            );

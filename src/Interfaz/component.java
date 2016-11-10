@@ -25,6 +25,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import Administrador.*;
+import javax.swing.JOptionPane;
 //no sirve
 public class component {
 
@@ -37,8 +38,9 @@ public class component {
     private Validacion valida;
     private JTable tablero;
     private JScrollPane nombreColumnas;
-
-    public component(JFrame frame, String dato) {
+    String cargo;
+    public component(JFrame frame, String dato,String cargo) {
+        this.cargo=cargo;
         admin = Administrador.crearAdministrador("");
         this.frame = frame;
         frame.setVisible(true);
@@ -161,8 +163,10 @@ public class component {
     }
 
     private void BconfirmaActionPerformed(ActionEvent evt) {
-        buscadorIDvehiculo buscar = new buscadorIDvehiculo();
-        frame.dispose();
+        JOptionPane.showMessageDialog(null,"ok");
+         frame.dispose();
+        buscadorIDvehiculo buscar = new buscadorIDvehiculo(cargo);
+       
     }
 
     private void transitarImpresion() {

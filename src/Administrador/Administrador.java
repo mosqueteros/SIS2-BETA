@@ -11,6 +11,9 @@ public class Administrador {
     private final String nombre;
     private ConexionMySQL base;
     private Connection cn;
+    
+    private int usuarioConectado;
+    
     public static Administrador crearAdministrador(String nombre) {
         if (admin==null) {
             admin=new Administrador(nombre);
@@ -608,6 +611,24 @@ public class Administrador {
         }
         
         return tabladeventas;
+    }
+    public void setUsuarioConectado(int id){
+        usuarioConectado=id;
+    }
+    public boolean existeEmpleado(int cii){
+        boolean existe=false;
+        try{
+            Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String consulta="SELECT ci FROM empleado where ci='"+cii+"'";
+            ResultSet rs = stmt.executeQuery(consulta);
+            if(rs.absolute(1)){
+                existe=true;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return existe;
     }
     
 }

@@ -5,6 +5,11 @@
  */
 package principal;
 
+import Administrador.Administrador;
+import Interfaz.DespedirEmpleado;
+import Interfaz.buscadorIDvehiculo;
+import Interfaz.registroEmplead;
+import Interfaz.registroEmpleado;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -63,20 +68,24 @@ public class PrincipalNuevo {
     JButton registrarPagoBoton;
     //Usuario
     String cargo;
-
+    private int estado=0;
     JButton salirBoton;
     JButton perfilBoton;
     JButton mensajesBoton;
     int id;
     int saltoLinea;
-
+    private Administrador admin;
+    
     public static void main(String[] args) {
-        PrincipalNuevo p = new PrincipalNuevo(1, "eduardo");
+        PrincipalNuevo p = new PrincipalNuevo( "eduardo");
     }
 
-    public PrincipalNuevo(int id, String cargo) {
+    public PrincipalNuevo(String cargo) {
         Frame = new JFrame();
         //imagen();
+       
+        
+        
         Frame.setUndecorated(true);
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.setBackground(Color.darkGray);
@@ -145,7 +154,7 @@ public class PrincipalNuevo {
 
         });
         //Secundarios
-        ventasBoton = new JButton("DPTO DE VENTAS");
+        ventasBoton = new JButton("VENDEDOR");
         ventasBoton.setBounds(0, 150, 150, 80);
 
         recursosBoton = new JButton("R HUMANOS");
@@ -188,6 +197,7 @@ public class PrincipalNuevo {
             private void ventaBotonActionPerformed(ActionEvent evt) {
 
                 ventas();
+                if(estado==1){
                 try {
                    
                     recursosBoton.setEnabled(true);
@@ -200,6 +210,8 @@ public class PrincipalNuevo {
                 } catch (Exception e) {
                     System.out.println("elementos no existen");
                 }
+                }
+                
 
             }
         });
@@ -211,12 +223,13 @@ public class PrincipalNuevo {
 
             private void recursosHActionPerformed(ActionEvent evt) {
                 recusoHumanos();
+                if(estado==1){
                 try {
                     
                     
-                     ventasBoton.setEnabled(true);
-                     cajeroBoton.setEnabled(true);
-                     administracionBoton.setEnabled(true);
+                    ventasBoton.setEnabled(true);
+                    cajeroBoton.setEnabled(true);
+                    administracionBoton.setEnabled(true);
                     panel.remove(ventaCreditoBoton);
                     panel.remove(ventaContadoBoton);
                     panel.remove(registrarPagoBoton);
@@ -225,6 +238,8 @@ public class PrincipalNuevo {
                 } catch (Exception e) {
                     System.out.println("elementos no existen");
                 }
+                }
+                
 
             }
 
@@ -238,6 +253,7 @@ public class PrincipalNuevo {
             private void cajeroBotonActionPerformed(ActionEvent evt) {
 
                 cajero();
+                if(estado==1){
                 try {
                      
                     ventasBoton.setEnabled(true);
@@ -252,8 +268,10 @@ public class PrincipalNuevo {
                     panel.remove(registrarVehiculoBoton);
                     
                 } catch (Exception e) {
-                    System.out.println("elementos no existen");
+                    System.out.println("Elementos no existen");
                 }
+                }
+                
 
             }
         });
@@ -266,10 +284,6 @@ public class PrincipalNuevo {
             private void administracionActionPerformed(ActionEvent evt) {
                 administracion();
                 try {
-                    /*JButton ventasBoton;
-                    JButton recursosBoton;
-                    JButton cajeroBoton;
-                    JButton administracionBoton;*/
                     ventasBoton.setEnabled(true);
                     recursosBoton.setEnabled(true);
                     cajeroBoton.setEnabled(true);
@@ -280,7 +294,7 @@ public class PrincipalNuevo {
                     panel.remove(ventaContadoBoton);
                     panel.remove(ventaCreditoBoton);
                 } catch (Exception e) {
-                    System.out.println("elementos no existen");
+                    System.out.println("Elementos no existen");
                 }
 
             }
@@ -330,7 +344,7 @@ public class PrincipalNuevo {
         despedirEmpleadoBoton.setBounds(300, 390, 150, 80);
         despedirEmpleadoBoton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt){
                 despedirEmpleadoActionPerformed(evt);
             }
 
@@ -400,12 +414,18 @@ public class PrincipalNuevo {
         
     }
 
-    private void despedirEmpleadoActionPerformed(ActionEvent evt) {
+    private void despedirEmpleadoActionPerformed(ActionEvent evt){
+        try{
+            DespedirEmpleado d = new DespedirEmpleado(cargo);
+            Frame.dispose();
+        }catch (Exception e){
+        
+        }
         
     }
 
     private void ventaContadoActionPerformed(ActionEvent evt) {
-        
+        buscadorIDvehiculo h=new buscadorIDvehiculo(cargo);
     }   
 
     private void RegistrarVehiculActionPerformed(ActionEvent evt) {
@@ -416,11 +436,12 @@ public class PrincipalNuevo {
     }
 
     private void ventaCreditEmpleadoActionPerformed(ActionEvent evt) {
-
+        
     }
 
     private void registrarEmpleadoActionPerformed(ActionEvent evt) {
-
+        registroEmpleado h=new registroEmpleado(cargo);
+        Frame.dispose();
     }
 
     private void registraraPagoActionPerformed(ActionEvent evt) {
@@ -454,16 +475,17 @@ public class PrincipalNuevo {
         
     }
     private void preferencias() {
-        if(cargo==(ventasBoton.getText())){
+        if(cargo.equals(ventasBoton.getText())){
             ventasBoton.setEnabled(true);
         }
-        if(cargo==(cajeroBoton.getText())){
+        if(cargo.equals(cajeroBoton.getText())){
             cajeroBoton.setEnabled(true);
         }
-        if(cargo==(administracionBoton.getText())){
+        if(cargo.equals(administracionBoton.getText())){
+            estado=1;
             administracionBoton.setEnabled(true);
         }
-        if(cargo==(recursosBoton.getText())){
+        if(cargo.equals(recursosBoton.getText())){
             recursosBoton.setEnabled(true);
         }
     }

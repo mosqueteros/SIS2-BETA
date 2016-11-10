@@ -95,7 +95,7 @@ public class frame {
 
             private void compra1ActionPerformed(ActionEvent evt) {
 
-                buscadorIDvehiculo v=new buscadorIDvehiculo();
+              //  buscadorIDvehiculo v=new buscadorIDvehiculo(cargo);
 
             }
 

@@ -17,7 +17,7 @@ public class Validacion {
    
      public boolean nombreProveedorValido(String nombre){
         
-        Pattern p = Pattern.compile("[a-zA-Z_]{1,20}");
+        Pattern p = Pattern.compile("[a-zA-Z_ ]{1,20}");
         if(!p.matcher(nombre).matches()){
             return false;
         }
