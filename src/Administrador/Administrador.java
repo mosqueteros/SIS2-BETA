@@ -263,7 +263,6 @@ public class Administrador {
         catch(Exception e){
             System.out.println(e.toString());
         }
-       
     }    
     private void actualizar_automovil(int id_auto, int cantidad_auto){
         String idd=""+id_auto;
@@ -300,7 +299,6 @@ public class Administrador {
         Statement stmt;
         int pos = 1;
         try {
-            
             stmt = cn.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
@@ -466,5 +464,117 @@ public class Administrador {
         return id;
     }
     
+   
+    
+    //a partir de aca nuevo comit 4EJ
+    public int getCIEmpleado(int id){
+        int ci=-1;
+        try{
+            Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String consulta="SELECT ci FROM empleado where idEmp="+id+"";
+            ResultSet rs = stmt.executeQuery(consulta);
+            if(rs.absolute(1)){
+                ci=rs.getInt("ci");
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return ci;
+    }
+    
+    public String getTipoEmpleado(int id){
+        String tipoEmpleado="";
+        try{
+            Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String consulta="SELECT tipo FROM empleado where idEmp="+id+"";
+            ResultSet rs = stmt.executeQuery(consulta);
+            if(rs.absolute(1)){
+                tipoEmpleado=rs.getString("tipo");
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return tipoEmpleado;
+    }
+    //al momento de realizar la compra hay que verificar si hay dinero suficiente
+    public void ingresarCaja(float dinero, String fecha, int tipo, int id){
+        //el tipo y el id lo manejo, para si el caso de querer saber los detalles de la compra o venta
+        //tipo1-> ventaContado
+        //tipo2-> compraProveedores
+        //tipo3-> ventaCredito
+        String ingreso1 = "INSERT INTO caja"+"(idVentaCompra, tipoVentaCompra,fecha, dinero)"+
+                "VALUES(?,?,?,?)";
+        try{
+            int n;
+            PreparedStatement ps=cn.prepareStatement(ingreso1);
+            ps.setInt(1, id);
+            ps.setInt(2, tipo);
+            ps.setString(3, fecha);
+            ps.setFloat(4, dinero);
+            n=ps.executeUpdate();
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
+    
+    public float dineroDisponibleCaja(){
+        String consulta = "SELECT sum(dinero) AS disponible FROM caja";
+        float dineroDisponible=0;
+        try {
+            
+            Statement st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery(consulta);
+            if(rs.absolute(1)){
+                dineroDisponible=rs.getFloat("disponible");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dineroDisponible;
+    }
+    
+    
+    public ArrayList<Float> listadoIngresos(){
+        String consulta = "SELECT caja.fecha AS fecha, count(*) AS numVentas, sum(dinero) AS suma FROM caja " +"WHERE caja.tipoVentaCompra<>2"+ " GROUP BY caja.fecha";
+        ArrayList<Float> lista=new ArrayList<Float>();
+        try {
+            
+            Statement st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery(consulta);
+            int p=1;
+            while(rs.absolute(p)){
+                lista.add(rs.getFloat("suma"));
+                p++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
+    public ArrayList<Float> listadoEgresos(){
+        String consulta = "SELECT caja.fecha AS fecha, count(*) AS numVentas, sum(dinero) AS suma FROM caja " +"WHERE caja.tipoVentaCompra=2"+ " GROUP BY caja.fecha";
+        ArrayList<Float> lista=new ArrayList<Float>();
+        try {
+            Statement st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery(consulta);
+            int p=1;
+            while(rs.absolute(p)){
+                lista.add(rs.getFloat("suma"));
+                p++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
 }
 
