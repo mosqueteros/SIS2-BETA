@@ -1,5 +1,5 @@
 
-package InterfacesFX;
+package Interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -44,10 +44,14 @@ public class CajeroSwing{
      ArrayList<String> parametros;
      ArrayList<JLabel> labels;
      ArrayList<JTextField> textFields;
+     
      int saltoLinea;
      int columnaUno;
      int columnaDos;
+     int tamanoLabel;
      
+     String fuenteLabel;
+     String fuenteTextField;
      JButton confirmarBoton;
      JButton cancelarBoton;
     public static void main(String [] args)throws Exception{
@@ -55,23 +59,28 @@ public class CajeroSwing{
     }
     public CajeroSwing()throws Exception{
         Frame = new JFrame();
-        Frame.setSize(500,500);
+        Frame.setSize(400,450);
+        inicializarEstandares();
         inicializarPanel();
         inicializarEstandares();
         inicializarLabels();
         inicializarTextFields();
         inicializarBotones();
         //Frame.pack();
-       
+        Frame.setResizable(false);
         Frame.add(panel);
         Frame.setVisible(true);
         //inicializarBotones();
     }
+    //kktsv81102
    
     public void inicializarEstandares(){
         saltoLinea = 50;
         columnaUno = 20;
-        columnaDos = 200;
+        columnaDos = 150;
+        fuenteLabel = "Eras Bold ITC";
+        fuenteTextField = "Eras Bold ITC";
+        tamanoLabel = 20;
     
     }
      public void inicializarLabels(){
@@ -87,12 +96,12 @@ public class CajeroSwing{
     }
     private void anadirLabels(){
         tituloLabel.setBounds(columnaUno,20,200,40);
-        tituloLabel.setFont(new Font("Arial", 4, 40));
+        tituloLabel.setFont(new Font(fuenteLabel, 4, 40));
         Frame.getContentPane().add(tituloLabel);
         int y = 90;
         for(int j = 0; j< labels.size(); j++){
             JLabel actual = labels.get(j);
-            actual.setFont(new Font("Arial", 4, 20));
+            actual.setFont(new Font(fuenteLabel, 4, tamanoLabel));
             actual.setBounds(columnaUno, y, 200, 40);
             y+=saltoLinea;
             Frame.getContentPane().add(actual);
@@ -112,7 +121,7 @@ public class CajeroSwing{
         int y = 90;
         for(int j = 0; j< textFields.size(); j++){
             JTextField actual = textFields.get(j);
-            actual.setFont(new Font("Arial", 4, 20));
+            actual.setFont(new Font(fuenteTextField, 4, tamanoLabel));
             actual.setBounds(columnaDos, y, 200, 40);
             actual.setBorder(new LineBorder(Color.GRAY));
             y+=saltoLinea;
@@ -125,16 +134,18 @@ public class CajeroSwing{
         panel = new JPanel();
         //JLabel label = new JLabel("HOLA");
        
-        panel.setBackground(Color.red);
-        panel.setBounds(0, 0,1000, 600);
+        panel.setBackground(Color.LIGHT_GRAY);
+        panel.setBounds(0, 0,500, 500);
        
     
     }
     private void inicializarBotones(){
            confirmarBoton = new JButton("Confirmar");
-           confirmarBoton.setBounds(columnaUno, 350, 150, 40);
+           confirmarBoton.setFont(new Font(fuenteLabel, 4, tamanoLabel));
+           confirmarBoton.setBounds(columnaUno+5, 320, 150, 40);
            cancelarBoton = new JButton("Cancelar");
-           cancelarBoton.setBounds(columnaDos, 350, 150, 40);
+           cancelarBoton.setBounds(columnaDos+60, 320, 150, 40);
+           cancelarBoton.setFont(new Font(fuenteLabel, 4, tamanoLabel));
            Frame.getContentPane().add(confirmarBoton);
            Frame.getContentPane().add(cancelarBoton);
     }

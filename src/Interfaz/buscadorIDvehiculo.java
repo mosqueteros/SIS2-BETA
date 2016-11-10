@@ -13,7 +13,7 @@ public class buscadorIDvehiculo {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.LIGHT_GRAY);
         frame.setLayout(null);
-        frame.setSize(1000, 600);
+        frame.setSize(600, 150);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         

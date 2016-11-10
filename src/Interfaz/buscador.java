@@ -28,28 +28,36 @@ public class buscador {
     private String directeada;
     private JButton aceptar;
     
+    String fuente;
+    int tamanoTitulo;
+    int tamanoLabels;
+    
     public buscador(JFrame frame,ArrayList<String> lista) {
-        this.frame=frame;
-        
+        this.frame=frame;  
         this.lista = lista;
         panel();
+        inicializarEstandares();
         componentes();
         modificador(lista);
         frame.add(panel);
         
         
     }
+    private void inicializarEstandares(){
+        fuente = "Eras Bold ITC";
+        tamanoTitulo = 40 ;
+        tamanoLabels = 20;
+    }
 
     private void componentes() {
-        textBuscador = new JLabel("buscar:");
-        textBuscador.setFont(new Font("Arial", 4, 15));
-        textBuscador.setText("buscar:");
-        textBuscador.setBounds(20, 10, 200, 30);
+        textBuscador = new JLabel("Buscar:");
+        textBuscador.setFont(new Font(fuente, 4, tamanoLabels));
+        textBuscador.setBounds(20, 10, 200, 35);
         frame.getContentPane().add(textBuscador);
 
         texto = new JTextField();
-        texto.setFont(new Font("Arial", 3, 15));
-        texto.setBounds(80, 10, 200, 30);
+        texto.setFont(new Font(fuente, 3, tamanoLabels));
+        texto.setBounds(100, 10, 200, 35);
         frame.getContentPane().add(texto);
         texto.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent evt) {
@@ -60,7 +68,7 @@ public class buscador {
         combo = new JComboBox<>();
         combo.setModel(new DefaultComboBoxModel<>(new String[]{""}));
         panel.add(combo);
-        combo.setBounds(290, 10, 200, 30);
+        combo.setBounds(310, 10, 200, 35);
         combo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 comboActionPerformed(evt);
@@ -69,9 +77,9 @@ public class buscador {
         });
 
         aceptar = new JButton();
-        aceptar.setFont(new Font("Arial", 4, 15));
-        aceptar.setText("aceptar");
-        aceptar.setBounds(390, 340, 100, 30);
+        aceptar.setFont(new Font(fuente, 4, tamanoLabels));
+        aceptar.setText("Aceptar");
+        aceptar.setBounds(100, 60, 200, 35);
         panel.add(aceptar);
         aceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -127,8 +135,8 @@ public class buscador {
         panel=new JPanel();
         GroupLayout grupo=new GroupLayout(panel);
         panel.setLayout(grupo);
-        panel.setBackground(Color.RED);
-        panel.setBounds(0, 0,500, 400);
+        panel.setBackground(Color.LIGHT_GRAY);
+        panel.setBounds(0, 0,600, 200);
     }
   
     
