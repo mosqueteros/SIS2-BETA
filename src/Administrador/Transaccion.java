@@ -52,7 +52,7 @@ public class Transaccion {
                 aux = new ArrayList<String>();
                 
                 aux.add(rs.getString("idventcred"));
-                aux.add(rs.getString("cuotas"));
+                aux.add(rs.getString("cuota"));
                 aux.add(rs.getString("estadoventcred"));
                 aux.add(rs.getString("deudaventcred"));
                 aux.add(rs.getString("idclie"));
@@ -80,7 +80,7 @@ public class Transaccion {
                 + "SET ventacredito.deudaventcred = ventacredito.deudaventcred - "+cantidad_cancelar
                 + " WHERE ventacredito.idventcred = "+idVentaCredito;
         //String consultaDeuda = "SELECT deudaventcred FROM ventacredito WHERE idventcred = "+idVentaCredito;
-        String cuotasRestantes = "SELECT cuotas FROM ventacredito WHERE idventcre = "+idVentaCredito;
+        String cuotasRestantes = "SELECT cuota FROM ventacredito WHERE idventcred = "+idVentaCredito;
         try {
             cn.setAutoCommit(false);//inicio de la transaccion -> BEGIN
             stmt = cn.createStatement(
@@ -93,7 +93,7 @@ public class Transaccion {
                 pos = 1;
                 rs.absolute(pos);
                 //var = rs.getString("deudaventcred");
-                var = rs.getString("cuotas");
+                var = rs.getString("cuota");
                 //monto = Float.parseFloat(var);
                 cuotas = Integer.parseInt(var);
                 //if(monto <= 0){//si cuotas restantes == 0 -> cancelarDeuda 
