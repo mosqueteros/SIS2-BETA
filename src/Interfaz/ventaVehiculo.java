@@ -1,12 +1,12 @@
+package Interfaz;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interfaz;
 
-import java.awt.Container;
-import java.awt.Graphics;
+
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -29,8 +29,12 @@ public class ventaVehiculo extends javax.swing.JFrame {
         this.setTitle("VENTA DE VEHICULOS");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        
+        this.setSize(1000, 600);
         initComponents();
+        textNombre.setText("Introduzca nombre...");
+        textApellido.setText("Introduzca apellido...");
+        textCI.setText("Introduzca Cedula de Identidad...");
+        textTelefono.setText("Añada su telefono...");
         
         //Container contentpane =getContentPane();
         //contentpane.add(panel);
@@ -63,49 +67,82 @@ public class ventaVehiculo extends javax.swing.JFrame {
         comboAuto = new javax.swing.JComboBox<>();
         imageAuto = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        botonImprimir = new javax.swing.JButton();
+        botonGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panel.setPreferredSize(new java.awt.Dimension(1000, 600));
 
+        labelNombre.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
         labelNombre.setText("NOMBRE CLIENTE:");
 
+        labelApellido.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
         labelApellido.setText("APELLIDO CLIENTE:");
 
+        labelCI.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
         labelCI.setText("CI:");
 
+        labelTelefono.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
         labelTelefono.setText("TELEFONO:");
 
+        labelModelo.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
         labelModelo.setText("MODELO AUTOMOVIL:");
 
+        textNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textNombreMouseClicked(evt);
+            }
+        });
         textNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textNombreActionPerformed(evt);
             }
         });
 
+        textApellido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textApellidoMouseClicked(evt);
+            }
+        });
         textApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textApellidoActionPerformed(evt);
             }
         });
 
+        textCI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textCIMouseClicked(evt);
+            }
+        });
         textCI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textCIActionPerformed(evt);
             }
         });
 
+        textTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textTelefonoMouseClicked(evt);
+            }
+        });
         textTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textTelefonoActionPerformed(evt);
             }
         });
 
+        comboAuto.setFont(new java.awt.Font("Arial", 3, 11)); // NOI18N
         comboAuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE MODELO", "FERRARI", "FORD F-150", "LAMBORGHINI", "NISSAN SKYLINE", "TOYOTA AURIS", "PUMA F25", "KOENIGSEGG ONE" }));
         comboAuto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboAutoItemStateChanged(evt);
+            }
+        });
+        comboAuto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAutoActionPerformed(evt);
             }
         });
 
@@ -113,35 +150,61 @@ public class ventaVehiculo extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("VENTA DE VEHICULOS ");
 
+        botonImprimir.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
+        botonImprimir.setText("IMPRIMIR");
+        botonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonImprimirActionPerformed(evt);
+            }
+        });
+
+        botonGuardar.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
+        botonGuardar.setText("GUARDAR");
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelNombre)
-                            .addComponent(labelApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelCI)
-                            .addComponent(labelTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(26, 26, 26)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textCI, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelModelo)
+                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(labelApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelCI)
+                                .addComponent(labelTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textCI, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(14, Short.MAX_VALUE))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(24, 24, 24)
-                                .addComponent(comboAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(comboAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                .addComponent(botonGuardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(imageAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                        .addComponent(imageAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,17 +227,18 @@ public class ventaVehiculo extends javax.swing.JFrame {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(comboAuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addComponent(imageAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(60, 60, 60)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(imageAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,15 +249,13 @@ public class ventaVehiculo extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textNombreActionPerformed
 
     private void textApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textApellidoActionPerformed
         // TODO add your handling code here:
@@ -263,6 +325,39 @@ public class ventaVehiculo extends javax.swing.JFrame {
                     break;
             }
     }//GEN-LAST:event_comboAutoItemStateChanged
+
+    private void comboAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboAutoActionPerformed
+
+    private void textNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreActionPerformed
+         
+    }//GEN-LAST:event_textNombreActionPerformed
+
+    private void textNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textNombreMouseClicked
+       textNombre.setText(" ");
+     
+    }//GEN-LAST:event_textNombreMouseClicked
+
+    private void textApellidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textApellidoMouseClicked
+        textApellido.setText(" ");
+    }//GEN-LAST:event_textApellidoMouseClicked
+
+    private void textCIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textCIMouseClicked
+        textCI.setText(" ");
+    }//GEN-LAST:event_textCIMouseClicked
+
+    private void textTelefonoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textTelefonoMouseClicked
+        textTelefono.setText(" ");
+    }//GEN-LAST:event_textTelefonoMouseClicked
+
+    private void botonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonImprimirActionPerformed
+       
+    }//GEN-LAST:event_botonImprimirActionPerformed
+  
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+            
+    }//GEN-LAST:event_botonGuardarActionPerformed
         public void SLetras(JTextField a){
         a.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
@@ -329,6 +424,8 @@ public class ventaVehiculo extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -339,6 +436,8 @@ public class ventaVehiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonImprimir;
     private javax.swing.JComboBox<String> comboAuto;
     private javax.swing.JLabel imageAuto;
     private javax.swing.JLabel jLabel1;
