@@ -36,14 +36,15 @@ public class InterfazCliente extends javax.swing.JFrame {
     DefaultTableModel modelo;
     ArrayList<Integer> listaid;
     int idactual;
-    boolean modificar;
+    boolean datoseleccionado;
     
     public InterfazCliente() {
         initComponents();
         modelo=(DefaultTableModel) tablero.getModel();
         listaid=new ArrayList<Integer>();
         idactual=0;
-        modificar=false;
+        datoseleccionado=false;
+        cambiarBotones();
        // textFecha.setText(getFechaActual()+"            "+getHoraActual()+" horas");
        SLetras(textNombre);
        SLetras(textApellido);
@@ -94,9 +95,13 @@ public class InterfazCliente extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablero = new javax.swing.JTable();
         botonGuardar = new javax.swing.JButton();
+        botonEliminar = new javax.swing.JButton();
+        botonNuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1032, 900));
+
+        panel.setPreferredSize(new java.awt.Dimension(1098, 1037));
 
         labelTitulo.setFont(new java.awt.Font("Bodoni MT Black", 3, 18)); // NOI18N
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -168,18 +173,35 @@ public class InterfazCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablero.setColumnSelectionAllowed(true);
         tablero.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableroMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tablero);
+        tablero.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         botonGuardar.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
-        botonGuardar.setText("GUARDAR");
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonGuardarActionPerformed(evt);
+            }
+        });
+
+        botonEliminar.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
+        botonEliminar.setText("ELIMINAR");
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
+
+        botonNuevo.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
+        botonNuevo.setLabel("NUEVO");
+        botonNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonNuevoActionPerformed(evt);
             }
         });
 
@@ -189,6 +211,18 @@ public class InterfazCliente extends javax.swing.JFrame {
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(467, 467, 467)
+                        .addComponent(labelTitulo))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(botonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -201,7 +235,6 @@ public class InterfazCliente extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textDireccion)
                             .addComponent(comboBanco, 0, 249, Short.MAX_VALUE)
                             .addComponent(textCuenta)
@@ -209,17 +242,9 @@ public class InterfazCliente extends javax.swing.JFrame {
                             .addComponent(textCI)
                             .addComponent(textApellido)
                             .addComponent(textNombre))
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(448, 448, 448)
-                                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(467, 467, 467)
-                        .addComponent(labelTitulo)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,19 +278,22 @@ public class InterfazCliente extends javax.swing.JFrame {
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                             .addComponent(comboBanco))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49)))
-                .addGap(36, 36, 36)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                        .addComponent(botonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(637, 637, 637))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                        .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(606, 606, 606))))
+                .addGap(34, 34, 34)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(botonGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addComponent(botonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -279,7 +307,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -288,8 +316,7 @@ public class InterfazCliente extends javax.swing.JFrame {
 
     
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        // TODO add your handling code here:
-       // System.exit(0);//cancel
+        
            Object [] opciones ={"Aceptar","Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(rootPane,"En realidad desea realizar cerrar la aplicacion","Mensaje de Confirmacion",
                 JOptionPane.YES_NO_OPTION,
@@ -297,8 +324,8 @@ public class InterfazCliente extends javax.swing.JFrame {
                 if (eleccion == JOptionPane.YES_OPTION)
                 {
                  System.exit(0);
-}else{
-    }                           
+                }else{
+                }                           
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void comboBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBancoActionPerformed
@@ -308,33 +335,18 @@ public class InterfazCliente extends javax.swing.JFrame {
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         if (verificarDatos()){
             obtenerDatos();
-            if(modificar)
+            if(datoseleccionado)
                 modificarDatos();
             else
                 guardarDatos();
             limpiarDatos();
             llenarTablero();
+            JOptionPane.showMessageDialog( null, "DATOS GUARDADOS CORRECTAMENTE",
+                                        "", JOptionPane.INFORMATION_MESSAGE );
+        }else{
+            JOptionPane.showMessageDialog( null,"PORFAVOR LLENE LOS DATOS",
+                                            "", JOptionPane.ERROR_MESSAGE );
         }
-        /*long ced = Long.parseLong(textCI.getText().trim());
-            String nom = .getText().trim();
-            String tel = cj_telefono.getText().trim();
-            String tipo = item_tipo.getSelectedItem().toString();  
-            //Doctores p = new Doctores(ced, nom, tel, tipo);
-         
-        JOptionPane.showMessageDialog(null, "Registro Modificado Con Exito");
-        }
-        else
-            {
-            JOptionPane.showMessageDialog(null, "Modificacion Cancelada");
-            }
-            Object CI= textCI.getText().trim();
-            String Nom= textNombre.getText().trim();
-            String Apel=textApellido.getText().trim();
-            Integer Telf=Integer.parseInt(textTelefono.getText().trim());
-            Integer NroC=Integer.parseInt(textCuenta.getText().trim());
-            String Ban= comboBanco.getSelectedItem().toString();*/
-            
-        
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void textCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCIActionPerformed
@@ -344,11 +356,36 @@ public class InterfazCliente extends javax.swing.JFrame {
     private void tableroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableroMouseClicked
         recogerDatosTabla();
     }//GEN-LAST:event_tableroMouseClicked
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+        if(datoseleccionado){
+        Object [] opciones ={"Aceptar","Cancelar"};
+            int eleccion = JOptionPane.showOptionDialog(rootPane,"ESTA SEGURO QUE QUIERE ELIMINAR LOS DATOS ?","",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+                if (eleccion == JOptionPane.YES_OPTION)
+                {
+                    eliminarDato();
+                    limpiarDatos();
+                    llenarTablero();
+                }else{
+                }
+        }else{
+            JOptionPane.showMessageDialog( null,"PORFAVOR SELECCIONE UN CAMPO DE LA TABLA",
+                                            "", JOptionPane.ERROR_MESSAGE );
+        }
+    }//GEN-LAST:event_botonEliminarActionPerformed
+
+    private void botonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoActionPerformed
+        limpiarDatos();
+        datoseleccionado=false;
+        cambiarBotones();
+    }//GEN-LAST:event_botonNuevoActionPerformed
     
     public void recogerDatosTabla(){
         int pos = tablero.getSelectedRow();
         idactual=listaid.get(pos);
-        modificar=true;
+        datoseleccionado=true;
         TableModel model = tablero.getModel();
             String aux = "";
             aux = model.getValueAt(pos, 1).toString();
@@ -365,6 +402,17 @@ public class InterfazCliente extends javax.swing.JFrame {
             textTelefono.setText(aux);
             aux = model.getValueAt(pos, 7).toString();
             textDireccion.setText(aux);
+            
+            cambiarBotones();
+    }
+    public void cambiarBotones(){
+        if(datoseleccionado){
+            botonGuardar.setText("GUARDAR CAMBIOS");
+            //botonEliminar.setEnabled(true);
+        }
+        else
+            botonGuardar.setText("GUARDAR NUEVO");
+            //botonEliminar.setEnabled(false);
     }
     public void SLetras(JTextField a){
         a.addKeyListener(new KeyAdapter(){
@@ -414,20 +462,25 @@ public class InterfazCliente extends javax.swing.JFrame {
                String c5=fila.get(5);
                String c6=fila.get(6);
                String c7=fila.get(7);
+               
                modelo.addRow(new Object[]{c0,c1,c2,c3,c4,c5,c6,c7});
            }
     }
 
        private void eliminarFilas(){
-           for(int i=0;i<modelo.getRowCount();i++){
+           int numfilas=modelo.getRowCount()-1;
+           for(int i=numfilas;i>=0;i--){
                modelo.removeRow(i);
            }
        }
     private boolean verificarDatos(){
         boolean resp=false;
-        if(textCI.getText()!="" && textNombre.getText()!=""
-                && textApellido.getText()!="" &&textCuenta.getText()!=""
-                && textTelefono.getText()!="" && textDireccion.getText()!=""){
+        if(textCI.getText()!="" 
+                && textNombre.getText()!=""
+                && textApellido.getText()!="" 
+                && textCuenta.getText()!=""
+                && textTelefono.getText()!="" 
+                && textDireccion.getText()!=""){
             resp=true;
         }else
             resp=false;
@@ -450,9 +503,15 @@ public class InterfazCliente extends javax.swing.JFrame {
     
     private void modificarDatos(){
         admin.modificarCliente(idactual,ci, nombre, apellido, cuenta, banco, telefono, direccion);
-        modificar=false;
+        datoseleccionado=false;
+        cambiarBotones();
     }
     
+    private void eliminarDato(){
+        admin.eliminarCliente(idactual);
+        datoseleccionado=false;
+        cambiarBotones();
+    }
     private void limpiarDatos(){
         textCI.setText("");
         textNombre.setText("");
@@ -514,7 +573,9 @@ public class InterfazCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonEliminar;
     public javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonNuevo;
     private javax.swing.JButton botonSalir;
     public javax.swing.JComboBox<String> comboBanco;
     private javax.swing.JLabel jLabel1;

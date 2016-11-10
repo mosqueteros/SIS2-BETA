@@ -201,7 +201,26 @@ public class Administrador {
             System.out.println(e.toString());
         }
     }
-    
+
+    public void eliminarCliente(int id){
+        String idd=Integer.toString(id);
+        int n;
+        PreparedStatement ps;
+        String scripteliminacion;
+        
+        scripteliminacion = "DELETE FROM cliente where idclie="+idd;        
+        
+        try{
+                ps = cn.prepareStatement(scripteliminacion);
+                n = ps.executeUpdate();
+        
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
     public void ingresarVentaCredito(String plazo, String estado, float deuda, int idcliente){
         //despues verificar si crear una tabla de sueldos de acuerdo al tipo 
         String ingreso1 = "INSERT INTO ventacredito"+"(plazoventcred, estadoventcred, deudaventcred, idclie)"+
