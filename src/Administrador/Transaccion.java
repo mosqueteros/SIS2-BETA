@@ -72,15 +72,15 @@ public class Transaccion {
         return tablaCredito;
     }
     
-    public int ejecutarPagoCliente(int ci_cliente, float cantidad_cancelar, String fechapago, int idVentaCredito){
+    public void ejecutarPagoCliente(int ci_cliente, float cantidad_cancelar, String fechapago, int idVentaCredito){
     	Statement stmt;
         String var;
-        int pos = 1, monto, vuelto = 0, cuotas;
+        int pos = 1, vuelto = 0, cuotas;
+        float monto;
         String actualizacion1 = "Update ventacredito "
                 + "SET ventacredito.deudaventcred = ventacredito.deudaventcred - "+cantidad_cancelar
                 + " WHERE ventacredito.idventcred = "+idVentaCredito;
-        //String consultaDeuda = "SELECT deudaventcred FROM ventacredito WHERE idventcred = "+idVentaCredito;
-        String cuotasRestantes = "SELECT cuota FROM ventacredito WHERE idventcred = "+idVentaCredito;
+        String consultaDeuda = "SELECT deudaventcred FROM ventacredito WHERE idventcred = "+idVentaCredito;
         try {
             cn.setAutoCommit(false);//inicio de la transaccion -> BEGIN
             stmt = cn.createStatement(
@@ -88,20 +88,17 @@ public class Transaccion {
                     ResultSet.CONCUR_UPDATABLE);
             int n1 = stmt.executeUpdate(actualizacion1);
             if(n1 > 0){
-                //ResultSet rs = stmt.executeQuery(consultaDeuda);
-                ResultSet rs = stmt.executeQuery(cuotasRestantes);
+                ResultSet rs = stmt.executeQuery(consultaDeuda);
                 pos = 1;
                 rs.absolute(pos);
-                //var = rs.getString("deudaventcred");
-                var = rs.getString("cuota");
-                //monto = Float.parseFloat(var);
+                var = rs.getString("deudaventcred");
+                monto = Float.parseFloat(var);
+                System.out.println("entre "+var);
                 cuotas = Integer.parseInt(var);
-                //if(monto <= 0){//si cuotas restantes == 0 -> cancelarDeuda 
-                if(cuotas==0){
+                
+                if(monto <= 0){
                     cancelarDeuda(idVentaCredito);
-                    //vuelto=Math.abs(monto);
                 }
-                //falta la actualizacion de la caja
                 ingresarCaja(cantidad_cancelar, fechapago, 3, idVentaCredito);//tipo3->xq es el pago de una deuda a credito
                 registrarPagoCliente(ci_cliente, cantidad_cancelar, fechapago);//documenta el pago
             }else{
@@ -126,7 +123,6 @@ public class Transaccion {
                     e.printStackTrace();
                 }
 	}
-        return vuelto;
     }
     
     private void cancelarDeuda(int id){
@@ -167,7 +163,7 @@ public class Transaccion {
         }
     }
     public void registrarPagoCliente(int ci, float monto, String fecha){
-        String ingreso1 = "INSERT INTO ventacontado"+"(cicliente, montopago, fechapago)"+
+        String ingreso1 = "INSERT INTO pagocliente "+" (cicliente, montopago, fechapago)"+
                 "VALUES(?,?,?)";
         try{
             int n;
