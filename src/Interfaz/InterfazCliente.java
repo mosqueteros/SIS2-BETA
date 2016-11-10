@@ -91,7 +91,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         textDireccion = new javax.swing.JTextField();
         botonSalir = new javax.swing.JButton();
-        comboBanco = new javax.swing.JComboBox<String>();
+        comboBanco = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablero = new javax.swing.JTable();
         botonGuardar = new javax.swing.JButton();
@@ -143,7 +143,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         });
 
         comboBanco.setFont(new java.awt.Font("Rod", 1, 14)); // NOI18N
-        comboBanco.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BANCO UNION", "BANCO MERCANTIL", "BANCO NACIONAL DE BOLIVIA", "BANCOSOL", "BANCO FIE", "BANCO GANADERO" }));
+        comboBanco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BANCO UNION", "BANCO MERCANTIL", "BANCO NACIONAL DE BOLIVIA", "BANCOSOL", "BANCO FIE", "BANCO GANADERO" }));
         comboBanco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBancoActionPerformed(evt);

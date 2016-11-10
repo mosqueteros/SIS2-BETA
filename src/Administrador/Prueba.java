@@ -22,7 +22,7 @@ public class Prueba {
         
     }
     private static void llenarTablero() {
-           ArrayList<ArrayList<String>> listaclientes=admin.getClientes();
+        ArrayList<ArrayList<String>> listaclientes=admin.getClientes();
            for(int i=0;i<listaclientes.size();i++){
                ArrayList<String> fila=listaclientes.get(i);
                for(int j=0;j<fila.size();j++){

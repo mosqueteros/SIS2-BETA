@@ -576,5 +576,39 @@ public class Administrador {
         }
         return lista;
     }
+    
+    public ArrayList<ArrayList<String>> reporteVentasVendedor(int ci){
+        ArrayList<ArrayList<String>> tabladeventas = new ArrayList();
+        ArrayList<String> aux;
+        String consulta = "SELECT * FROM ventacontado "
+                + " JOIN empleado ON ventacontado.idEmp = empledo.idEmp"
+                + " WHERE ventacontado.tipo = 'Vendedor' and ci = "+ci;
+        try {
+            Statement st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery(consulta);
+            int p=1;
+            while(rs.absolute(p)){
+                
+                aux = new ArrayList<String>();
+                
+                aux.add(rs.getString("Nombre"));
+                aux.add(rs.getString("Apellidos"));
+                aux.add(rs.getString("sueldo"));
+                aux.add(rs.getString("ci"));
+                aux.add(rs.getString("correo"));
+                aux.add(rs.getString("tipo"));
+                
+                tabladeventas.add(aux);
+                
+                p++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return tabladeventas;
+    }
+    
 }
 
