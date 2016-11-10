@@ -29,16 +29,13 @@ public class ventaVehiculo extends javax.swing.JFrame {
         this.setTitle("VENTA DE VEHICULOS");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        this.setSize(1000, 600);
+        this.setSize(400, 600);
         initComponents();
-        textNombre.setText("Introduzca nombre...");
-        textApellido.setText("Introduzca apellido...");
-        textCI.setText("Introduzca Cedula de Identidad...");
-        textTelefono.setText("Añada su telefono...");
+        
         
         //Container contentpane =getContentPane();
         //contentpane.add(panel);
-        SLetras(textNombre);
+       SLetras(textNombre);
        SLetras(textApellido);
        SNumeros(textTelefono);
        SLNum(textCI);
@@ -74,79 +71,38 @@ public class ventaVehiculo extends javax.swing.JFrame {
 
         panel.setPreferredSize(new java.awt.Dimension(1000, 600));
 
-        labelNombre.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
-        labelNombre.setText("NOMBRE CLIENTE:");
+        labelNombre.setFont(new java.awt.Font("Eras Bold ITC", 1, 20)); // NOI18N
+        labelNombre.setText("Nombre:");
 
-        labelApellido.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
-        labelApellido.setText("APELLIDO CLIENTE:");
+        labelApellido.setFont(new java.awt.Font("Eras Bold ITC", 1, 20)); // NOI18N
+        labelApellido.setText("Apellido:");
 
-        labelCI.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
+        labelCI.setFont(new java.awt.Font("Eras Bold ITC", 1, 20)); // NOI18N
         labelCI.setText("CI:");
 
-        labelTelefono.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
-        labelTelefono.setText("TELEFONO:");
+        labelTelefono.setFont(new java.awt.Font("Eras Bold ITC", 1, 20)); // NOI18N
+        labelTelefono.setText("Teléfono:");
 
-        labelModelo.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
-        labelModelo.setText("MODELO AUTOMOVIL:");
+        labelModelo.setFont(new java.awt.Font("Eras Bold ITC", 1, 20)); // NOI18N
+        labelModelo.setText("Modelo Automovil:");
 
-        textNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                textNombreMouseClicked(evt);
-            }
-        });
-        textNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textNombreActionPerformed(evt);
-            }
-        });
+        textNombre.setFont(new java.awt.Font("Eras Bold ITC", 1, 15)); // NOI18N
 
-        textApellido.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                textApellidoMouseClicked(evt);
-            }
-        });
-        textApellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textApellidoActionPerformed(evt);
-            }
-        });
+        textApellido.setFont(new java.awt.Font("Eras Bold ITC", 1, 15)); // NOI18N
 
-        textCI.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                textCIMouseClicked(evt);
-            }
-        });
-        textCI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCIActionPerformed(evt);
-            }
-        });
+        textCI.setFont(new java.awt.Font("Eras Bold ITC", 1, 15)); // NOI18N
 
-        textTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                textTelefonoMouseClicked(evt);
-            }
-        });
-        textTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textTelefonoActionPerformed(evt);
-            }
-        });
+        textTelefono.setFont(new java.awt.Font("Eras Bold ITC", 1, 15)); // NOI18N
 
-        comboAuto.setFont(new java.awt.Font("Arial", 3, 11)); // NOI18N
-        comboAuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE MODELO", "FERRARI", "FORD F-150", "LAMBORGHINI", "NISSAN SKYLINE", "TOYOTA AURIS", "PUMA F25", "KOENIGSEGG ONE" }));
+        comboAuto.setFont(new java.awt.Font("Eras Bold ITC", 1, 15)); // NOI18N
+        comboAuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Modelo", "Ferrari", "Ford F-150", "Lamborghini", "Nissan Skyline", "Toyota Auris", "Puma F25", "Koenigsegg One" }));
         comboAuto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboAutoItemStateChanged(evt);
             }
         });
-        comboAuto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboAutoActionPerformed(evt);
-            }
-        });
 
-        jLabel1.setFont(new java.awt.Font("Monotype Corsiva", 3, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Eras Bold ITC", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("VENTA DE VEHICULOS ");
 
@@ -175,36 +131,40 @@ public class ventaVehiculo extends javax.swing.JFrame {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(labelApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelCI)
-                                .addComponent(labelTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(comboAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelModelo))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelCI)
+                            .addComponent(labelTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textCI, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textCI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(14, Short.MAX_VALUE))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(comboAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                .addComponent(botonGuardar)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(imageAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37))))
+                                .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+            .addGroup(panelLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(panelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(imageAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonImprimir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonGuardar, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(22, 22, 22))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,38 +174,41 @@ public class ventaVehiculo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                    .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCI, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textCI, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textCI, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(labelModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(comboAuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(imageAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imageAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(botonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(botonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,18 +219,6 @@ public class ventaVehiculo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textApellidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textApellidoActionPerformed
-
-    private void textCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCIActionPerformed
-
-    private void textTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textTelefonoActionPerformed
 
     private void comboAutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboAutoItemStateChanged
             int posicion;
@@ -325,31 +276,6 @@ public class ventaVehiculo extends javax.swing.JFrame {
                     break;
             }
     }//GEN-LAST:event_comboAutoItemStateChanged
-
-    private void comboAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboAutoActionPerformed
-
-    private void textNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreActionPerformed
-         
-    }//GEN-LAST:event_textNombreActionPerformed
-
-    private void textNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textNombreMouseClicked
-       textNombre.setText(" ");
-     
-    }//GEN-LAST:event_textNombreMouseClicked
-
-    private void textApellidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textApellidoMouseClicked
-        textApellido.setText(" ");
-    }//GEN-LAST:event_textApellidoMouseClicked
-
-    private void textCIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textCIMouseClicked
-        textCI.setText(" ");
-    }//GEN-LAST:event_textCIMouseClicked
-
-    private void textTelefonoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textTelefonoMouseClicked
-        textTelefono.setText(" ");
-    }//GEN-LAST:event_textTelefonoMouseClicked
 
     private void botonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonImprimirActionPerformed
        
