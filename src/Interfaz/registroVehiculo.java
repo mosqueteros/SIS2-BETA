@@ -1,6 +1,7 @@
 
 package Interfaz;
 
+import Administrador.Administrador;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,21 +28,17 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import principal.PrincipalNuevo;
 
-public class CajeroSwing{
+public class registroVehiculo{
 
      JFrame Frame;
      JPanel panel;
      
-     JLabel CILabel;
-     JLabel montoLabel;
-     JLabel cambioLabel;
-     JLabel otroLabel;
+     JLabel nombreLabel;
+     JLabel precioLabel;
      JLabel tituloLabel;
      
-     JTextField CI;
-     JTextField monto;
-     JTextField cambio;
-     JTextField otro;
+     JTextField nombre;
+     JTextField precio;
      
      ArrayList<String> parametros;
      ArrayList<JLabel> labels;
@@ -53,17 +49,17 @@ public class CajeroSwing{
      int columnaDos;
      int tamanoLabel;
      
-     String fuenteLabel;
-     String fuenteTextField;
      
      String cargo;
+     String fuenteLabel;
+     String fuenteTextField;
      
      JButton confirmarBoton;
      JButton cancelarBoton;
     public static void main(String [] args)throws Exception{
-        CajeroSwing cajero = new CajeroSwing("M");
+       registroVehiculo v = new registroVehiculo("");
     }
-    public CajeroSwing(String cargo)throws Exception{
+    public registroVehiculo(String cargo)throws Exception{
         Frame = new JFrame();
         this.cargo = cargo;
         
@@ -72,7 +68,7 @@ public class CajeroSwing{
         Frame.setLayout(null);
         
         inicializarEstandares();
-       
+        inicializarPanel();
         inicializarEstandares();
         
         inicializarBotones();
@@ -87,38 +83,39 @@ public class CajeroSwing{
         //Frame.add(panel);
         Frame.setLocationRelativeTo(null);
         Frame.setVisible(true);
+       
+        //inicializarBotones();
     }
     //kktsv81102
    
     public void inicializarEstandares(){
         saltoLinea = 50;
-        columnaUno = 30;
-        columnaDos = 180;
+        columnaUno = 55;
+        columnaDos = 150;
         fuenteLabel = "Eras Bold ITC";
         fuenteTextField = "Eras Bold ITC";
         tamanoLabel = 20;
     
     }
      public void inicializarLabels(){
-         tituloLabel = new JLabel("CAJERO ");
+        tituloLabel = new JLabel("REGISTRAR VEHÍCULO ");
         
-        CILabel =       new JLabel("CI: ");
-        montoLabel =    new JLabel("Monto: ");  
+        nombreLabel =       new JLabel("Nombre: ");
+        precioLabel =    new JLabel("Precio: ");  
         labels =        new ArrayList<>();
-        labels.add(CILabel);labels.add(montoLabel);
+        
+        labels.add(nombreLabel);labels.add(precioLabel);
+        
         anadirLabels();
-         JLabel label = new JLabel(); 
+        JLabel label = new JLabel(); 
         label.setIcon(new ImageIcon(getClass().getResource("/Imagen/InterfazMejor.jpg")));
-        Frame.getContentPane().add(label);
-        label.setBounds(0,0,500,500);
-      
-        
-        
+         Frame.getContentPane().add(label);
+        label.setBounds(0,0,450,500);
     }
     private void anadirLabels(){
-        tituloLabel.setBounds(columnaUno+100,20,200,40);
-        tituloLabel.setForeground(Color.LIGHT_GRAY);
-        tituloLabel.setFont(new Font(fuenteLabel, 4, 40));
+        tituloLabel.setBounds(columnaUno,20,400,45);
+         tituloLabel.setForeground(Color.LIGHT_GRAY);
+        tituloLabel.setFont(new Font(fuenteLabel, 4, 30));
         Frame.getContentPane().add(tituloLabel);
         int y = 130;
         for(int j = 0; j< labels.size(); j++){
@@ -131,10 +128,10 @@ public class CajeroSwing{
         }
     }
     public void inicializarTextFields(){
-        CI =        new JTextField();
-        monto =     new JTextField();
+        nombre =        new JTextField();
+        precio =     new JTextField();
         textFields =    new ArrayList<>();
-        textFields.add(CI);textFields.add(monto);
+        textFields.add(nombre);textFields.add(precio);
         anadirTextFields();
     }
     private void anadirTextFields(){
@@ -149,27 +146,34 @@ public class CajeroSwing{
         }
     
     }
+    private void inicializarPanel()throws Exception {
+
+        panel = new JPanel();
+        //JLabel label = new JLabel("HOLA");
+       
+        panel.setBackground(Color.LIGHT_GRAY);
+        panel.setBounds(0, 0,500, 500);
+       
     
-    private void inicializarBotones(){ 
-            confirmarBoton =     new JButton("Confirmar");
-            confirmarBoton.setFont(new Font(fuenteLabel, 4, tamanoLabel));
-            confirmarBoton.setBounds(columnaUno+20, 320, 150, 40);
-            confirmarBoton.addActionListener(new ActionListener(){
+    }
+    private void inicializarBotones(){
+        Administrador admin = Administrador.crearAdministrador("");
+        
+           confirmarBoton = new JButton("Confirmar");
+           confirmarBoton.setFont(new Font(fuenteLabel, 4, tamanoLabel));
+           confirmarBoton.setBounds(columnaUno, 320, 150, 40);
+           confirmarBoton.addActionListener(new ActionListener(){
                Validacion v = new Validacion();
                @Override
                public void actionPerformed(ActionEvent e) {
-                   if(v.CIValido(CI.getText()) && (Integer.parseInt(monto.getText())>0)){
-                       int cambio = 0;
-                       if(cambio!=0){
-                       JOptionPane.showMessageDialog(null,"Transacción realizada con éxito \n"
-                               +"Su cambio es :"+cambio+".");
-                       Frame.dispose();
-                        PrincipalNuevo p = new PrincipalNuevo(cargo);
-                       }else{
-                       JOptionPane.showMessageDialog(null,"Transacción realizada con éxito");
+                   if(v.ApellidosValido(nombre.getText()) && (Integer.parseInt(precio.getText())>0)){
+                       admin.registrarAutomovil(Float.parseFloat(precio.getText()),0, nombre.getText());
+                     
+                       JOptionPane.showMessageDialog(null,"Registro realizado con éxito");
+                       
                        Frame.dispose();
                        PrincipalNuevo p = new PrincipalNuevo(cargo);
-                       }
+                       
                        
                    }else{
                        JOptionPane.showMessageDialog(null,"Datos incorrectos, por favor, revise");

@@ -83,9 +83,6 @@ public class PrincipalNuevo {
 
     public PrincipalNuevo(String cargo) {
         Frame = new JFrame();
-        //imagen();
-       
-        
         
         Frame.setUndecorated(true);
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
