@@ -45,7 +45,7 @@ public class PrincipalNuevo {
     JFrame Frame;
     JPanel panel;
 
-    JLabel bienvenidoLabel;
+    JLabel cargoLabel;
     JLabel loggeadoLabel;
 
     ArrayList<JTextField> textFields;
@@ -106,14 +106,11 @@ public class PrincipalNuevo {
     }
 
     public void inicializarLabels() {
-        bienvenidoLabel = new JLabel("BIENVENIDO A SCRUMCARS: ");
-        bienvenidoLabel.setFont(new Font("Arial", 3, 20));
-        bienvenidoLabel.setBounds(0, 0, 300, 40);
-        bienvenidoLabel.setForeground(Color.BLACK);
-        loggeadoLabel = new JLabel("ESTAS LOGEADO COMO: " + cargo);
-        loggeadoLabel.setFont(new Font("Arial", 3, 20));
-        loggeadoLabel.setForeground(Color.BLACK);
-        loggeadoLabel.setBounds(450, 0, 300, 40);
+        
+        cargoLabel = new JLabel(cargo);
+        cargoLabel.setFont(new Font("Eras Bold ITC", 3, 22));
+        cargoLabel.setForeground(Color.WHITE);
+        cargoLabel.setBounds(615, 16, 250, 40);
         
 
     }
@@ -169,16 +166,22 @@ public class PrincipalNuevo {
 
     public void inicializarPanel() {
 
-        Frame.getContentPane().add(bienvenidoLabel);
-        Frame.getContentPane().add(loggeadoLabel);
+        
+        Frame.getContentPane().add(cargoLabel);
         Frame.getContentPane().add(salirBoton);
         Frame.getContentPane().add(mensajesBoton);
         Frame.getContentPane().add(perfilBoton);
+        
 
         Frame.getContentPane().add(ventasBoton);
         Frame.getContentPane().add(recursosBoton);
         Frame.getContentPane().add(cajeroBoton);
         Frame.getContentPane().add(administracionBoton);
+        JLabel label = new JLabel();
+        label.setIcon(new ImageIcon(getClass().getResource("/Imagen/Interfaz1.jpg")));
+        //label.setIcon(new ImageIcon(getClass().getResource("/Imagen/Interfaz2.jpg")));
+        Frame.getContentPane().add(label);
+        label.setBounds(0,0,1000,600);
         panel = new JPanel();
         Frame.getContentPane().add(panel);
         panel.setBounds(300,300,300, 300);

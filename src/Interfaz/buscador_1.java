@@ -127,7 +127,7 @@ public class buscador_1 {
     private void aceptarActionPerformed(ActionEvent evt) {
         if(!texto.getText().isEmpty()){
             frame.dispose();
-             InterfazRegistroCompraVehiculo v=new InterfazRegistroCompraVehiculo(texto.getText(),cargo);
+             compraVehiculos v=new compraVehiculos(texto.getText(),cargo);
               
         }
         

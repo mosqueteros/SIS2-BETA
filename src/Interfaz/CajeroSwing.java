@@ -72,8 +72,6 @@ public class CajeroSwing{
         Frame.setLayout(null);
         
         inicializarEstandares();
-       
-        inicializarEstandares();
         
         inicializarBotones();
         inicializarLabels();
