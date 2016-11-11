@@ -6,11 +6,13 @@
 package principal;
 
 import Administrador.Administrador;
+import Interfaz.CajeroSwing;
 import Interfaz.DespedirEmpleado;
 import Interfaz.buscadorIDvehiculo;
 import Interfaz.buscadorIDvehiculo_1;
 import Interfaz.registroEmplead;
 import Interfaz.registroEmpleado;
+import Interfaz.ventaCredito;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -158,7 +160,7 @@ public class PrincipalNuevo {
         cajeroBoton = new JButton("CAJERO");
         cajeroBoton.setBounds(0, 310, 150, 80);
        
-        administracionBoton = new JButton("ADMISNISTRACION");
+        administracionBoton = new JButton("GERENTE");
         administracionBoton.setBounds(0, 390, 150, 80);
         eventosBoton();
         inavilitar();
@@ -416,9 +418,9 @@ public class PrincipalNuevo {
     }
 
     private void despedirEmpleadoActionPerformed(ActionEvent evt){
-        try{
+        try{Frame.dispose();
             DespedirEmpleado d = new DespedirEmpleado(cargo);
-            Frame.dispose();
+            
         }catch (Exception e){
         
         }
@@ -426,27 +428,34 @@ public class PrincipalNuevo {
     }
 
     private void ventaContadoActionPerformed(ActionEvent evt) {
+        Frame.dispose();
         buscadorIDvehiculo h=new buscadorIDvehiculo(cargo);
     }   
 
     private void RegistrarVehiculActionPerformed(ActionEvent evt) {
+        Frame.dispose();
+        buscadorIDvehiculo_1 b=new buscadorIDvehiculo_1(cargo);
         
     }
 
     private void reporteActionPerformed(ActionEvent evt) {
-    }
-
-    private void ventaCreditEmpleadoActionPerformed(ActionEvent evt) {
-        buscadorIDvehiculo_1 b=new buscadorIDvehiculo_1(cargo);
-    }
-
-    private void registrarEmpleadoActionPerformed(ActionEvent evt) {
-        registroEmpleado h=new registroEmpleado(cargo);
         Frame.dispose();
     }
 
-    private void registraraPagoActionPerformed(ActionEvent evt) {
+    private void ventaCreditEmpleadoActionPerformed(ActionEvent evt) {
+        Frame.dispose();
+        ventaCredito g=new ventaCredito(cargo);
+    }
 
+    private void registrarEmpleadoActionPerformed(ActionEvent evt) {
+        
+        Frame.dispose();
+        registroEmpleado l=new registroEmpleado(cargo);
+        
+    }
+    private void registraraPagoActionPerformed(ActionEvent evt) {
+        Frame.dispose();
+        CajeroSwing j= new CajeroSwing(cargo);
     }
 
     private void perfilActionPerformed(ActionEvent evt) {

@@ -56,16 +56,16 @@ public class registroVehiculo{
      
      JButton confirmarBoton;
      JButton cancelarBoton;
-    public static void main(String [] args)throws Exception{
+    public static void main(String [] args){
        registroVehiculo v = new registroVehiculo("");
     }
-    public registroVehiculo(String cargo)throws Exception{
+    public registroVehiculo(String cargo){
         Frame = new JFrame();
         this.cargo = cargo;
         
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.setResizable(false);
-        Frame.setLayout(null);
+        Frame.getContentPane().setLayout(null);
         
         inicializarEstandares();
         inicializarPanel();
@@ -73,10 +73,11 @@ public class registroVehiculo{
         
         inicializarBotones();
         inicializarLabels();
+        
         inicializarTextFields();
         
-        
-         Frame.pack();
+        Frame.pack();
+         
         //Frame.pack();
        
         Frame.setSize(450,500);
@@ -85,6 +86,7 @@ public class registroVehiculo{
         Frame.setVisible(true);
        
         //inicializarBotones();
+        nombre.repaint();
     }
     //kktsv81102
    
@@ -108,9 +110,10 @@ public class registroVehiculo{
         
         anadirLabels();
         JLabel label = new JLabel(); 
+        label.setBounds(0,0,450,500);
         label.setIcon(new ImageIcon(getClass().getResource("/Imagen/InterfazMejor.jpg")));
          Frame.getContentPane().add(label);
-        label.setBounds(0,0,450,500);
+        
     }
     private void anadirLabels(){
         tituloLabel.setBounds(columnaUno,20,400,45);
@@ -146,7 +149,7 @@ public class registroVehiculo{
         }
     
     }
-    private void inicializarPanel()throws Exception {
+    private void inicializarPanel(){
 
         panel = new JPanel();
         //JLabel label = new JLabel("HOLA");

@@ -60,10 +60,10 @@ public class CajeroSwing{
      
      JButton confirmarBoton;
      JButton cancelarBoton;
-    public static void main(String [] args)throws Exception{
+    public static void main(String [] args){
         CajeroSwing cajero = new CajeroSwing("M");
     }
-    public CajeroSwing(String cargo)throws Exception{
+    public CajeroSwing(String cargo){
         Frame = new JFrame();
         this.cargo = cargo;
         
@@ -159,6 +159,7 @@ public class CajeroSwing{
                    if(v.CIValido(CI.getText()) && (Integer.parseInt(monto.getText())>0)){
                        int cambio = 0;
                        if(cambio!=0){
+                           
                        JOptionPane.showMessageDialog(null,"Transacción realizada con éxito \n"
                                +"Su cambio es :"+cambio+".");
                        Frame.dispose();

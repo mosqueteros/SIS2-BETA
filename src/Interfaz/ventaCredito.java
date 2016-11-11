@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import principal.PrincipalNuevo;
 
 /**
  *
@@ -28,13 +29,18 @@ public class ventaCredito {
     int con=0;
     //private DefaultTableModel tabla1;
     private JFrame frame;
-    public ventaCredito() {
+    public static void main(String[]j){
+        ventaCredito h=new ventaCredito("");
+    }
+    private String cargo;
+    public ventaCredito(String cargo) {
+        this.cargo=cargo;
         frame=new JFrame("registro de compra de vehiculo");
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.LIGHT_GRAY);
         frame.setLayout(null);
-        frame.setSize(600, 400);
+        frame.setSize(500, 600);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -295,7 +301,8 @@ public class ventaCredito {
                 JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
                 if (eleccion == JOptionPane.YES_OPTION)
                 {
-                 System.exit(0);
+                 frame.dispose();
+                 PrincipalNuevo k=new PrincipalNuevo(cargo);
 }else{
     }                           
     }                                          

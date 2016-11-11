@@ -13,9 +13,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 
-public class Estadisticas extends JFrame{
+public class Estadisticas {
  
-    public static void main(String[] args){
+    public Estadisticas(){
         String[] equipos=new String[]{"RIVER", "BOCA", "CHICAGO"};
         int[] val=new int[]{116,12,50};
         Estadisticas p=new Estadisticas(equipos, val, "ejex", "eje y", "XY", 2);
