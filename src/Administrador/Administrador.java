@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 public class Administrador {
     private static Administrador admin;
+    public static Administrador cr;
     private final String nombre;
     private ConexionMySQL base;
     private Connection cn;
@@ -102,7 +103,7 @@ public class Administrador {
     public void registrarVentaAutomovil(String nombre){
         //actualizar el stock
         
-        String ingreso = "update automovil set cantidad = cantidad - 1 where nombreAuto='"+nombre+"'";
+        String ingreso = "update automovil set cantidadauto = cantidadauto - 1 where nombreAuto='"+nombre+"'";
         int n;
         try{
             PreparedStatement ps=cn.prepareStatement(ingreso);
@@ -118,7 +119,7 @@ public class Administrador {
     //para generar el registro de la venta al contado
     public void registrarVentaContado(int idEmp, int idAuto, Float precio, String nombre, String apellidos, int ci, String fecha){
         String ingreso1 = "INSERT INTO ventacontado"+"(idEmp, idAuto, precio, nombre, apellidos, ci, fecha)"+
-                "VALUES(?,?,?,?,?,?)";
+                "VALUES(?,?,?,?,?,?,?)";
         try{
             int n;
             PreparedStatement ps=cn.prepareStatement(ingreso1);
@@ -130,8 +131,8 @@ public class Administrador {
             ps.setInt(6, ci);
             ps.setString(7, fecha);
             n=ps.executeUpdate();
-            if(n>0) System.out.println("Funciono");
-            else System.out.println("NOOOOO");
+            if(n>0) System.out.println("Funciono el registro de venta al contado");
+            else System.out.println("NOOOOO funciono el registro de venta al contado");
         }
         catch(Exception e){
             System.out.println(e.toString());
@@ -245,7 +246,7 @@ public class Administrador {
         
     }
 
-    public void registrar_compra(String nombre, int nit, int id_auto, int costo_unitario, int cantidad_auto, int precio_venta){
+    public void registrar_compra(String nombre, int nit, int id_auto, float costo_unitario, int cantidad_auto, float precio_venta){
         // registra la compra de un conjunto de vehiculos y lo actualiza al numero de vehiculos que ya existen
         String tabla = "compra_vehiculos";
         String consulta = "INSERT INTO "+tabla+"(Nombre, NIT, ID_Auto, Costo_Unitario, Cantidad, Precio_de_venta)"+
@@ -256,9 +257,9 @@ public class Administrador {
             ps.setString(1, nombre);
             ps.setInt(2, nit);
             ps.setInt(3, id_auto);
-            ps.setInt(4, costo_unitario);
+            ps.setFloat(4, costo_unitario);
             ps.setInt(5, cantidad_auto);
-            ps.setInt(6, precio_venta);
+            ps.setFloat(6, precio_venta);
             n=ps.executeUpdate();
             if(n>0) actualizar_automovil(id_auto, cantidad_auto);
             else System.out.println("NOOOOO");
@@ -267,10 +268,10 @@ public class Administrador {
             System.out.println(e.toString());
         }
     }    
-    private void actualizar_automovil(int id_auto, int cantidad_auto){
+    public void actualizar_automovil(int id_auto, int cantidad_auto){
         String idd=""+id_auto;
         String ingreso = "update automovil set cantidadauto = cantidadauto+"+cantidad_auto+" where idauto="+idd;
-        
+        System.out.println("Cantidad de autos "+cantidad_auto);
         int n;
         try{
             PreparedStatement ps=cn.prepareStatement(ingreso);
@@ -424,10 +425,10 @@ public class Administrador {
         int stock=0;
         try{
             Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String consulta="SELECT cantidad FROM automovil where nombreAuto='"+nombre+"'";
+            String consulta="SELECT cantidadauto FROM automovil where nombreAuto='"+nombre+"'";
             ResultSet rs = stmt.executeQuery(consulta);
             rs.absolute(1);
-            String res=rs.getString("cantidad");
+            String res=rs.getString("cantidadauto");
             stock=Integer.parseInt(res);
         }
         catch(Exception e){
@@ -502,7 +503,7 @@ public class Administrador {
         return tipoEmpleado;
     }
     //al momento de realizar la compra hay que verificar si hay dinero suficiente
-    public void ingresarCaja(float dinero, String fecha, int tipo, int id){
+    public void ingresarCaja(int id, int tipo, String fecha, float dinero){
         //el tipo y el id lo manejo, para si el caso de querer saber los detalles de la compra o venta
         //tipo1-> ventaContado
         //tipo2-> compraProveedores
@@ -615,6 +616,9 @@ public class Administrador {
     public void setUsuarioConectado(int id){
         usuarioConectado=id;
     }
+    public int getUsuarioConectado(){
+    return usuarioConectado;
+    }
     public boolean existeEmpleado(int cii){
         boolean existe=false;
         try{
@@ -630,6 +634,43 @@ public class Administrador {
         }
         return existe;
     }
-    
+    public int getIDUltimaVentaContado(){
+        int id=-1;
+        String consulta = "SELECT * FROM ventacontado";
+        try {
+            Statement st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery(consulta);
+            int p=1;
+            while(rs.absolute(p)){
+                p++;
+            }
+            p--;
+            rs.absolute(p);
+            id = rs.getInt("idVentaContado");
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+    public int getIDUltimaCompra(){
+        int id=-1;
+        String consulta = "SELECT compra_vehiculos.id FROM compra_vehiculos";
+        try {
+            Statement st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery(consulta);
+            int p=1;
+            while(rs.absolute(p)){
+                p++;
+            }
+            p--;
+            rs.absolute(p);
+            id = rs.getInt("id");
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 }
 

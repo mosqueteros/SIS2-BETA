@@ -57,7 +57,7 @@ public class princi {
         pasword.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pasword.getContentPane().setBackground(Color.cyan);
         pasword.setLayout(null);
-        valor = "DPTO DE VENTAS";
+        valor = "VENDEDOR";
         pasword.setSize(300, 205);
         pasword.setResizable(false);
         pasword.setLocationRelativeTo(null);
@@ -84,7 +84,7 @@ public class princi {
         pasword.getContentPane().add(ide);
 
         combo = new JComboBox<>();
-        combo.setModel(new DefaultComboBoxModel<>(new String[]{"VENDEDOR", "R HUMANOS", "ADMISNISTRACION", "CAJERO"}));
+        combo.setModel(new DefaultComboBoxModel<>(new String[]{"VENDEDOR", "R HUMANOS", "GERENTE", "CAJERO"}));
         pasword.getContentPane().add(combo);
         combo.setBounds(100, 10, 120, 20);
         combo.addActionListener(new ActionListener() {
@@ -94,7 +94,6 @@ public class princi {
 
             private void comboActionPerformed(ActionEvent evt) {
                 valor = (String) combo.getSelectedItem();
-                System.out.println(valor);
             }
 
         });
@@ -157,18 +156,18 @@ public class princi {
                     }
                         else {
                             
-                        JOptionPane.showMessageDialog(null,"DATOS INCORRECTOS");
+                        JOptionPane.showMessageDialog(null,"1DATOS INCORRECTOS");
         
                         }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"DATOS INCORRECTOS");
+                    JOptionPane.showMessageDialog(null,"2DATOS INCORRECTOS");
         
                 }
             }
         }
         else{
-            JOptionPane.showMessageDialog(null,"DATOS INCORRECTOS");
+            JOptionPane.showMessageDialog(null,"3DATOS INCORRECTOS");
         }
     }
 }

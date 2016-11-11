@@ -26,7 +26,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import Administrador.*;
 import javax.swing.JOptionPane;
+import principal.PrincipalNuevo;
 //no sirve
+
 public class component {
 
     private Administrador admin;
@@ -39,8 +41,9 @@ public class component {
     private JTable tablero;
     private JScrollPane nombreColumnas;
     String cargo;
-    public component(JFrame frame, String dato,String cargo) {
-        this.cargo=cargo;
+
+    public component(JFrame frame, String dato, String cargo) {
+        this.cargo = cargo;
         admin = Administrador.crearAdministrador("");
         this.frame = frame;
         frame.setVisible(true);
@@ -48,20 +51,22 @@ public class component {
         tablavehiculos();
         editor();
         valida = new Validacion();
-        Tfecha.setText(getFechaActual() + "            " + getHoraActual() + " horas");
+        Tfecha.setText(getFechaActual());
         TidAuto.setText(dato);
+        
+        TidEmpleado.setText(""+admin.getUsuarioConectado());
         frame.add(panel2);
     }
 
     public String getFechaActual() {
         Date ahora = new Date();
-        SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formateador = new SimpleDateFormat("yyyyddMM");
         return formateador.format(ahora);
     }
 
     public String getHoraActual() {
         Date ahora = new Date();
-        SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat formateador = new SimpleDateFormat("hhmmss");
         return formateador.format(ahora);
     }
 
@@ -163,10 +168,9 @@ public class component {
     }
 
     private void BconfirmaActionPerformed(ActionEvent evt) {
-        JOptionPane.showMessageDialog(null,"ok");
-         frame.dispose();
+        frame.dispose();
         buscadorIDvehiculo buscar = new buscadorIDvehiculo(cargo);
-       
+
     }
 
     private void transitarImpresion() {
@@ -299,18 +303,28 @@ public class component {
         int ci = Integer.parseInt(Tci.getText());
         String nombreAuto = TidAuto.getText();
         String fecha = Tfecha.getText();
+        int idVendedor=admin.getUsuarioConectado();
+        int idAuto=admin.getIdAuto(nombreAuto);
         float precio;
-        int id;
+        int id, idVenta;
         //int idEmp, int idAuto, Float precio, String nombre, String apellidos, int ci, String fecha
         if (!nombre.isEmpty() && valida.nombreProveedorValido(nombre)
                 && !apellido.isEmpty() && valida.ApellidosValido(apellido)
                 && !("" + ci).isEmpty() && valida.CIValido("" + ci)) {
-            System.out.println("listo");
             precio = admin.getPrecioAuto(nombreAuto);
             id = admin.getIdAuto(nombreAuto);
             admin.registrarVentaAutomovil(nombreAuto);
-            //admin.registrarVentaContado(1, id, precio, nombre, apellido, ci, fecha);
+            admin.registrarVentaContado(idVendedor, idAuto, precio, nombre, apellido, ci, fecha);
+            
+            
+            idVenta=admin.getIDUltimaVentaContado();
+            admin.ingresarCaja(idVenta, 1, fecha, precio);
+//admin.registrarVentaContado(1, id, precio, nombre, apellido, ci, fecha);
+            
+            JOptionPane.showMessageDialog(null,"TRANSACION REALIZADA CON EXITO");
+            frame.dispose();
             transitarImpresion();
+            PrincipalNuevo j=new PrincipalNuevo(cargo);
         }
     }
 

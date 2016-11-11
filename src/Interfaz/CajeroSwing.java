@@ -21,11 +21,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import principal.PrincipalNuevo;
 
 public class CajeroSwing{
 
@@ -34,10 +32,14 @@ public class CajeroSwing{
      
      JLabel CILabel;
      JLabel montoLabel;
+     JLabel cambioLabel;
+     JLabel otroLabel;
      JLabel tituloLabel;
      
      JTextField CI;
      JTextField monto;
+     JTextField cambio;
+     JTextField otro;
      
      ArrayList<String> parametros;
      ArrayList<JLabel> labels;
@@ -50,39 +52,26 @@ public class CajeroSwing{
      
      String fuenteLabel;
      String fuenteTextField;
-     
-     String cargo;
-     
      JButton confirmarBoton;
      JButton cancelarBoton;
     public static void main(String [] args)throws Exception{
-        CajeroSwing cajero = new CajeroSwing("CAJERO");
+        CajeroSwing cajero = new CajeroSwing();
     }
-    public CajeroSwing(String cargo)throws Exception{
+    public CajeroSwing()throws Exception{
         Frame = new JFrame();
-        this.cargo = cargo;
         
-        Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Frame.setResizable(false);
-        Frame.setLayout(null);
-        
+       Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Frame.setSize(400,450);
         inicializarEstandares();
         inicializarPanel();
         inicializarEstandares();
-        
-        inicializarBotones();
         inicializarLabels();
         inicializarTextFields();
-        
-        
-         Frame.pack();
+        inicializarBotones();
         //Frame.pack();
-       
-        Frame.setSize(450,500);
-        //Frame.add(panel);
-        Frame.setLocationRelativeTo(null);
+        Frame.setResizable(false);
+        Frame.add(panel);
         Frame.setVisible(true);
-       
         //inicializarBotones();
     }
     //kktsv81102
@@ -98,28 +87,22 @@ public class CajeroSwing{
     }
      public void inicializarLabels(){
         tituloLabel = new JLabel("CAJERO ");
-        
         CILabel =       new JLabel("CI: ");
-        montoLabel =    new JLabel("Monto: ");  
+        montoLabel =    new JLabel("Monto: ");
+        cambioLabel =   new JLabel("Cambio: ");
+        otroLabel =     new JLabel("Otro: ");
         labels =        new ArrayList<>();
-        
         labels.add(CILabel);labels.add(montoLabel);
-        
+        labels.add(cambioLabel);labels.add(otroLabel);
         anadirLabels();
-        JLabel label = new JLabel(); 
-        label.setIcon(new ImageIcon(getClass().getResource("/Imagen/InterfazMejor.jpg")));
-         Frame.getContentPane().add(label);
-        label.setBounds(0,0,500,500);
     }
     private void anadirLabels(){
-        tituloLabel.setBounds(columnaUno+100,20,200,40);
-         tituloLabel.setForeground(Color.LIGHT_GRAY);
+        tituloLabel.setBounds(columnaUno,20,200,40);
         tituloLabel.setFont(new Font(fuenteLabel, 4, 40));
         Frame.getContentPane().add(tituloLabel);
-        int y = 130;
+        int y = 90;
         for(int j = 0; j< labels.size(); j++){
             JLabel actual = labels.get(j);
-            actual.setForeground(Color.LIGHT_GRAY);
             actual.setFont(new Font(fuenteLabel, 4, tamanoLabel));
             actual.setBounds(columnaUno, y, 200, 40);
             y+=saltoLinea;
@@ -129,12 +112,15 @@ public class CajeroSwing{
     public void inicializarTextFields(){
         CI =        new JTextField();
         monto =     new JTextField();
+        cambio =    new JTextField();
+        otro =      new JTextField();
         textFields =    new ArrayList<>();
         textFields.add(CI);textFields.add(monto);
+        textFields.add(cambio);textFields.add(otro);
         anadirTextFields();
     }
     private void anadirTextFields(){
-        int y = 130;
+        int y = 90;
         for(int j = 0; j< textFields.size(); j++){
             JTextField actual = textFields.get(j);
             actual.setFont(new Font(fuenteTextField, 4, tamanoLabel));
@@ -159,49 +145,10 @@ public class CajeroSwing{
            confirmarBoton = new JButton("Confirmar");
            confirmarBoton.setFont(new Font(fuenteLabel, 4, tamanoLabel));
            confirmarBoton.setBounds(columnaUno+5, 320, 150, 40);
-           confirmarBoton.addActionListener(new ActionListener(){
-               Validacion v = new Validacion();
-               @Override
-               public void actionPerformed(ActionEvent e) {
-                   if(v.CIValido(CI.getText()) && (Integer.parseInt(monto.getText())>0)){
-                       int cambio = 0;
-                       if(cambio!=0){
-                       JOptionPane.showMessageDialog(null,"Transacción realizada con éxito \n"
-                               +"Su cambio es :"+cambio+".");
-                       Frame.dispose();
-                        PrincipalNuevo p = new PrincipalNuevo(cargo);
-                       }else{
-                       JOptionPane.showMessageDialog(null,"Transacción realizada con éxito");
-                       Frame.dispose();
-                       PrincipalNuevo p = new PrincipalNuevo(cargo);
-                       }
-                       
-                   }else{
-                       JOptionPane.showMessageDialog(null,"Datos incorrectos, por favor, revise");
-                       
-                   }
-               }
-               
-           
-           });
-           
-           //confirmarBoton.setFocusCycleRoot(true);
            cancelarBoton = new JButton("Cancelar");
            cancelarBoton.setBounds(columnaDos+60, 320, 150, 40);
            cancelarBoton.setFont(new Font(fuenteLabel, 4, tamanoLabel));
            Frame.getContentPane().add(confirmarBoton);
-           cancelarBoton.addActionListener(new ActionListener(){
-               Validacion v = new Validacion();
-               @Override
-               public void actionPerformed(ActionEvent e) {
-                   JOptionPane.showMessageDialog(null,"Cancelado");
-                   Frame.dispose();
-                   PrincipalNuevo p = new PrincipalNuevo(cargo);
-                   
-               }
-               
-           
-           });
            Frame.getContentPane().add(cancelarBoton);
     }
 }

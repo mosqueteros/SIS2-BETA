@@ -82,7 +82,7 @@ public class impresora {
             } catch (IOException ex) {
             
             }
-            System.exit(0);
+            frame.dispose();
         }
     }
 }

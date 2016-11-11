@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import Administrador.Administrador;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -56,8 +58,18 @@ public class compraVehiculos extends JPanel{
     String fuente;
     int grosor;
     int tamano;
-    
-    public compraVehiculos(){
+    String cargo;
+    float precioUnitario;
+    int idAuto;
+    String carro;
+    Administrador admin;
+    int contador=0;
+    public compraVehiculos(String carro,String cargo){
+        this.carro=carro;
+        admin=Administrador.crearAdministrador("");
+        precioUnitario=admin.getPrecioAuto(carro);
+        idAuto=admin.getIdAuto(carro);
+        this.cargo=cargo;
        // this.setLayout(null);
         v = new Validacion();
          grosor = 4;
@@ -69,7 +81,9 @@ public class compraVehiculos extends JPanel{
         this.setSize(1000,600);
         //this.setLayout(null);
         inicializarComponentes();
-       
+       nombre.setText(carro);
+       nombre.setEnabled(false);
+       monto.setText(precioUnitario+"");
         //anadirComponentes();
     }
     public void inicializarComponentes(){
@@ -87,6 +101,7 @@ public class compraVehiculos extends JPanel{
            @Override
             public void actionPerformed(ActionEvent e) {
                 if (enviar()){
+                    JOptionPane.showMessageDialog(null,"mensaje correcto");
                     System.out.println("Enviado");
                 }else{
                     System.out.println("Error");
@@ -103,8 +118,27 @@ public class compraVehiculos extends JPanel{
     
     }
     public boolean enviar(){
-       
-       return true;
+        boolean compro=false;
+       int cantidadAutos = Integer.parseInt(cantidad.getText());
+       //System.out.println("CANTIDAD--->"+cantidad.getText());
+       float totalAPagar = cantidadAutos*precioUnitario;
+       float dineroDisponibleCaja = admin.dineroDisponibleCaja();
+       float porcentaje = Float.parseFloat((String)comboBox.getSelectedItem());
+       //System.out.println("totalAPagar = "+totalAPagar+", dineroDisponible )= "+dineroDisponibleCaja+", porcentaje= "+porcentaje);
+       float precioVenta;
+       int idCompra;
+       if(dineroDisponibleCaja>=totalAPagar){
+           contador++;
+           precioVenta = (float)(precioUnitario*(porcentaje/100))+precioUnitario;
+           admin.registrar_compra(nombreProveedor.getText(), Integer.parseInt(NIT.getText()), idAuto, (float)(precioUnitario), cantidadAutos, (float) precioVenta);
+           idCompra = admin.getIDUltimaCompra();
+           admin.ingresarCaja(idCompra, 2, "20161205", totalAPagar*-1);//crear la verdadera fecha
+           compro=true;
+       }
+       else{
+           JOptionPane.showMessageDialog(null, "No existe el dinero suficiente para realizar esa compra");
+       }
+       return compro;
     }
     
     public void inicializarTextFields(){
@@ -117,7 +151,7 @@ public class compraVehiculos extends JPanel{
        precioVenta.setEditable(false);
        textFields        =  new ArrayList<>();
        textFields.add(nombreProveedor);textFields.add(NIT);textFields.add(nombre);
-       textFields.add(cantidad);textFields.add(monto);textFields.add(precioVenta);
+      textFields.add(monto); textFields.add(cantidad);textFields.add(precioVenta);
        comboBox = new JComboBox();
        comboBox.setFont(new Font((fuente),grosor,tamano));
        comboBox.addItem("");

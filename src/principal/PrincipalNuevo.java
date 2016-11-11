@@ -8,6 +8,7 @@ package principal;
 import Administrador.Administrador;
 import Interfaz.DespedirEmpleado;
 import Interfaz.buscadorIDvehiculo;
+import Interfaz.buscadorIDvehiculo_1;
 import Interfaz.registroEmplead;
 import Interfaz.registroEmpleado;
 import java.awt.BorderLayout;
@@ -77,7 +78,7 @@ public class PrincipalNuevo {
     private Administrador admin;
     
     public static void main(String[] args) {
-        PrincipalNuevo p = new PrincipalNuevo( "eduardo");
+        PrincipalNuevo p = new PrincipalNuevo( "GERENTE");
     }
 
     public PrincipalNuevo(String cargo) {
@@ -436,7 +437,7 @@ public class PrincipalNuevo {
     }
 
     private void ventaCreditEmpleadoActionPerformed(ActionEvent evt) {
-        
+        buscadorIDvehiculo_1 b=new buscadorIDvehiculo_1(cargo);
     }
 
     private void registrarEmpleadoActionPerformed(ActionEvent evt) {
