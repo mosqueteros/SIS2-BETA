@@ -11,10 +11,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.security.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -29,7 +32,7 @@ import javax.swing.JTextField;
  *
  * @author Invitado
  */
-public class princi {
+public class Login {
 
     private static JFrame frame;
     private static JPanel pane;
@@ -43,50 +46,57 @@ public class princi {
     private JFrame pasword;
     String valor;
 
-    public princi() {
+    public Login() {
         pasword();
     }
 
     public static void main(String[] a) {
-        princi p = new princi();
+        Login p = new Login();
     }
 
     private void pasword() {
-        pasword = new JFrame("usuario");
+        pasword = new JFrame("Inicio de Sesión");
+         JLabel label = new JLabel(); 
+        label.setIcon(new ImageIcon(getClass().getResource("/Imagen/ImgLogin.jpg")));
+        
+        label.setBounds(0,0,360,500);
 
         pasword.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pasword.getContentPane().setBackground(Color.cyan);
+     
         pasword.setLayout(null);
-        valor = "VENDEDOR";
-        pasword.setSize(300, 205);
+      
+        pasword.setSize(360, 450);
         pasword.setResizable(false);
         pasword.setLocationRelativeTo(null);
-        nombre = new JLabel("usuario:");
-        nombre.setFont(new Font("Arial", 3, 15));
-        nombre.setBounds(10, 10, 90, 20);
+        int y = 160;
+        int x = 5;
+        //Primera Columna
+       
+        nombre = new JLabel("USUARIO:");
+        nombre.setForeground(Color.LIGHT_GRAY);
+        nombre.setFont(new Font("Eras Bold ITC", 4, 20));
+        nombre.setBounds(35, 30+y,110, 25);
         pasword.getContentPane().add(nombre);
-        paswor = new JPasswordField("1234567");
-        paswor.setFont(new Font("Arial", 3, 15));
-        paswor.setBounds(100, 90, 120, 20);
-        pasword.getContentPane().add(paswor);
-        paswordt = new JLabel("clave:");
-        paswordt.setFont(new Font("Arial", 3, 15));
-        paswordt.setBounds(10, 90, 90, 20);
-        pasword.getContentPane().add(paswordt);
-
-        id = new JTextField("1");
-        id.setFont(new Font("Arial", 3, 15));
-        id.setBounds(100, 50, 120, 20);
-        pasword.getContentPane().add(id);
-        ide = new JLabel("Ide:");
-        ide.setFont(new Font("Arial", 3, 15));
-        ide.setBounds(10, 50, 90, 20);
+      
+        ide = new JLabel("IDE: ");
+        ide.setForeground(Color.LIGHT_GRAY);
+        ide.setFont(new Font("Eras Bold ITC", 4, 20));
+        ide.setBounds(35, 70+y, 100, 20);
         pasword.getContentPane().add(ide);
 
+        paswordt = new JLabel("CLAVE:");
+        paswordt.setForeground(Color.LIGHT_GRAY);
+        paswordt.setFont(new Font("Eras Bold ITC", 4, 20));
+        paswordt.setBounds(35, 110+y, 100, 20);
+        pasword.getContentPane().add(paswordt);
+        
+        
+        //SegundaColumna
+        
         combo = new JComboBox<>();
         combo.setModel(new DefaultComboBoxModel<>(new String[]{"VENDEDOR", "R HUMANOS", "GERENTE", "CAJERO"}));
         pasword.getContentPane().add(combo);
-        combo.setBounds(100, 10, 120, 20);
+        combo.setBounds(150+x+35, 30+y, 120, 25);
         combo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 comboActionPerformed(evt);
@@ -97,23 +107,40 @@ public class princi {
             }
 
         });
-        aceptar = new JButton("aceptar");
-        aceptar.setBackground(Color.GREEN);
-        aceptar.setFont(new Font("Arial", 3, 15));
-        aceptar.setBounds(20, 130, 100, 20);
+        
+         id = new JTextField("1");
+        id.setFont(new Font("Eras Bold ITC", 4, 20));
+        id.setBounds(150+x+35, 70+y, 120, 25);
+        pasword.getContentPane().add(id);
+        
+        paswor = new JPasswordField("1234567");
+        paswor.setFont(new Font("Eras Bold ITC", 4, 20));
+        paswor.setBounds(150+x+35, 110+y, 120, 25);
+        pasword.getContentPane().add(paswor);
+        paswor.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent evt) {
+                if (evt.getKeyCode() == 10) {
+                          aceptarActionPerformed();
+                }
+        }
+});
+       
+        aceptar = new JButton("LOGIN");
+        aceptar.setFont(new Font("Eras Bold ITC", 4, 15));
+        aceptar.setBounds(15, 160+y+10, 160, 30);
         aceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                aceptarActionPerformed(evt);
+                aceptarActionPerformed();
             }
 
         });
         pasword.getContentPane().add(aceptar);
 
-        salir = new JButton("cancelar");
-        salir.setBackground(Color.GREEN);
-        salir.setFont(new Font("Arial", 3, 15));
-        salir.setBounds(150, 130, 100, 20);
+        salir = new JButton("CANCELAR");
+        salir.setFont(new Font("Eras Bold ITC", 4, 15));
+        salir.setBounds(180, 160+y+10, 160, 30);
         salir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -126,10 +153,11 @@ public class princi {
 
         });
         pasword.getContentPane().add(salir);
+        pasword.getContentPane().add(label);
         pasword.setVisible(true);
     }
 
-    private void aceptarActionPerformed(ActionEvent evt) {
+    private void aceptarActionPerformed() {
         Validacion valida = new Validacion();
         int iden = Integer.parseInt("" + id.getText());
         String carg = valor;

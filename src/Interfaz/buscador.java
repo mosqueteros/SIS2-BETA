@@ -2,14 +2,17 @@ package Interfaz;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Frame;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -26,7 +29,7 @@ public class buscador {
     private JComboBox combo;
     private ArrayList<String> lista;
     private String directeada;
-    private JButton aceptar;
+    private JButton aceptar,registrar;
     
     String fuente;
     int tamanoTitulo;
@@ -39,6 +42,7 @@ public class buscador {
         panel();
         inicializarEstandares();
         componentes();
+        imagen();
         modificador(lista);
         frame.add(panel);
         
@@ -52,6 +56,7 @@ public class buscador {
 
     private void componentes() {
         textBuscador = new JLabel("Buscar:");
+        textBuscador.setForeground(Color.WHITE);
         textBuscador.setFont(new Font(fuente, 4, tamanoLabels));
         textBuscador.setBounds(20, 10, 200, 35);
         frame.getContentPane().add(textBuscador);
@@ -79,8 +84,9 @@ public class buscador {
 
         aceptar = new JButton();
         aceptar.setFont(new Font(fuente, 4, tamanoLabels));
-        aceptar.setText("Aceptar");
-        aceptar.setBounds(100, 60, 200, 35);
+        aceptar.setText("ACEPTAR");
+        aceptar.setForeground(Color.BLACK);
+        aceptar.setBounds(200, 60, 200, 35);
         panel.add(aceptar);
         aceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -88,7 +94,7 @@ public class buscador {
             }
 
         });
-        //panel.pack();
+
     }
 
     private void textokeyReleased(KeyEvent evt) {
@@ -139,6 +145,13 @@ public class buscador {
         panel.setBackground(Color.LIGHT_GRAY);
         panel.setBounds(0, 0,600, 200);
     }
-  
     
+    JLabel fondos;
+    private void imagen() {
+        fondos = new JLabel(); 
+        fondos.setBounds(0,0,600,200);
+        fondos.setIcon(new ImageIcon(getClass().getResource("/Imagen/InterfazMejor.jpg")));
+        panel.add(fondos);
+    }
+  
 }

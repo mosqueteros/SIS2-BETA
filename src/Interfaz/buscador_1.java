@@ -26,27 +26,28 @@ public class buscador_1 {
     private JComboBox combo;
     private ArrayList<String> lista;
     private String directeada;
-    private JButton aceptar;
-    
+    private JButton aceptar, registrar;
+
     String fuente;
     int tamanoTitulo;
     int tamanoLabels;
     String cargo;
-    public buscador_1(JFrame frame,ArrayList<String> lista,String cargo) {
-        this.cargo=cargo;
-        this.frame=frame;  
+
+    public buscador_1(JFrame frame, ArrayList<String> lista, String cargo) {
+        this.cargo = cargo;
+        this.frame = frame;
         this.lista = lista;
         panel();
         inicializarEstandares();
         componentes();
         modificador(lista);
         frame.add(panel);
-        
-        
+
     }
-    private void inicializarEstandares(){
+
+    private void inicializarEstandares() {
         fuente = "Eras Bold ITC";
-        tamanoTitulo = 40 ;
+        tamanoTitulo = 40;
         tamanoLabels = 20;
     }
 
@@ -88,6 +89,17 @@ public class buscador_1 {
             }
 
         });
+        registrar = new JButton();
+        registrar.setFont(new Font(fuente, 4, tamanoLabels));
+        registrar.setText("registrar nuevo");
+        registrar.setBounds(300, 60, 200, 35);
+        panel.add(registrar);
+        registrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                nuevoActionPerformed(evt);
+            }
+
+        });
         //panel.pack();
     }
 
@@ -124,22 +136,27 @@ public class buscador_1 {
         }
     }
 
-    private void aceptarActionPerformed(ActionEvent evt) {
-        if(!texto.getText().isEmpty()){
-            frame.dispose();
-             compraVehiculos v=new compraVehiculos(texto.getText(),cargo);
-              
-        }
+    private void nuevoActionPerformed(ActionEvent evt) {
+        frame.dispose();
+        registroVehiculo f=new registroVehiculo(cargo);
         
     }
 
+    private void aceptarActionPerformed(ActionEvent evt) {
+        if (!texto.getText().isEmpty()) {
+            frame.dispose();
+            compraVehiculos v = new compraVehiculos(texto.getText(), cargo);
+
+        }
+
+    }
+
     private void panel() {
-        panel=new JPanel();
-        GroupLayout grupo=new GroupLayout(panel);
+        panel = new JPanel();
+        GroupLayout grupo = new GroupLayout(panel);
         panel.setLayout(grupo);
         panel.setBackground(Color.LIGHT_GRAY);
-        panel.setBounds(0, 0,600, 200);
+        panel.setBounds(0, 0, 600, 200);
     }
-  
-    
+
 }

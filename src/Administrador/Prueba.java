@@ -20,10 +20,10 @@ public class Prueba {
         //Transaccion transaccion = new Transaccion();
         //transaccion.ejecutarPagoCliente(1, 100, "1212", 1);
         
-        //admin.registrarVentaContado(0, 0, 888.32f,"COCO", "MARTINEZ", 0, "20161006");
+        admin.registrarVentaContado(0, 0, 888.32f,"COCO", "MARTINEZ", 0, "20161006");
         
-        //int idVenta=admin.getIDUltimaVentaContado();
-        //admin.ingresarCaja(idVenta, 1, "20161006", 888.32f);
+        int idVenta=admin.getIDUltimaVentaContado();
+        admin.ingresarCaja(idVenta, 1, "20161006", 888.32f);
         admin.actualizar_automovil(1, 10);
     }
     private static void llenarTablero() {

@@ -23,7 +23,6 @@ public class impresora {
     private JTextArea textoPa;
     private archivo documento;
     private JButton imprimiConf;
-
     public impresora(String[] factura) {
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,12 +46,13 @@ public class impresora {
         panelScrol.setViewportView(textoPa);
         frame.getContentPane().add(panelScrol);
         panelScrol.setBounds(200, 70, 600, 400);
-        textoPa.setFont(new Font("Arial", 3, 18));
+        textoPa.setFont(new Font("Eras Bold ITC", 4, 20));
         textoPa.setEditable(false);
         textoPa.setBackground(Color.lightGray);
         imprimiConf = new JButton();
-        imprimiConf.setFont(new Font("Arial", 3, 15));
-        imprimiConf.setText("aceptar");
+        imprimiConf.setFont(new Font("Eras Bold ITC", 4, 20));
+        imprimiConf.setText("ACEPTAR");
+        imprimiConf.setForeground(Color.BLACK);
         imprimiConf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

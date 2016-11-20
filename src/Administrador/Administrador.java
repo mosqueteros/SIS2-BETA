@@ -129,7 +129,7 @@ public class Administrador {
             ps.setString(4, nombre);
             ps.setString(5, apellidos);
             ps.setInt(6, ci);
-            ps.setString(7, fecha);
+            ps.setString(7,fecha);
             n=ps.executeUpdate();
             if(n>0) System.out.println("Funciono el registro de venta al contado");
             else System.out.println("NOOOOO funciono el registro de venta al contado");
@@ -142,14 +142,15 @@ public class Administrador {
     
     public void registrarAutomovil(Float f, int cant, String nombre){
         
-        String ingreso1 = "INSERT INTO automovil"+"(precioauto, cantidad, nombreAuto)"+
-                "VALUES(?,?,?)";
+        String ingreso1 = "INSERT INTO automovil"+"(precioauto, cantidadauto, nombreAuto, precioventa)"+
+                "VALUES(?,?,?,?)";
         
         try{
             PreparedStatement ps=cn.prepareStatement(ingreso1);
             ps.setFloat(1, f);
             ps.setInt(2, cant);
             ps.setString(3, nombre);
+            ps.setFloat(4, 0);
             int n=ps.executeUpdate();
             if(n>0) System.out.println("Funciono");
             else System.out.println("NOOOOO");
@@ -672,5 +673,39 @@ public class Administrador {
         }
         return id;
     }
+    public void actualizarPrecioVenta(float precio, int idAuto){
+        String idd=""+idAuto;
+        String precioo=""+precio;
+        String ingreso = "update automovil set precioventa = "+precioo+" where idauto="+idd;
+        System.out.println("Precio venta "+precio);
+        int n;
+        try{
+            PreparedStatement ps=cn.prepareStatement(ingreso);
+            n=ps.executeUpdate();
+            if(n>0) System.out.println("Funciono setear precio venta auto");
+            else System.out.println("NOOOOO funciono setear precio venta auto");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        
+    }
+    
+    public float getPrecioVentaAuto(String nombre){
+        float precio=0;
+        try{
+            Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String consulta="SELECT precioventa FROM automovil where nombreAuto='"+nombre+"'";
+            ResultSet rs = stmt.executeQuery(consulta);
+            rs.absolute(1);
+            String res=rs.getString("precioventa");
+            precio=Float.parseFloat(res);
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return precio;
+    }
+    
 }
 

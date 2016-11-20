@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class buscadorIDvehiculo {
     private JFrame frame;
     public buscadorIDvehiculo(String cargo){
-        frame=new JFrame("registro de compra de vehiculo");
+        frame=new JFrame("REGISTRO DE VENTA AL CONTADO");
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.LIGHT_GRAY);

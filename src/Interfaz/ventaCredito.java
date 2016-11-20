@@ -27,13 +27,13 @@ public class ventaCredito {
      * Creates new form Interface_Venta
      */
     int con=0;
-    //private DefaultTableModel tabla1;
-    private JFrame frame;
-    public static void main(String[]j){
-        ventaCredito h=new ventaCredito("");
-    }
+    private DefaultTableModel tabla1;
+   private JFrame frame;
+  public static void main(String[]j){
+        ventaCredito h=new ventaCredito();
+  }
     private String cargo;
-    public ventaCredito(String cargo) {
+    public ventaCredito() {
         this.cargo=cargo;
         frame=new JFrame("registro de compra de vehiculo");
         

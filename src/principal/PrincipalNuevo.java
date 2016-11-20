@@ -41,6 +41,7 @@ import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import static javafx.scene.text.Font.font;
 
 public class PrincipalNuevo {
 
@@ -66,7 +67,7 @@ public class PrincipalNuevo {
     JButton registrarEmpleadoBoton;
     JButton despedirEmpleadoBoton;
     //Administracion
-    JButton registrarVehiculoBoton;
+    JButton compraDeVehiculos;
     //Cajero
     JButton registrarPagoBoton;
     //Usuario
@@ -209,7 +210,7 @@ public class PrincipalNuevo {
                     panel.remove(registrarEmpleadoBoton);
                     panel.remove(despedirEmpleadoBoton);
                     panel.remove(registrarPagoBoton);
-                    panel.remove(registrarVehiculoBoton);
+                    panel.remove(compraDeVehiculos);
                 } catch (Exception e) {
                     System.out.println("elementos no existen");
                 }
@@ -236,7 +237,7 @@ public class PrincipalNuevo {
                     panel.remove(ventaCreditoBoton);
                     panel.remove(ventaContadoBoton);
                     panel.remove(registrarPagoBoton);
-                    panel.remove(registrarVehiculoBoton);
+                    panel.remove(compraDeVehiculos);
                     panel.remove(reporteBoton);
                 } catch (Exception e) {
                     System.out.println("elementos no existen");
@@ -268,7 +269,7 @@ public class PrincipalNuevo {
                     panel.remove(ventaContadoBoton);
                     panel.remove(ventaCreditoBoton);
                     panel.remove(reporteBoton);
-                    panel.remove(registrarVehiculoBoton);
+                    panel.remove(compraDeVehiculos);
                     
                 } catch (Exception e) {
                     System.out.println("Elementos no existen");
@@ -401,16 +402,16 @@ public class PrincipalNuevo {
 
     public void administracion() {
 
-        registrarVehiculoBoton = new JButton("REGISTRAR VEHICULO");
-        registrarVehiculoBoton.setBounds(300, 300, 150, 80);
-        registrarVehiculoBoton.addActionListener(new ActionListener() {
+        compraDeVehiculos = new JButton("COMPRA VEHICULOS");
+        compraDeVehiculos.setBounds(300, 300, 150, 80);
+        compraDeVehiculos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 RegistrarVehiculActionPerformed(evt);
             }
 
         });
-        panel.add(registrarVehiculoBoton);
+        panel.add(compraDeVehiculos);
         actualizarFrame();
         administracionBoton.setEnabled(false);
         panel.repaint();
@@ -418,9 +419,10 @@ public class PrincipalNuevo {
     }
 
     private void despedirEmpleadoActionPerformed(ActionEvent evt){
-        try{Frame.dispose();
+        try{
+           Frame.dispose();
             DespedirEmpleado d = new DespedirEmpleado(cargo);
-            
+             
         }catch (Exception e){
         
         }
@@ -444,7 +446,7 @@ public class PrincipalNuevo {
 
     private void ventaCreditEmpleadoActionPerformed(ActionEvent evt) {
         Frame.dispose();
-        ventaCredito g=new ventaCredito(cargo);
+        //ventaCredito g=new ventaCredito(cargo);
     }
 
     private void registrarEmpleadoActionPerformed(ActionEvent evt) {

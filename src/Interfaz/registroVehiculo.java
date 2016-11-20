@@ -170,12 +170,14 @@ public class registroVehiculo{
                @Override
                public void actionPerformed(ActionEvent e) {
                    if(v.ApellidosValido(nombre.getText()) && (Integer.parseInt(precio.getText())>0)){
+                       System.out.println("PRECCCIOIOOOOWWW "+precio.getText());
                        admin.registrarAutomovil(Float.parseFloat(precio.getText()),0, nombre.getText());
                      
                        JOptionPane.showMessageDialog(null,"Registro realizado con éxito");
                        
                        Frame.dispose();
-                       PrincipalNuevo p = new PrincipalNuevo(cargo);
+                       
+                   buscadorIDvehiculo_1 g=new buscadorIDvehiculo_1(cargo);
                        
                        
                    }else{
@@ -198,7 +200,7 @@ public class registroVehiculo{
                public void actionPerformed(ActionEvent e) {
                    JOptionPane.showMessageDialog(null,"Cancelado");
                    Frame.dispose();
-                   PrincipalNuevo p = new PrincipalNuevo(cargo);
+                   buscadorIDvehiculo_1 g=new buscadorIDvehiculo_1(cargo);
                    
                }
                
