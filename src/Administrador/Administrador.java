@@ -545,25 +545,6 @@ public class Administrador {
     }
     
     
-    public ArrayList<Float> listadoIngresos(){
-        String consulta = "SELECT caja.fecha AS fecha, count(*) AS numVentas, sum(dinero) AS suma FROM caja " +"WHERE caja.tipoVentaCompra<>2"+ " GROUP BY caja.fecha";
-        ArrayList<Float> lista=new ArrayList<Float>();
-        try {
-            
-            Statement st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = st.executeQuery(consulta);
-            int p=1;
-            while(rs.absolute(p)){
-                lista.add(rs.getFloat("suma"));
-                p++;
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
-    
     public ArrayList<Float> listadoEgresos(){
         String consulta = "SELECT caja.fecha AS fecha, count(*) AS numVentas, sum(dinero) AS suma FROM caja " +"WHERE caja.tipoVentaCompra=2"+ " GROUP BY caja.fecha";
         ArrayList<Float> lista=new ArrayList<Float>();
@@ -706,6 +687,52 @@ public class Administrador {
         }
         return precio;
     }
-    
+    public void vaciarDatosCaja(){
+        try{
+            Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String vaciarCaja="TRUNCATE caja";
+            PreparedStatement ps=cn.prepareStatement(vaciarCaja);
+            int n = ps.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
+    public ArrayList<Float> listadoIngresos(){
+        String consulta = "SELECT caja.fecha AS fecha, count(*) AS numVentas, sum(dinero) AS suma FROM caja " +"WHERE caja.tipoVentaCompra<>2"+ " GROUP BY caja.fecha";
+        ArrayList<Float> lista=new ArrayList<Float>();
+        try {
+            
+            Statement st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery(consulta);
+            int p=1;
+            while(rs.absolute(p)){
+                lista.add(rs.getFloat("suma"));
+                p++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    public ArrayList<Integer> listadoCantidadVentas(){
+        String consulta = "SELECT caja.fecha AS fecha, count(*) AS numVentas, sum(dinero) AS suma FROM caja " +"WHERE caja.tipoVentaCompra<>2"+ " GROUP BY caja.fecha";
+        ArrayList<Integer> lista=new ArrayList<Integer>();
+        try {
+            
+            Statement st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery(consulta);
+            int p=1;
+            while(rs.absolute(p)){
+                lista.add(rs.getInt("numVentas"));
+                p++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
 }
 
