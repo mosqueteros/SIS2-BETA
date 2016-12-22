@@ -26,11 +26,12 @@ public class Prueba {
         //admin.ingresarCaja(idVenta, 1, "20161006", 888.32f);
         //admin.actualizar_automovil(1, 10);
         
-        ArrayList<Float> lista= admin.listadoIngresos();
+        /*ArrayList<Float> lista= admin.listadoIngresos();
         for(int i=0; i<lista.size(); i++){
             System.out.println("Dinero vendido: "+lista.get(i));
         }
-        admin.vaciarDatosCaja();
+        admin.vaciarDatosCaja();*/
+        
     }
     private static void llenarTablero() {
         ArrayList<ArrayList<String>> listaclientes=admin.getClientes();

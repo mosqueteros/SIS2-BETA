@@ -734,5 +734,57 @@ public class Administrador {
         }
         return lista;
     }
+    public void registrarBanco(String nombreBanco){
+        String ingreso1 = "INSERT INTO banco"+"(nombrebanco)"+
+                "VALUES(?)";
+        try{
+            int n;
+            PreparedStatement ps=cn.prepareStatement(ingreso1);
+            ps.setString(1, nombreBanco);
+            n=ps.executeUpdate();
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
+    
+    public ArrayList<String> listadoBancos(){
+        String consulta = "SELECT * FROM `banco` ORDER BY nombrebanco";
+        ArrayList<String> lista=new ArrayList<String>();
+        try {
+            Statement st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery(consulta);
+            int p=1;
+            while(rs.absolute(p)){
+                lista.add(rs.getString("nombrebanco"));
+                p++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    public void modificacionBanco(int id,String nombreBanco){
+        String idd=""+id;
+        int n;
+        PreparedStatement ps;
+        String modificacionBanco;
+        
+        modificacionBanco = "update banco set nombrebanco = "+nombreBanco+" where idbanco="+idd;        
+        
+        try{
+                ps = cn.prepareStatement(modificacionBanco);
+                n = ps.executeUpdate();
+            
+            if(n>0) System.out.println("Funciono");
+            else System.out.println("NOOOOO");
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
 }
 
