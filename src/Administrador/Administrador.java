@@ -820,7 +820,7 @@ public class Administrador {
             System.out.println(e.toString());
         }
     }
-    
+
     public boolean modificacionBanco(int id, String nombreBanco) {
         boolean resp = false;
         String idd = "" + id;
@@ -838,6 +838,27 @@ public class Administrador {
                 resp = true;
             }
 
+        } catch (Exception e) {
+        }
+        return resp;
+    }
+
+    public boolean eliminarBanco(int idbanco) {
+        boolean resp = false;
+        String idd = "" + idbanco;
+        int n;
+        PreparedStatement ps;
+        String eliminarBanco;
+
+        eliminarBanco = "DELETE FROM banco where idbanco=" + idd;
+
+        try {
+            ps = cn.prepareStatement(eliminarBanco);
+            n = ps.executeUpdate();
+
+            if (n > 0) {
+                resp = true;
+            }
         } catch (Exception e) {
         }
         return resp;

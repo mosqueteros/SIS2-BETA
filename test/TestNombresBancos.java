@@ -1,6 +1,5 @@
 
 import Administrador.Administrador;
-import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,21 +29,32 @@ public class TestNombresBancos {
     }
 
     @Test
-    public void testIngresoNombresBancos() {
+    public void testIngresarBanco() {
         Administrador admin = Administrador.crearAdministrador("");
         admin.vaciarDatosBanco();
-        boolean respuesta = admin.registrarBanco("banco ganadero");
+        boolean respuesta = admin.registrarBanco("banco nuevo");
         assertEquals(true, respuesta);
     }
 
     @Test
-    public void testModificacionBanco() {
+    public void testModificarBanco() {
         Administrador admin = Administrador.crearAdministrador("");
         admin.vaciarDatosBanco();
-        admin.registrarBanco("banco total");
-        String idbanco = admin.getIdBanco("banco total");
+        admin.registrarBanco("banco nombre actual");
+        String idbanco = admin.getIdBanco("banco nombre actual");
         int id = Integer.parseInt(idbanco);
-        boolean respuesta = admin.modificacionBanco(id, "banco parcial");
+        boolean respuesta = admin.modificacionBanco(id, "banco nombre nuevo");
+        assertEquals(true, respuesta);
+    }
+    
+    @Test
+    public void testEliminarBanco(){
+        Administrador admin = Administrador.crearAdministrador("");
+        admin.vaciarDatosBanco();
+        admin.registrarBanco("banco inexistente");
+        String idbanco = admin.getIdBanco("banco inexistente");
+        int id = Integer.parseInt(idbanco);
+        boolean respuesta = admin.eliminarBanco(id);
         assertEquals(true, respuesta);
     }
 }
