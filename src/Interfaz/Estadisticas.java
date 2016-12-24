@@ -1,4 +1,3 @@
-
 package Interfaz;
 
 /**
@@ -6,7 +5,9 @@ package Interfaz;
  * @author Heredia
  */
 
+import Administrador.Administrador;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import org.jfree.chart.*;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -14,39 +15,88 @@ import org.jfree.data.general.DefaultPieDataset;
 
 
 public class Estadisticas {
- 
-    public Estadisticas(){
-        String[] equipos=new String[]{"RIVER", "BOCA", "CHICAGO"};
-        int[] val=new int[]{116,12,50};
-        Estadisticas p=new Estadisticas(equipos, val, "ejex", "eje y", "XY", 2);
+
+    public Estadisticas() {
+        
+        Administrador admin=Administrador.crearAdministrador("");
+        cargarDatos(admin);
+        ArrayList<String> fechas=admin.listadoFechasIngresos();
+        ArrayList<Float> ingresos=admin.listadoIngresos();
+        
+        Estadisticas p=new Estadisticas(fechas, ingresos, "Bolivianos", "Fechas", "Ventas diarias", 2);
         ChartPanel panel = new ChartPanel(p.getGrafica());
         JFrame ventana = new JFrame("");
         ventana.getContentPane().add(panel);
         ventana.pack();
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
+        
     }
     
+
+    private void cargarDatos(Administrador admin){
+        admin.vaciarDatosCaja();
+        String fecha="20160113";
+        float precio = admin.getPrecioVentaAuto("renault");
+        int id = admin.getIdAuto("renault")    ;
+        admin.registrarVentaAutomovil("renault");
+        admin.registrarVentaContado(4, id, precio, "Gustavo", "Torres", 1234567, fecha);
+        int idVenta=admin.getIDUltimaVentaContado();
+        admin.ingresarCaja(idVenta, 1, fecha, precio);
+        
+        fecha="20160113";
+        precio = admin.getPrecioVentaAuto("toyota");
+        id = admin.getIdAuto("toyota")    ;
+        admin.registrarVentaAutomovil("toyota");
+        admin.registrarVentaContado(4, id, precio, "Gustavo", "Torres", 1234567, fecha);
+        idVenta=admin.getIDUltimaVentaContado();
+        admin.ingresarCaja(idVenta, 1, fecha, precio);
+        
+        fecha="20160120";
+        precio = admin.getPrecioVentaAuto("volvo");
+        id = admin.getIdAuto("volvo");
+        admin.registrarVentaAutomovil("volvo");
+        admin.registrarVentaContado(4, id, precio, "Gustavo", "Torres", 1234567, fecha);
+        idVenta=admin.getIDUltimaVentaContado();
+        admin.ingresarCaja(idVenta, 1, fecha, precio);
     
+        fecha="20160322";
+        precio = admin.getPrecioVentaAuto("ford");
+        id = admin.getIdAuto("ford");
+        admin.registrarVentaAutomovil("ford");
+        admin.registrarVentaContado(4, id, precio, "Gustavo", "Torres", 1234567, fecha);
+        idVenta=admin.getIDUltimaVentaContado();
+        admin.ingresarCaja(idVenta, 1, fecha, precio);
+    
+        fecha="20160402";
+        precio = admin.getPrecioVentaAuto("fiat");
+        id = admin.getIdAuto("fiat");
+        admin.registrarVentaAutomovil("fiat");
+        admin.registrarVentaContado(4, id, precio, "Gustavo", "Torres", 1234567, fecha);
+        idVenta=admin.getIDUltimaVentaContado();
+        admin.ingresarCaja(idVenta, 1, fecha, precio);
+    }
+    
+    Administrador admin;
     JFreeChart grafica;
     DefaultCategoryDataset datos = new DefaultCategoryDataset();
     DefaultCategoryDataset datosL = new DefaultCategoryDataset();
     DefaultPieDataset datosPie = new DefaultPieDataset();
     String nombreP, nombreEje, nombreT;
     
-    public Estadisticas(String[] n, int[] v, String n1, String n2, String n3, int tipo) {
-        anadir(n,v,n1);
+    public Estadisticas(ArrayList<String> nombres, ArrayList<Float> valores, String n1, String n2, String n3, int tipo) {
+        anadir(nombres,valores,n1);
         nombreP = n1;
         nombreEje = n2;
         nombreT = n3;
         graficar(tipo);
     }
     
-    public void anadir(String[] n, int[] v, String n1) {
-        for(int i=0; i<n.length; i++){
-            datos.addValue(v[i], n[i], n[i]);
-            datosL.addValue(v[i], n1, n[i]);
-            datosPie.setValue(n[i], v[i]);
+    public void anadir(ArrayList<String> n, ArrayList<Float> v, String n1) {
+        for(int i=0; i<n.size(); i++){
+            datos.addValue(v.get(i), n.get(i), n.get(i));
+            datosL.addValue(v.get(i), n1, n.get(i));
+            datosPie.setValue(n.get(i), v.get(i));
         }
     }
     
@@ -70,4 +120,11 @@ public class Estadisticas {
         return grafica;
     }
     
+    public void cambiarValores(ArrayList<String> nombres, ArrayList<Float> valores, String n1, String n2, String n3, int tipo) {
+        anadir(nombres,valores,n1);
+        nombreP = n1;
+        nombreEje = n2;
+        nombreT = n3;
+        graficar(tipo);
+    }
 }

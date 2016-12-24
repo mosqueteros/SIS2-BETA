@@ -20,6 +20,7 @@ import java.util.*;
 public class TestEstadisticasVentas {
     
     public TestEstadisticasVentas() {
+        //System.out.println();
     }
     
     @BeforeClass

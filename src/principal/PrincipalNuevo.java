@@ -8,6 +8,7 @@ package principal;
 import Administrador.Administrador;
 import Interfaz.CajeroSwing;
 import Interfaz.DespedirEmpleado;
+import Interfaz.Estadisticas;
 import Interfaz.buscadorIDvehiculo;
 import Interfaz.buscadorIDvehiculo_1;
 import Interfaz.registroEmplead;
@@ -174,7 +175,7 @@ public class PrincipalNuevo {
         Frame.getContentPane().add(salirBoton);
         Frame.getContentPane().add(mensajesBoton);
         Frame.getContentPane().add(perfilBoton);
-        
+       // Frame.getContentPane().add(estadistica);
 
         Frame.getContentPane().add(ventasBoton);
         Frame.getContentPane().add(recursosBoton);
@@ -211,6 +212,7 @@ public class PrincipalNuevo {
                     panel.remove(despedirEmpleadoBoton);
                     panel.remove(registrarPagoBoton);
                     panel.remove(compraDeVehiculos);
+                    panel.remove(estadistica);
                 } catch (Exception e) {
                     System.out.println("elementos no existen");
                 }
@@ -239,6 +241,7 @@ public class PrincipalNuevo {
                     panel.remove(registrarPagoBoton);
                     panel.remove(compraDeVehiculos);
                     panel.remove(reporteBoton);
+                    panel.remove(estadistica);
                 } catch (Exception e) {
                     System.out.println("elementos no existen");
                 }
@@ -270,7 +273,7 @@ public class PrincipalNuevo {
                     panel.remove(ventaCreditoBoton);
                     panel.remove(reporteBoton);
                     panel.remove(compraDeVehiculos);
-                    
+                    panel.remove(estadistica);
                 } catch (Exception e) {
                     System.out.println("Elementos no existen");
                 }
@@ -291,12 +294,14 @@ public class PrincipalNuevo {
                     ventasBoton.setEnabled(true);
                     recursosBoton.setEnabled(true);
                     cajeroBoton.setEnabled(true);
+                    
                     panel.remove(registrarEmpleadoBoton);
                     panel.remove(despedirEmpleadoBoton);
                     panel.remove(registrarPagoBoton);
                     panel.remove(reporteBoton);
                     panel.remove(ventaContadoBoton);
                     panel.remove(ventaCreditoBoton);
+                    panel.remove(estadistica);
                 } catch (Exception e) {
                     System.out.println("Elementos no existen");
                 }
@@ -399,7 +404,7 @@ public class PrincipalNuevo {
         panel.repaint();
         
     }
-
+        JButton  estadistica;
     public void administracion() {
 
         compraDeVehiculos = new JButton("COMPRA VEHICULOS");
@@ -414,6 +419,25 @@ public class PrincipalNuevo {
         panel.add(compraDeVehiculos);
         actualizarFrame();
         administracionBoton.setEnabled(false);
+        panel.repaint();
+        
+        estadistica = new JButton("ESTATISTICA");
+        estadistica.setBounds(300, 450, 150, 80);
+        estadistica.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                estadistVehiculActionPerformed(evt);
+            }
+
+            private void estadistVehiculActionPerformed(ActionEvent evt) {
+                Estadisticas est=new Estadisticas();
+            }
+
+        });
+        estadistica.setVisible(true);
+        panel.add(estadistica);
+        actualizarFrame();
+        //estadistica.setEnabled(false);
         panel.repaint();
         
     }
@@ -446,7 +470,8 @@ public class PrincipalNuevo {
 
     private void ventaCreditEmpleadoActionPerformed(ActionEvent evt) {
         Frame.dispose();
-        //ventaCredito g=new ventaCredito(cargo);
+        ventaCredito g=new ventaCredito(cargo);
+        g.setVisible(true);
     }
 
     private void registrarEmpleadoActionPerformed(ActionEvent evt) {
@@ -484,6 +509,7 @@ public class PrincipalNuevo {
         recursosBoton.setEnabled(false);
         cajeroBoton.setEnabled(false);
         administracionBoton.setEnabled(false);
+     
         
     }
     private void preferencias() {

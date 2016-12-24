@@ -59,7 +59,20 @@ public class Validacion {
             return false;
         }
         return true;
-        
+    }
+    public boolean esNumero(String numero){
+        Pattern p = Pattern.compile("[0-9]");
+        if(!p.matcher(numero).matches()){
+            return false;
+        }
+        return true;
+    }
+    public boolean esPalabra(String palabra){
+        Pattern p = Pattern.compile("[a-zA-z_ ]{1,25}");
+        if(!p.matcher(palabra).matches()){
+            return false;
+        }
+        return true;
     }
 
 }
