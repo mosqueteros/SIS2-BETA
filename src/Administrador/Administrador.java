@@ -756,5 +756,109 @@ public class Administrador {
         }
         return lista;
     }
+    public boolean registrarBanco(String nombreBanco) {
+        boolean resp = false;
+        String ingreso1 = "INSERT INTO banco" + "(nombrebanco)"
+                + "VALUES(?)";
+        try {
+            int n;
+            PreparedStatement ps = cn.prepareStatement(ingreso1);
+            ps.setString(1, nombreBanco);
+            n = ps.executeUpdate();
+            if (n > 0) {
+                resp = true;
+            }
+        } catch (Exception e) {
+        }
+        return resp;
+    }
+
+    public ArrayList<ArrayList<String>> listadoBancos() {
+        Statement stmt;
+        ArrayList<ArrayList<String>> lista = new ArrayList();
+        try {
+            stmt = cn.createStatement();
+            String consulta = "SELECT * FROM `banco` ORDER BY nombrebanco";
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            while (rs.next()) {
+                ArrayList<String> fila = new ArrayList<String>();
+                fila.add(Integer.toString(rs.getInt("idbanco")));
+                fila.add(rs.getString("nombrebanco"));
+            }
+        } catch (SQLException ex) {
+        }
+
+        return lista;
+    }
+
+    public String getIdBanco(String nombreBanco) {
+        String idbanco = "";
+        Statement stmt;
+        try {
+            stmt = cn.createStatement();
+            String consulta = "SELECT idbanco FROM `banco` WHERE nombrebanco='" + nombreBanco + "'";
+            ResultSet rs = stmt.executeQuery(consulta);
+            rs.absolute(1);
+            idbanco = rs.getString("idbanco");
+        } catch (SQLException ex) {
+        }
+
+        return idbanco;
+    }
+
+    public void vaciarDatosBanco() {
+        try {
+            Statement stmt = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String vaciarBanco = "TRUNCATE banco";
+            PreparedStatement ps = cn.prepareStatement(vaciarBanco);
+            int n = ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public boolean modificacionBanco(int id, String nombreBanco) {
+        boolean resp = false;
+        String idd = "" + id;
+        int n;
+        PreparedStatement ps;
+        String modificacionBanco;
+
+        modificacionBanco = "update banco set nombrebanco = '" + nombreBanco + "' where idbanco=" + idd;
+
+        try {
+            ps = cn.prepareStatement(modificacionBanco);
+            n = ps.executeUpdate();
+
+            if (n > 0) {
+                resp = true;
+            }
+
+        } catch (Exception e) {
+        }
+        return resp;
+    }
+
+    public boolean eliminarBanco(int idbanco) {
+        boolean resp = false;
+        String idd = "" + idbanco;
+        int n;
+        PreparedStatement ps;
+        String eliminarBanco;
+
+        eliminarBanco = "DELETE FROM banco where idbanco=" + idd;
+
+        try {
+            ps = cn.prepareStatement(eliminarBanco);
+            n = ps.executeUpdate();
+
+            if (n > 0) {
+                resp = true;
+            }
+        } catch (Exception e) {
+        }
+        return resp;
+    }
 }
 
