@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -15,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import principal.PrincipalNuevo;
 
 public class registroPagosEmpleados extends JFrame {
 
@@ -32,8 +35,10 @@ public class registroPagosEmpleados extends JFrame {
     JButton aceptar = new JButton("pagar");
     JButton cancelar = new JButton("cancelar");
     String cargo;
+           String fuenteTextField = "Eras Bold ITC";
     public registroPagosEmpleados(String cargo) {
-        
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setUndecorated(true);
         this.cargo=cargo;
         int posY = 0, posX = 100, posX1 = 25, posY1 = 0;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,36 +51,60 @@ public class registroPagosEmpleados extends JFrame {
         posY += 50;
         nombre.setBounds(posX1, posY1, 200, 30);
         posY1 += 50;
-        nombres.setBounds(posX, posY, 200, 30);
+        nombres.setBounds(posX, posY, 250, 30);
         posY += 50;
         creaEventoTeclado(nombres);
         ci.setBounds(posX1, posY1, 200, 30);
         posY1 += 50;
-        cis.setBounds(posX, posY, 200, 30);
+        cis.setBounds(posX, posY, 250, 30);
         posY += 50;
         creaEventoTeclado(cis);
         tipoEmpleado.setBounds(posX1, posY1, 200, 30);
         posY1 += 50;
-        tipoEmpleados.setBounds(posX, posY, 200, 30);
+        tipoEmpleados.setBounds(posX, posY, 250, 30);
         posY += 50;
         fechaPago.setBounds(posX1, posY1, 200, 30);
         posY1 += 50;
-        fechaPagos.setBounds(posX, posY, 200, 30);
+        fechaPagos.setBounds(posX, posY, 250, 30);
         posY += 50;
         montoPagado.setBounds(posX1, posY1, 200, 30);
         posY1 += 50;
-        montoPagados.setBounds(posX, posY, 200, 30);
+        montoPagados.setBounds(posX, posY, 250, 30);
         posY += 50;
-        aceptar.setBounds(posX, posY, 100, 30);
+        aceptar.setBounds(posX, posY, 150, 40);
         posX += 50;
         posX += 50;
+        titulo.setForeground(Color.white);
+        ci.setForeground(Color.white);
+        nombre.setForeground(Color.white);
+        fechaPago.setForeground(Color.white);
+        montoPagado.setForeground(Color.white);
+                tipoEmpleado.setForeground(Color.white);
+
+	titulo.setFont(new Font("Eras Bold ITC", 4, 20));
+        ci.setFont(new Font("Eras Bold ITC", 4, 20));
+        nombre.setFont(new Font("Eras Bold ITC", 4, 20));
+        tipoEmpleado.setFont(new Font("Eras Bold ITC", 4, 20));
+        fechaPago.setFont(new Font("Eras Bold ITC", 4, 20));
+        montoPagado.setFont(new Font("Eras Bold ITC", 4, 20));
+
+        cis.setFont(new Font("Eras Bold ITC", 4, 20));
+        nombres.setFont(new Font("Eras Bold ITC", 4, 20));
+        tipoEmpleados.setFont(new Font("Eras Bold ITC", 4, 20));
+        fechaPagos.setFont(new Font("Eras Bold ITC", 4, 20));
+        montoPagados.setFont(new Font("Eras Bold ITC", 4, 20));
+        
+        aceptar.setFont(new Font("Eras Bold ITC", 4, 20));
+
         aceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 accionBotonAceptar(evt);
             }
 
         });
-        cancelar.setBounds(posX, posY, 100, 30);
+        cancelar.setBounds(posX+50, posY, 150, 40);
+        cancelar.setFont(new Font("Eras Bold ITC", 4, 20));
+
         cancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 accionBotonCancelar(evt);
@@ -143,32 +172,35 @@ public class registroPagosEmpleados extends JFrame {
                 if (verificarString(tipoEmpleados.getText())) {
                     if (verificarFecha(fechaPagos.getText())) {
                         if (verificarNumero(montoPagados.getText())) {
-                            JOptionPane.showMessageDialog(null,"bien ingersado");
+                            JOptionPane.showMessageDialog(null,"correcto");
                         }
                         else{
-                            System.out.println("monto Error");
+                            JOptionPane.showMessageDialog(null,"monto Error");
                         }
                     }
                     else{
-                        System.out.println("fecha pago Error");
+                        JOptionPane.showMessageDialog(null,"fecha pago Error");
                     }
                 }
                 else{
-                    System.out.println("tipoEmpleado Error");
+                    JOptionPane.showMessageDialog(null,"tipoEmpleado Error");
                 }
             }
             else{
-            System.out.println("ci Error");
+            JOptionPane.showMessageDialog(null,"ci Error");
             }
         }
         else{
-            System.out.println("noombre Error");
+           JOptionPane.showMessageDialog(null,"noombre Error");
         }
 
     }
 
     private void accionBotonCancelar(ActionEvent evt) {
-        this.setVisible(false);
+        this.dispose();
+        PrincipalNuevo p = new PrincipalNuevo(cargo);
+
+                
 
     }
 

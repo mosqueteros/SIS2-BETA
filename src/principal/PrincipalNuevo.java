@@ -12,6 +12,7 @@ import Interfaz.DespedirEmpleado;
 import Interfaz.Estadisticas;
 import Interfaz.buscadorIDvehiculo;
 import Interfaz.buscadorIDvehiculo_1;
+import Interfaz.registroBanc;
 import Interfaz.registroEmplead;
 import Interfaz.registroEmpleado;
 import Interfaz.registroPagosEmpleados;
@@ -215,6 +216,7 @@ public class PrincipalNuevo {
                     panel.remove(registrarPagoBoton);
                     panel.remove(compraDeVehiculos);
                     panel.remove(estadistica);
+                    panel.remove(registBanco);
                 } catch (Exception e) {
                     System.out.println("elementos no existen");
                 }
@@ -244,6 +246,7 @@ public class PrincipalNuevo {
                     panel.remove(compraDeVehiculos);
                     panel.remove(reporteBoton);
                     panel.remove(estadistica);
+                            panel.remove(registBanco);
                 } catch (Exception e) {
                     System.out.println("elementos no existen");
                 }
@@ -276,6 +279,7 @@ public class PrincipalNuevo {
                     panel.remove(reporteBoton);
                     panel.remove(compraDeVehiculos);
                     panel.remove(estadistica);
+                    panel.remove(registBanco);
                 } catch (Exception e) {
                     System.out.println("Elementos no existen");
                 }
@@ -422,8 +426,29 @@ public class PrincipalNuevo {
         
     }
         JButton  estadistica;
-    public void administracion() {
+                JButton  registBanco;
 
+    public void administracion() {
+         registBanco = new JButton("REGISTRO BANCO");
+        registBanco.setBounds(300,150, 150, 80);
+        registBanco.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                registroBanc h=new registroBanc(cargo);
+                Frame.dispose();
+            }
+
+        });
+        panel.add(registBanco);
+        actualizarFrame();
+        administracionBoton.setEnabled(false);
+        panel.repaint();
+        
+        
+        
+        
+        
+        
         compraDeVehiculos = new JButton("COMPRA VEHICULOS");
         compraDeVehiculos.setBounds(300, 300, 150, 80);
         compraDeVehiculos.addActionListener(new ActionListener() {
@@ -447,12 +472,10 @@ public class PrincipalNuevo {
             }
 
             private void estadistVehiculActionPerformed(ActionEvent evt) {
-                //Estadisticas est=new Estadisticas();//corregir edilberto esto esta raro
-                AllEstadisticas f=new AllEstadisticas();
+                 AllEstadisticas f=new AllEstadisticas();
                 f.setVisible(true);
-                Frame.disable();
+                Frame.dispose();
             }
-
         });
         estadistica.setVisible(true);
         panel.add(estadistica);
