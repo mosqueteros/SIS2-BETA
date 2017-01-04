@@ -13,6 +13,7 @@ import Interfaz.buscadorIDvehiculo;
 import Interfaz.buscadorIDvehiculo_1;
 import Interfaz.registroEmplead;
 import Interfaz.registroEmpleado;
+import Interfaz.registroPagosEmpleados;
 import Interfaz.ventaCredito;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -82,7 +83,7 @@ public class PrincipalNuevo {
     private Administrador admin;
     
     public static void main(String[] args) {
-        PrincipalNuevo p = new PrincipalNuevo( "GERENTE");
+        PrincipalNuevo p = new PrincipalNuevo( "CAJERO");
     }
 
     public PrincipalNuevo(String cargo) {
@@ -278,7 +279,7 @@ public class PrincipalNuevo {
                     System.out.println("Elementos no existen");
                 }
                 }
-                
+               
 
             }
         });
@@ -320,8 +321,8 @@ public class PrincipalNuevo {
     public void cajero() {
 
         //limpia
-        registrarPagoBoton = new JButton("REGISTRAR PAGO");
-        registrarPagoBoton.setBounds(300, 300, 150, 80);
+        registrarPagoBoton = new JButton("REGISTRAR PAGO DE CLIENTE");
+        registrarPagoBoton.setBounds(300, 300,300, 80);
         registrarPagoBoton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -330,11 +331,26 @@ public class PrincipalNuevo {
 
         });
         panel.add(registrarPagoBoton);
+        
+        
+        JButton registroPagoEm = new JButton("REGISTRAR PAGO A EMPLEADO");
+        registroPagoEm.setBounds(300, 450, 300, 80);
+        registroPagoEm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                registroPagosEmpleados regist=new registroPagosEmpleados(cargo);
+            }
 
+        });
+        panel.add(registroPagoEm);
+        
+        
         Frame.getContentPane().add(panel);
         actualizarFrame();
         registrarPagoBoton.setVisible(true);
+        registroPagoEm.setVisible(true);
         cajeroBoton.setEnabled(false);
+       
     }
 
     public void recusoHumanos() {
@@ -430,7 +446,7 @@ public class PrincipalNuevo {
             }
 
             private void estadistVehiculActionPerformed(ActionEvent evt) {
-                Estadisticas est=new Estadisticas();
+                Estadisticas est=new Estadisticas();//corregir edilberto esto esta raro
             }
 
         });

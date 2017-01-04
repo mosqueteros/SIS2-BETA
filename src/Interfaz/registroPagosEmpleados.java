@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,8 +31,10 @@ public class registroPagosEmpleados extends JFrame {
     JTextField montoPagados = new JTextField();
     JButton aceptar = new JButton("pagar");
     JButton cancelar = new JButton("cancelar");
-
-    public registroPagosEmpleados() {
+    String cargo;
+    public registroPagosEmpleados(String cargo) {
+        
+        this.cargo=cargo;
         int posY = 0, posX = 100, posX1 = 25, posY1 = 0;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().setLayout(null);
@@ -95,8 +98,14 @@ public class registroPagosEmpleados extends JFrame {
         this.getContentPane().add(aceptar);
         this.getContentPane().add(cancelar);
         this.setLocationRelativeTo(null);
+        
+        JLabel fondos;
+        fondos = new JLabel(); 
+        fondos.setBounds(0,0,600,400);
+        fondos.setIcon(new ImageIcon(getClass().getResource("/Imagen/InterfazMejor.jpg")));
+        this.add(fondos);
         this.setVisible(true);
-
+        this.setUndecorated(false);
     }
 
     public void creaEventoTeclado(JTextField texto) {
@@ -116,8 +125,8 @@ public class registroPagosEmpleados extends JFrame {
     }
 
     public static void main(String[] a) {
-        registroPagosEmpleados n = new registroPagosEmpleados();
-
+        registroPagosEmpleados n = new registroPagosEmpleados("CAJERO");
+        
     }
 
     private boolean validoTeclado(char dato) {
@@ -159,7 +168,7 @@ public class registroPagosEmpleados extends JFrame {
     }
 
     private void accionBotonCancelar(ActionEvent evt) {
-        System.exit(0);
+        this.setVisible(false);
 
     }
 
