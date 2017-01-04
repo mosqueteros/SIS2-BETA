@@ -5,6 +5,7 @@ package Interfaz;
  * @author Heredia
  */
 
+import Administrador.Reporte;
 import Administrador.Administrador;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -15,15 +16,38 @@ import org.jfree.data.general.DefaultPieDataset;
 
 
 public class Estadisticas {
+    
+    public static void main(String [] args){
+        Estadisticas v = new Estadisticas("20161006",0);
+    }
 
-    public Estadisticas() {
+    public Estadisticas(int tipo) {
         
         Administrador admin=Administrador.crearAdministrador("");
         cargarDatos(admin);
         ArrayList<String> fechas=admin.listadoFechasIngresos();
         ArrayList<Float> ingresos=admin.listadoIngresos();
         
-        Estadisticas p=new Estadisticas(fechas, ingresos, "Bolivianos", "Fechas", "Ventas diarias", 2);
+        Estadisticas p=new Estadisticas(fechas, ingresos, "Bolivianos", "Fechas", "Ventas diarias", tipo);
+        ChartPanel panel = new ChartPanel(p.getGrafica());
+        JFrame ventana = new JFrame("");
+        ventana.getContentPane().add(panel);
+        ventana.pack();
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
+        
+    }
+    public Estadisticas(String mes,int tipo) {
+        
+        Administrador admin=Administrador.crearAdministrador("");
+        Reporte reporte = new Reporte();
+        //cargarDatos(admin);
+        System.out.println("entre");
+        reporte.reporteVendedoresVentas(mes);
+        ArrayList<String> nombres = reporte.getListaVendedores();
+        ArrayList<Float> ingresos = reporte.getListaIngresosGenerados();
+        
+        Estadisticas p=new Estadisticas(nombres, ingresos, "Bolivianos", "Nombres", "Reporte de ventas por vendedor", tipo);
         ChartPanel panel = new ChartPanel(p.getGrafica());
         JFrame ventana = new JFrame("");
         ventana.getContentPane().add(panel);
@@ -33,7 +57,6 @@ public class Estadisticas {
         
     }
     
-
     private void cargarDatos(Administrador admin){
         admin.vaciarDatosCaja();
         String fecha="20160113";
@@ -44,7 +67,7 @@ public class Estadisticas {
         int idVenta=admin.getIDUltimaVentaContado();
         admin.ingresarCaja(idVenta, 1, fecha, precio);
         
-        fecha="20160113";
+        fecha="20160713";
         precio = admin.getPrecioVentaAuto("toyota");
         id = admin.getIdAuto("toyota")    ;
         admin.registrarVentaAutomovil("toyota");

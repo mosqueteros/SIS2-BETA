@@ -16,15 +16,16 @@ public class Prueba {
         //admin.ingresarEmpleado("Eduardo", "Perez", 10045, 1112223, "eduardo@gmail.com", "R HUMANOS");
         //admin.modificacionEmpleado(200, "luluchan@gmail.com", 100);
         //admin.eliminacionEmpleado(200);
-        //admin.reporteVendedoresVentas("20071016");
+        //admin.reporteVendedoresVentas("20161006");
         //Transaccion transaccion = new Transaccion();
         //transaccion.ejecutarPagoCliente(1, 100, "1212", 1);
         
-        admin.registrarVentaContado(0, 0, 888.32f,"COCO", "MARTINEZ", 0, "20161006");
+        //admin.registrarVentaContado(0, 0, 888.32f,"COCO", "MARTINEZ", 0, "20161006");
         
-        int idVenta=admin.getIDUltimaVentaContado();
-        admin.ingresarCaja(idVenta, 1, "20161006", 888.32f);
-        admin.actualizar_automovil(1, 10);
+        //int idVenta=admin.getIDUltimaVentaContado();
+        //admin.ingresarCaja(idVenta, 1, "20161006", 888.32f);
+        //admin.actualizar_automovil(1, 10);
+        
     }
     private static void llenarTablero() {
         ArrayList<ArrayList<String>> listaclientes=admin.getClientes();

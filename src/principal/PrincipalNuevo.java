@@ -6,6 +6,7 @@
 package principal;
 
 import Administrador.Administrador;
+import Interfaz.AllEstadisticas;
 import Interfaz.CajeroSwing;
 import Interfaz.DespedirEmpleado;
 import Interfaz.Estadisticas;
@@ -83,7 +84,7 @@ public class PrincipalNuevo {
     private Administrador admin;
     
     public static void main(String[] args) {
-        PrincipalNuevo p = new PrincipalNuevo( "CAJERO");
+        PrincipalNuevo p = new PrincipalNuevo( "GERENTE");
     }
 
     public PrincipalNuevo(String cargo) {
@@ -446,7 +447,10 @@ public class PrincipalNuevo {
             }
 
             private void estadistVehiculActionPerformed(ActionEvent evt) {
-                Estadisticas est=new Estadisticas();//corregir edilberto esto esta raro
+                //Estadisticas est=new Estadisticas();//corregir edilberto esto esta raro
+                AllEstadisticas f=new AllEstadisticas();
+                f.setVisible(true);
+                Frame.disable();
             }
 
         });

@@ -61,7 +61,7 @@ public class Validacion {
         return true;
     }
     public boolean esNumero(String numero){
-        Pattern p = Pattern.compile("[0-9]");
+        Pattern p = Pattern.compile("[0-9]{1,50}");
         if(!p.matcher(numero).matches()){
             return false;
         }

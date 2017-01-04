@@ -117,7 +117,7 @@ public class Administrador {
     }
     
     //para generar el registro de la venta al contado
-    public void registrarVentaContado(int idEmp, int idAuto, Float precio, String nombre, String apellidos, int ci, String fecha){
+    public void registrarVentaContado(int idEmp, int idAuto, float precio, String nombre, String apellidos, int ci, String fecha){
         String ingreso1 = "INSERT INTO ventacontado"+"(idEmp, idAuto, precio, nombre, apellidos, ci, fecha)"+
                 "VALUES(?,?,?,?,?,?,?)";
         try{
@@ -291,6 +291,7 @@ public class Administrador {
     // luego el mes seguido del dia
     public ArrayList<ArrayList<String>> reporteVendedoresVentas(String date){
         
+        System.out.println("entre");
         ArrayList<ArrayList<String>> vendedores = new ArrayList();
         ArrayList<String> aux;
         
@@ -298,7 +299,7 @@ public class Administrador {
         int mesfin = mesini+50;
         String fechaini = date.substring(0,4)+mesini;
         String fechafin = date.substring(0,4)+mesfin;
-        
+        System.out.println("-> "+fechaini+" "+fechafin);
         String consulta = "SELECT empleado.Nombre AS name, count(*) AS Numero_Ventas FROM ventacontado JOIN empleado ON ventacontado.idEmp = empleado.idEmp WHERE ventacontado.fecha >= '"+ fechaini +"' and ventacontado.fecha <= '"+fechafin +"' GROUP BY ventacontado.idEmp";
         
         String var;
