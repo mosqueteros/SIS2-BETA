@@ -85,7 +85,7 @@ public class PrincipalNuevo {
     private Administrador admin;
     
     public static void main(String[] args) {
-        PrincipalNuevo p = new PrincipalNuevo( "GERENTE");
+        PrincipalNuevo p = new PrincipalNuevo( "CAJERO");
     }
 
     public PrincipalNuevo(String cargo) {
@@ -344,6 +344,7 @@ public class PrincipalNuevo {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 registroPagosEmpleados regist=new registroPagosEmpleados(cargo);
+                Frame.dispose();
             }
 
         });

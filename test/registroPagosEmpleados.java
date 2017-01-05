@@ -76,7 +76,8 @@ public class registroPagosEmpleados {//clase prueba
         if (!text.isEmpty()) {
             char[] elementos = text.toCharArray();
             for (int i = 0; i < elementos.length; i++) {
-                if ((elementos[i] >= 48 && elementos[i] <= 57)) {//Si es numero
+                if ((elementos[i] >= 48 && elementos[i] <= 57)) {
+//Si es numero
                     salida = false;
                 }
             }

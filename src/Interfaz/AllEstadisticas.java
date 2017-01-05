@@ -37,9 +37,9 @@ public class AllEstadisticas extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        radio1 = new javax.swing.JRadioButton();
+        radio2 = new javax.swing.JRadioButton();
+        radio3 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -64,32 +64,32 @@ public class AllEstadisticas extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(20, 170, 190, 50);
 
-        jRadioButton1.setText("frafico de barras");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        radio1.setText("frafico de barras");
+        radio1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                radio1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(260, 90, 120, 23);
+        getContentPane().add(radio1);
+        radio1.setBounds(260, 90, 120, 23);
 
-        jRadioButton2.setText("grafico de linea");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        radio2.setText("grafico de linea");
+        radio2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                radio2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton2);
-        jRadioButton2.setBounds(260, 140, 120, 23);
+        getContentPane().add(radio2);
+        radio2.setBounds(260, 140, 120, 23);
 
-        jRadioButton3.setText("grafico de torta");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        radio3.setText("grafico de torta");
+        radio3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                radio3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton3);
-        jRadioButton3.setBounds(260, 190, 120, 23);
+        getContentPane().add(radio3);
+        radio3.setBounds(260, 190, 120, 23);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setText("estadistica");
@@ -116,25 +116,31 @@ public class AllEstadisticas extends javax.swing.JFrame {
           
     }//GEN-LAST:event_jButton2ActionPerformed
 int tipo;
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void radio3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio3ActionPerformed
         // TODO add your handling code here:
         tipo=2;
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+        radio2.setSelected(false);
+        radio1.setSelected(false);
+    }//GEN-LAST:event_radio3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Estadisticas est=new Estadisticas(tipo);//corregir edilberto esto esta raro
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void radio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio1ActionPerformed
         tipo=0;
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+        radio2.setSelected(false);
+        radio3.setSelected(false);
+    }//GEN-LAST:event_radio1ActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void radio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio2ActionPerformed
         // TODO add your handling code here:
         
         tipo =1;
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+        radio1.setSelected(false);
+        radio3.setSelected(false);
+    }//GEN-LAST:event_radio2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,8 +182,8 @@ int tipo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton radio1;
+    private javax.swing.JRadioButton radio2;
+    private javax.swing.JRadioButton radio3;
     // End of variables declaration//GEN-END:variables
 }

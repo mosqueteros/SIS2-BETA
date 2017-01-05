@@ -71,7 +71,7 @@ public class testegistropagosTest {
         boolean salida=registro.verificarNumero("1231");
         Assert.assertEquals(true,salida);
         
-        salida=registro.verificarNumero("s12312ss");
+        salida=registro.verificarNumero("gerente");
         Assert.assertEquals(false,salida);
         
         salida=registro.verificarNumero(" ");

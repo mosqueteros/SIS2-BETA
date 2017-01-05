@@ -134,7 +134,8 @@ public class registroPagosEmpleados extends JFrame {
         fondos.setIcon(new ImageIcon(getClass().getResource("/Imagen/InterfazMejor.jpg")));
         this.add(fondos);
         this.setVisible(true);
-        this.setUndecorated(false);
+        fechaPagos.setText("2015/11/12");
+       // this.setUndecorated(false);
     }
 
     public void creaEventoTeclado(JTextField texto) {
@@ -173,6 +174,11 @@ public class registroPagosEmpleados extends JFrame {
                     if (verificarFecha(fechaPagos.getText())) {
                         if (verificarNumero(montoPagados.getText())) {
                             JOptionPane.showMessageDialog(null,"correcto");
+                            nombres.setText("");
+                            cis.setText("");
+                            fechaPagos.setText("");
+                            montoPagados.setText("");
+                            tipoEmpleados.setText("");
                         }
                         else{
                             JOptionPane.showMessageDialog(null,"monto Error");

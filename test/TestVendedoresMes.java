@@ -103,6 +103,12 @@ public class TestVendedoresMes {
         assertTrue(valido);
     }
     @Test
+    public void validarLista(){
+        Reporte reporte = new Reporte();
+        ArrayList<String> answer = reporte.getListaVendedores();
+        assertNull(answer);
+    }
+    @Test
     public void reporte(){
     }
     /*    
